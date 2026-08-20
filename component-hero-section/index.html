@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Magazine — ORVION Hero Section</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Fragment+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ===== 3D Magazine Hero ===== -->
+    <section class="magazine-hero" id="magazine-hero">
+
+        <!-- Background Image -->
+        <div class="magazine-hero-bg">
+            <img src="assets/img/bg-hero.jpg" alt="" class="magazine-hero-bg-img">
+        </div>
+
+        <!-- Overlay -->
+        <div class="magazine-hero-overlay"></div>
+
+        <!-- Text Overlay -->
+        <div class="magazine-hero-text">
+            <h1 class="magazine-hero-title">
+                <span class="magazine-hero-line">THE</span>
+                <span class="magazine-hero-line magazine-hero-line--accent">FRAMER</span>
+                <span class="magazine-hero-line">PROPHET</span>
+            </h1>
+        </div>
+
+        <!-- 3D Magazine -->
+        <div class="magazine-scene" id="magazine-scene">
+            <div class="magazine" id="magazine">
+
+                <!-- Page 1 — Front Cover -->
+                <div class="magazine-page magazine-page--1" data-page="1">
+                    <div class="magazine-page-front">
+                        <div class="page-content page-content--cover">
+                            <img src="assets/img/cover-1.jpg" alt="Capa 1" class="page-media" loading="lazy">
+                            <div class="page-label">
+                                <span class="page-label-num">01</span>
+                                <span class="page-label-text">STRATEGY</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="magazine-page-back">
+                        <div class="page-content page-content--spread">
+                            <video src="assets/video/project-1.mp4" class="page-media" muted loop playsinline autoplay></video>
+                            <div class="page-overlay">
+                                <h2 class="page-heading">Estrat&eacute;gia &amp; Posicionamento</h2>
+                                <p class="page-desc">Transformamos ideias em experi&ecirc;ncias digitais que convertem.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 2 -->
+                <div class="magazine-page magazine-page--2" data-page="2">
+                    <div class="magazine-page-front">
+                        <div class="page-content page-content--spread">
+                            <img src="assets/img/project-2.jpg" alt="Projeto 2" class="page-media" loading="lazy">
+                            <div class="page-overlay">
+                                <h2 class="page-heading">Design &amp; Identidade</h2>
+                                <p class="page-desc">Cada pixel conta uma hist&oacute;ria.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="magazine-page-back">
+                        <div class="page-content page-content--spread">
+                            <video src="assets/video/project-2.mp4" class="page-media" muted loop playsinline autoplay></video>
+                            <div class="page-overlay">
+                                <h2 class="page-heading">UX/UI &amp; Prototipagem</h2>
+                                <p class="page-desc">Experi&ecirc;ncias pensadas para converter.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 3 -->
+                <div class="magazine-page magazine-page--3" data-page="3">
+                    <div class="magazine-page-front">
+                        <div class="page-content page-content--spread">
+                            <img src="assets/img/project-3.jpg" alt="Projeto 3" class="page-media" loading="lazy">
+                            <div class="page-overlay">
+                                <h2 class="page-heading">Desenvolvimento</h2>
+                                <p class="page-desc">C&oacute;digo limpo, performance m&aacute;xima.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="magazine-page-back">
+                        <div class="page-content page-content--spread">
+                            <img src="assets/img/project-4.jpg" alt="Projeto 4" class="page-media" loading="lazy">
+                            <div class="page-overlay">
+                                <h2 class="page-heading">SEO &amp; Performance</h2>
+                                <p class="page-desc">Velocidade que gera resultado.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 4 — Back Cover -->
+                <div class="magazine-page magazine-page--4" data-page="4">
+                    <div class="magazine-page-front">
+                        <div class="page-content page-content--spread">
+                            <video src="assets/video/project-4.mp4" class="page-media" muted loop playsinline autoplay></video>
+                            <div class="page-overlay">
+                                <h2 class="page-heading">Analytics &amp; Otimiza&ccedil;&atilde;o</h2>
+                                <p class="page-desc">Dados que direcionam decis&otilde;es.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="magazine-page-back">
+                        <div class="page-content page-content--back-cover">
+                            <img src="assets/img/back-cover.jpg" alt="Capa Traseira" class="page-media" loading="lazy">
+                            <div class="page-label page-label--center">
+                                <span class="page-label-text">ORVION</span>
+                                <span class="page-label-sub">Estrat&eacute;gia &middot; Design &middot; Tecnologia &middot; Performance</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="magazine-hero-scroll" id="scroll-indicator">
+            <span class="magazine-hero-scroll-text">Scroll to explore</span>
+            <div class="magazine-hero-scroll-line"></div>
+        </div>
+
+    </section>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
