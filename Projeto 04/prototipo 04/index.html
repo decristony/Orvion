@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORVION — Websites que vendem</title>
+    <meta name="description" content="ORVION cria sites rápidos, estratégicos e orientados à conversão para empresas que querem transformar visitantes em clientes.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Fragment+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="loading">
+
+    <!-- ===== Loading Screen ===== -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-content">
+            <h3 class="loading-title">
+                <span class="loading-text">ORVION</span>
+            </h3>
+            <p class="loading-sub">
+                <span class="loading-text">&copy; 2026 &middot; Websites que vendem</span>
+            </p>
+            <p class="loading-footer">
+                <span class="loading-text loading-version">v1.0</span>
+                <span class="loading-text loading-dots">Carregando<span class="dots"></span></span>
+            </p>
+        </div>
+        <svg class="loading-wave" viewBox="0 0 1920 1080" preserveAspectRatio="none">
+            <path d="M0 0 L1920 0 L1920 1080 Q960 1080 0 1080 Z"></path>
+        </svg>
+    </div>
+
+    <!-- ===== Noise Overlay ===== -->
+    <div class="noise-overlay" aria-hidden="true">
+        <svg viewBox="0 0 1920 1500" xmlns="http://www.w3.org/2000/svg">
+            <filter id="noise">
+                <feTurbulence baseFrequency="0.65" numOctaves="1" stitchTiles="stitch" type="fractalNoise"/>
+                <feBlend mode="screen"/>
+            </filter>
+            <rect width="100%" height="100%" filter="url(#noise)" opacity="0.15"/>
+        </svg>
+    </div>
+
+    <!-- ===== Navigation ===== -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#top" class="nav-logo">ORVION</a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#servicos" class="nav-link">Servi&ccedil;os</a></li>
+                <li><a href="#processo" class="nav-link">Processo</a></li>
+                <li><a href="#projetos" class="nav-link">Projetos</a></li>
+                <li><a href="#faq" class="nav-link">FAQ</a></li>
+            </ul>
+            <a href="#contato" class="nav-cta">Falar com a ORVION</a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== Mobile Menu ===== -->
+    <div class="mobile-menu" id="mobile-menu">
+        <ul class="mobile-menu-links">
+            <li><a href="#servicos">Servi&ccedil;os</a></li>
+            <li><a href="#processo">Processo</a></li>
+            <li><a href="#projetos">Projetos</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <a href="#contato" class="btn btn-primary mobile-menu-cta">Falar com a ORVION</a>
+    </div>
+
+    <main>
+
+        <!-- ===== Hero ===== -->
+        <section class="hero hero--sticky" id="top">
+            <div class="hero-inner">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="hero-line">Seu site n&atilde;o precisa</span>
+                        <span class="hero-line">apenas <em>parecer</em> profissional.</span>
+                        <span class="hero-line hero-accent">Ele precisa gerar neg&oacute;cios.</span>
+                    </h1>
+                    <p class="hero-body">
+                        Criamos sites r&aacute;pidos, estrat&eacute;gicos e orientados &agrave; convers&atilde;o para empresas que querem transformar visitantes em clientes.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#contato" class="btn btn-primary">Quero transformar meu site</a>
+                        <a href="#projetos" class="btn btn-ghost">Ver nossos projetos</a>
+                    </div>
+                </div>
+                <div class="hero-terminal">
+                    <div class="terminal">
+                        <div class="terminal-bar">
+                            <span class="terminal-dot terminal-dot--red"></span>
+                            <span class="terminal-dot terminal-dot--yellow"></span>
+                            <span class="terminal-dot terminal-dot--green"></span>
+                            <span class="terminal-title">index.html</span>
+                        </div>
+                        <div class="terminal-body" id="terminal-body">
+                            <div class="terminal-line">
+                                <span class="code-tag">&lt;!DOCTYPE html&gt;</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="code-tag">&lt;html</span> <span class="code-attr">lang=</span><span class="code-str">"pt-BR"</span><span class="code-tag">&gt;</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="code-tag">&lt;head&gt;</span>
+                            </div>
+                            <div class="terminal-line indent">
+                                <span class="code-tag">&lt;title&gt;</span><span class="code-text" id="typed-text"></span><span class="code-cursor">|</span><span class="code-tag">&lt;/title&gt;</span>
+                            </div>
+                            <div class="terminal-line indent">
+                                <span class="code-comment">&lt;!-- SEO &middot; Performance &middot; Convers&atilde;o --&gt;</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="code-tag">&lt;/head&gt;</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="code-tag">&lt;body&gt;</span>
+                            </div>
+                            <div class="terminal-line indent">
+                                <span class="code-tag">&lt;section</span> <span class="code-attr">class=</span><span class="code-str">"hero"</span><span class="code-tag">&gt;</span>
+                            </div>
+                            <div class="terminal-line indent double">
+                                <span class="code-tag">&lt;h1&gt;</span><span class="code-text">Seu site precisa vender&lt;/h1&gt;</span>
+                            </div>
+                            <div class="terminal-line indent">
+                                <span class="code-tag">&lt;/section&gt;</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="code-tag">&lt;/body&gt;</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="code-tag">&lt;/html&gt;</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="terminal-glow"></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="content-wrapper">
+
+        <!-- ===== Marquee ===== -->
+        <section class="marquee-section marquee-section--overlay" aria-hidden="true">
+            <div class="marquee" id="marquee">
+                <div class="marquee-track">
+                    <span class="marquee-item">Desenvolvimento Web</span>
+                    <span class="marquee-dot">&loz;</span>
+                    <span class="marquee-item">SEO</span>
+                    <span class="marquee-dot">&loz;</span>
+                    <span class="marquee-item">Performance</span>
+                    <span class="marquee-dot">&loz;</span>
+                    <span class="marquee-item">UX/UI</span>
+                    <span class="marquee-dot">&loz;</span>
+                    <span class="marquee-item">Convers&atilde;o</span>
+                    <span class="marquee-dot">&loz;</span>
+                    <span class="marquee-item">Copy</span>
+                    <span class="marquee-dot">&loz;</span>
+                    <span class="marquee-item">Estrat&eacute;gia</span>
+                    <span class="marquee-dot">&loz;</span>
+                    <span class="marquee-item">Analytics</span>
+                    <span class="marquee-dot">&loz;</span>
+                </div>
+                <div class="marquee-track" aria-hidden="true">
+                    <span class="marquee-item">Desenvolvimento Web</span>
+                    <span class="marquee-dot">&loz;</span>
+                    <span class="marquee-item">SEO</span>
+                    <span class="marquee-dot">&loz;</span>
+                    <span class="marquee-item">Performance</span>
+                    <span class="marquee-dot">&loz;</span>
+                    <span class="marquee-item">UX/UI</span>
+                    <span class="marquee-dot">&loz;</span>
+                    <span class="marquee-item">Convers&atilde;o</span>
+                    <span class="marquee-dot">&loz;</span>
+                    <span class="marquee-item">Copy</span>
+                    <span class="marquee-dot">&loz;</span>
+                    <span class="marquee-item">Estrat&eacute;gia</span>
+                    <span class="marquee-dot">&loz;</span>
+                    <span class="marquee-item">Analytics</span>
+                    <span class="marquee-dot">&loz;</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Servi&ccedil;os (Sticky Overlap) ===== -->
+        <section class="services" id="servicos">
+            <div class="services-inner">
+
+            <!-- Service 01 — Estrat&eacute;gia &amp; Copy -->
+            <div class="service-block service-block--strategy" style="top: 20vh; margin-bottom: 19em;">
+                <div class="service-header">
+                    <div class="service-header-inner">
+                        <span class="service-number">( 01 )</span>
+                        <h3 class="service-title">Estrat&eacute;gia &amp; Copy</h3>
+                        <div class="service-shape" aria-hidden="true">
+                            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M100 0C103.395 53.7596 146.24 96.6052 200 100C146.24 103.395 103.395 146.24 100 200C96.6052 146.24 53.7596 103.395 0 100C53.7596 96.6052 96.6052 53.7596 100 0Z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-content">
+                    <div class="service-content-inner">
+                        <p class="service-desc">Antes de escrever uma linha de c&oacute;digo, entendemos o seu neg&oacute;cio, o seu p&uacute;blico e os seus objetivos. Definimos a mensagem certa, no tom certo, para conduzir o visitante &agrave; a&ccedil;&atilde;o.</p>
+                        <div class="service-list">
+                            <p class="service-list-item"><span class="service-list-num">01</span> Posicionamento</p>
+                            <p class="service-list-item service-list-item--border"><span class="service-list-num">02</span> Copywriting</p>
+                            <p class="service-list-item"><span class="service-list-num">03</span> Arquitetura de Informa&ccedil;&atilde;o</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 02 — Design &amp; UX/UI -->
+            <div class="service-block service-block--design" style="top: calc(20vh + 8em); margin-bottom: 13.5em;">
+                <div class="service-header">
+                    <div class="service-header-inner">
+                        <span class="service-number">( 02 )</span>
+                        <h3 class="service-title">Design &amp; UX/UI</h3>
+                        <div class="service-shape" aria-hidden="true">
+                            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M127.14 200C99.9942 200 99.9943 167.423 72.8487 167.423C41.6048 167.423 0 158.386 0 127.133C0 99.9885 32.5678 99.9885 32.5678 72.8445C32.5678 41.6139 41.6048 0 72.8602 0C100.006 0 100.006 32.5774 127.151 32.5774C158.384 32.5774 200 41.6139 200 72.8675C200 100.012 167.421 100.012 167.421 127.156C167.409 158.444 158.384 200 127.14 200Z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-content">
+                    <div class="service-content-inner">
+                        <p class="service-desc">Criamos uma experi&ecirc;ncia visual que facilita a navega&ccedil;&atilde;o, transmite credibilidade e conduz o visitante at&eacute; o pr&oacute;ximo passo &mdash; sem distra&ccedil;&otilde;es.</p>
+                        <div class="service-list">
+                            <p class="service-list-item"><span class="service-list-num">01</span> Identidade Visual</p>
+                            <p class="service-list-item service-list-item--border"><span class="service-list-num">02</span> Prototipagem</p>
+                            <p class="service-list-item"><span class="service-list-num">03</span> Design Responsivo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 03 — Desenvolvimento &amp; Performance -->
+            <div class="service-block service-block--dev" style="top: calc(20vh + 16em); margin-bottom: 7.5em;">
+                <div class="service-header">
+                    <div class="service-header-inner">
+                        <span class="service-number">( 03 )</span>
+                        <h3 class="service-title">Desenvolvimento &amp; Performance</h3>
+                        <div class="service-shape" aria-hidden="true">
+                            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M100 0L170.711 29.2893L200 100L170.711 170.711L100 200L29.2893 170.711L0 100L29.2893 29.2893L100 0Z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-content">
+                    <div class="service-content-inner">
+                        <p class="service-desc">Constru&iacute;mos seu projeto com tecnologia moderna, c&oacute;digo limpo e arquitetura preparada para crescer. Velocidade e SEO t&eacute;cnico n&atilde;o s&atilde;o op&ccedil;&otilde;es &mdash; s&atilde;o padr&atilde;o.</p>
+                        <div class="service-list">
+                            <p class="service-list-item"><span class="service-list-num">01</span> Desenvolvimento Front-end</p>
+                            <p class="service-list-item service-list-item--border"><span class="service-list-num">02</span> SEO T&eacute;cnico</p>
+                            <p class="service-list-item"><span class="service-list-num">03</span> Core Web Vitals</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+        </section>
+
+        <!-- ===== Marquee 2 (roles) ===== -->
+        <section class="marquee-section marquee-section--large" aria-hidden="true">
+            <div class="marquee marquee--reverse" id="marquee-2">
+                <div class="marquee-track">
+                    <span class="marquee-item-lg">Web Developer</span>
+                    <span class="marquee-diamond">
+                        <svg viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg"><path d="M49.82 2C49.43 9.1 46.89 17.41 43.07 24.04C35.03 38.01 21.11 47.47 5.22 49.79C4.17 49.94 2.55 50.1 1.66 50.16C0.75 50.2 0 50.28 0 50.33C0 50.39 0.75 50.47 1.66 50.51C2.55 50.56 4.17 50.73 5.22 50.88C21.11 53.2 35.03 62.66 43.07 76.63C46.89 83.26 49.43 91.57 49.82 98.68C50.21 91.57 52.75 83.26 56.57 76.63C64.61 62.66 78.53 53.2 94.42 50.88C95.47 50.73 97.09 50.56 97.99 50.51C98.9 50.47 99.65 50.39 99.65 50.33C99.65 50.28 98.9 50.2 97.99 50.16C97.09 50.1 95.47 49.94 94.42 49.79C78.53 47.47 64.61 38.01 56.57 24.04C52.75 17.41 50.21 9.1 49.82 2Z" fill="currentColor"/></svg>
+                    </span>
+                    <span class="marquee-item-lg">Full Stack Developer</span>
+                    <span class="marquee-diamond">
+                        <svg viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg"><path d="M49.82 2C49.43 9.1 46.89 17.41 43.07 24.04C35.03 38.01 21.11 47.47 5.22 49.79C4.17 49.94 2.55 50.1 1.66 50.16C0.75 50.2 0 50.28 0 50.33C0 50.39 0.75 50.47 1.66 50.51C2.55 50.56 4.17 50.73 5.22 50.88C21.11 53.2 35.03 62.66 43.07 76.63C46.89 83.26 49.43 91.57 49.82 98.68C50.21 91.57 52.75 83.26 56.57 76.63C64.61 62.66 78.53 53.2 94.42 50.88C95.47 50.73 97.09 50.56 97.99 50.51C98.9 50.47 99.65 50.39 99.65 50.33C99.65 50.28 98.9 50.2 97.99 50.16C97.09 50.1 95.47 49.94 94.42 49.79C78.53 47.47 64.61 38.01 56.57 24.04C52.75 17.41 50.21 9.1 49.82 2Z" fill="currentColor"/></svg>
+                    </span>
+                    <span class="marquee-item-lg">Website Builder</span>
+                    <span class="marquee-diamond">
+                        <svg viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg"><path d="M49.82 2C49.43 9.1 46.89 17.41 43.07 24.04C35.03 38.01 21.11 47.47 5.22 49.79C4.17 49.94 2.55 50.1 1.66 50.16C0.75 50.2 0 50.28 0 50.33C0 50.39 0.75 50.47 1.66 50.51C2.55 50.56 4.17 50.73 5.22 50.88C21.11 53.2 35.03 62.66 43.07 76.63C46.89 83.26 49.43 91.57 49.82 98.68C50.21 91.57 52.75 83.26 56.57 76.63C64.61 62.66 78.53 53.2 94.42 50.88C95.47 50.73 97.09 50.56 97.99 50.51C98.9 50.47 99.65 50.39 99.65 50.33C99.65 50.28 98.9 50.2 97.99 50.16C97.09 50.1 95.47 49.94 94.42 49.79C78.53 47.47 64.61 38.01 56.57 24.04C52.75 17.41 50.21 9.1 49.82 2Z" fill="currentColor"/></svg>
+                    </span>
+                </div>
+                <div class="marquee-track" aria-hidden="true">
+                    <span class="marquee-item-lg">Web Developer</span>
+                    <span class="marquee-diamond">
+                        <svg viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg"><path d="M49.82 2C49.43 9.1 46.89 17.41 43.07 24.04C35.03 38.01 21.11 47.47 5.22 49.79C4.17 49.94 2.55 50.1 1.66 50.16C0.75 50.2 0 50.28 0 50.33C0 50.39 0.75 50.47 1.66 50.51C2.55 50.56 4.17 50.73 5.22 50.88C21.11 53.2 35.03 62.66 43.07 76.63C46.89 83.26 49.43 91.57 49.82 98.68C50.21 91.57 52.75 83.26 56.57 76.63C64.61 62.66 78.53 53.2 94.42 50.88C95.47 50.73 97.09 50.56 97.99 50.51C98.9 50.47 99.65 50.39 99.65 50.33C99.65 50.28 98.9 50.2 97.99 50.16C97.09 50.1 95.47 49.94 94.42 49.79C78.53 47.47 64.61 38.01 56.57 24.04C52.75 17.41 50.21 9.1 49.82 2Z" fill="currentColor"/></svg>
+                    </span>
+                    <span class="marquee-item-lg">Full Stack Developer</span>
+                    <span class="marquee-diamond">
+                        <svg viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg"><path d="M49.82 2C49.43 9.1 46.89 17.41 43.07 24.04C35.03 38.01 21.11 47.47 5.22 49.79C4.17 49.94 2.55 50.1 1.66 50.16C0.75 50.2 0 50.28 0 50.33C0 50.39 0.75 50.47 1.66 50.51C2.55 50.56 4.17 50.73 5.22 50.88C21.11 53.2 35.03 62.66 43.07 76.63C46.89 83.26 49.43 91.57 49.82 98.68C50.21 91.57 52.75 83.26 56.57 76.63C64.61 62.66 78.53 53.2 94.42 50.88C95.47 50.73 97.09 50.56 97.99 50.51C98.9 50.47 99.65 50.39 99.65 50.33C99.65 50.28 98.9 50.2 97.99 50.16C97.09 50.1 95.47 49.94 94.42 49.79C78.53 47.47 64.61 38.01 56.57 24.04C52.75 17.41 50.21 9.1 49.82 2Z" fill="currentColor"/></svg>
+                    </span>
+                    <span class="marquee-item-lg">Website Builder</span>
+                    <span class="marquee-diamond">
+                        <svg viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg"><path d="M49.82 2C49.43 9.1 46.89 17.41 43.07 24.04C35.03 38.01 21.11 47.47 5.22 49.79C4.17 49.94 2.55 50.1 1.66 50.16C0.75 50.2 0 50.28 0 50.33C0 50.39 0.75 50.47 1.66 50.51C2.55 50.56 4.17 50.73 5.22 50.88C21.11 53.2 35.03 62.66 43.07 76.63C46.89 83.26 49.43 91.57 49.82 98.68C50.21 91.57 52.75 83.26 56.57 76.63C64.61 62.66 78.53 53.2 94.42 50.88C95.47 50.73 97.09 50.56 97.99 50.51C98.9 50.47 99.65 50.39 99.65 50.33C99.65 50.28 98.9 50.2 97.99 50.16C97.09 50.1 95.47 49.94 94.42 49.79C78.53 47.47 64.61 38.01 56.57 24.04C52.75 17.41 50.21 9.1 49.82 2Z" fill="currentColor"/></svg>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== M&eacute;tricas ===== -->
+        <section class="metrics" id="metricas">
+            <div class="metrics-inner">
+                <div class="metric reveal">
+                    <span class="metric-value">+120</span>
+                    <span class="metric-label">Projetos entregues</span>
+                </div>
+                <div class="metric reveal">
+                    <span class="metric-value">98+</span>
+                    <span class="metric-label">PageSpeed m&eacute;dio</span>
+                </div>
+                <div class="metric reveal">
+                    <span class="metric-value">&lt; 1s</span>
+                    <span class="metric-label">Tempo de carregamento</span>
+                </div>
+                <div class="metric reveal">
+                    <span class="metric-value">100%</span>
+                    <span class="metric-label">Responsivo</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Projetos ===== -->
+        <section class="projects" id="projetos">
+            <div class="projects-header reveal">
+                <h2 class="section-heading">Projetos que transformam<br>presen&ccedil;a digital em resultado</h2>
+                <p class="section-sub">Cada projeto nasce com um objetivo comercial: <strong>atrair, convencer e converter.</strong></p>
+            </div>
+            <div class="projects-grid">
+                <article class="project-card reveal">
+                    <div class="project-video">
+                        <video autoplay muted loop playsinline preload="metadata" poster="">
+                            <source src="../pagina-20-eagle.vercel.app/assets/273e0b1a0b50803d_work1-c0znq8EJ.webm" type="video/webm">
+                        </video>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-tag">Redesign + Performance + CRO</span>
+                        <h3 class="project-name">Projeto 01</h3>
+                        <p class="project-desc">Um novo posicionamento digital para transformar visitantes em oportunidades comerciais.</p>
+                        <span class="project-result">Resultado: +X% em convers&otilde;es</span>
+                    </div>
+                </article>
+                <article class="project-card reveal">
+                    <div class="project-video">
+                        <video autoplay muted loop playsinline preload="metadata">
+                            <source src="../pagina-20-eagle.vercel.app/assets/3ff2295bd6ab2e74_work2-CBVasVIR.webm" type="video/webm">
+                        </video>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-tag">Site Institucional + SEO</span>
+                        <h3 class="project-name">Projeto 02</h3>
+                        <p class="project-desc">Arquitetura desenvolvida para aumentar autoridade e facilitar a descoberta no Google.</p>
+                        <span class="project-result">Resultado: +X% em tr&aacute;fego org&acirc;nico</span>
+                    </div>
+                </article>
+                <article class="project-card reveal">
+                    <div class="project-video">
+                        <video autoplay muted loop playsinline preload="metadata">
+                            <source src="../pagina-20-eagle.vercel.app/assets/88d928bfc5887243_work3-L6X9I4cA.webm" type="video/webm">
+                        </video>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-tag">Landing Page + Tr&aacute;fego</span>
+                        <h3 class="project-name">Projeto 03</h3>
+                        <p class="project-desc">Experi&ecirc;ncia constru&iacute;da para reduzir distra&ccedil;&otilde;es e aumentar a gera&ccedil;&atilde;o de leads.</p>
+                        <span class="project-result">Resultado: X% de convers&atilde;o</span>
+                    </div>
+                </article>
+                <article class="project-card reveal">
+                    <div class="project-video">
+                        <video autoplay muted loop playsinline preload="metadata">
+                            <source src="../pagina-20-eagle.vercel.app/assets/2bedb140ef7ebd77_work4-Dtixe7ZQ.webm" type="video/webm">
+                        </video>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-tag">E-commerce + SEO + CRO</span>
+                        <h3 class="project-name">Projeto 04</h3>
+                        <p class="project-desc">Loja virtual otimizada para convers&atilde;o com foco em performance e usabilidade.</p>
+                        <span class="project-result">Resultado: +X% em vendas</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ===== Processo ===== -->
+        <section class="process" id="processo">
+            <div class="process-header reveal">
+                <h2 class="section-heading">Nosso m&eacute;todo</h2>
+                <p class="section-sub">Estrat&eacute;gia &rarr; Experi&ecirc;ncia &rarr; Tecnologia &rarr; Convers&atilde;o</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step reveal">
+                    <span class="process-step-num">01</span>
+                    <h4 class="process-step-title">Diagn&oacute;stico</h4>
+                    <p class="process-step-desc">Analisamos seu neg&oacute;cio, posicionamento, concorrentes, p&uacute;blico e presen&ccedil;a digital atual.</p>
+                </div>
+                <div class="process-step reveal">
+                    <span class="process-step-num">02</span>
+                    <h4 class="process-step-title">Estrat&eacute;gia</h4>
+                    <p class="process-step-desc">Definimos a arquitetura do site, hierarquia das informa&ccedil;&otilde;es, jornada do usu&aacute;rio e objetivos de cada p&aacute;gina.</p>
+                </div>
+                <div class="process-step reveal">
+                    <span class="process-step-num">03</span>
+                    <h4 class="process-step-title">Design &amp; Copy</h4>
+                    <p class="process-step-desc">Criamos a identidade visual da experi&ecirc;ncia e desenvolvemos uma comunica&ccedil;&atilde;o orientada &agrave; convers&atilde;o.</p>
+                </div>
+                <div class="process-step reveal">
+                    <span class="process-step-num">04</span>
+                    <h4 class="process-step-title">Desenvolvimento</h4>
+                    <p class="process-step-desc">Transformamos o projeto em uma experi&ecirc;ncia r&aacute;pida, responsiva, segura e escal&aacute;vel.</p>
+                </div>
+                <div class="process-step reveal">
+                    <span class="process-step-num">05</span>
+                    <h4 class="process-step-title">Performance &amp; SEO</h4>
+                    <p class="process-step-desc">Otimizamos estrutura, carregamento, Core Web Vitals, SEO t&eacute;cnico e experi&ecirc;ncia mobile.</p>
+                </div>
+                <div class="process-step reveal">
+                    <span class="process-step-num">06</span>
+                    <h4 class="process-step-title">Mensura&ccedil;&atilde;o &amp; Otimiza&ccedil;&atilde;o</h4>
+                    <p class="process-step-desc">Configuramos os principais eventos e ferramentas de an&aacute;lise para identificar oportunidades de melhoria.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Depoimentos ===== -->
+        <section class="testimonials">
+            <div class="testimonials-header reveal">
+                <h2 class="section-heading">O que nossos clientes dizem</h2>
+            </div>
+            <div class="testimonials-grid">
+                <blockquote class="testimonial reveal">
+                    <p class="testimonial-quote">&ldquo;A ORVION conseguiu transformar aquilo que t&iacute;nhamos em mente em uma experi&ecirc;ncia muito mais profissional e estrat&eacute;gica.&rdquo;</p>
+                    <footer class="testimonial-footer">
+                        <strong>Nome do cliente</strong>
+                        <span>Cargo &mdash; Empresa</span>
+                    </footer>
+                </blockquote>
+                <blockquote class="testimonial reveal">
+                    <p class="testimonial-quote">&ldquo;Al&eacute;m de melhorar muito a apresenta&ccedil;&atilde;o da nossa empresa, o novo site passou a gerar muito mais oportunidades.&rdquo;</p>
+                    <footer class="testimonial-footer">
+                        <strong>Nome do cliente</strong>
+                        <span>Cargo &mdash; Empresa</span>
+                    </footer>
+                </blockquote>
+                <blockquote class="testimonial reveal">
+                    <p class="testimonial-quote">&ldquo;O processo foi muito mais estrat&eacute;gico do que simplesmente contratar algu&eacute;m para fazer um site.&rdquo;</p>
+                    <footer class="testimonial-footer">
+                        <strong>Nome do cliente</strong>
+                        <span>Cargo &mdash; Empresa</span>
+                    </footer>
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- ===== FAQ ===== -->
+        <section class="faq" id="faq">
+            <div class="faq-header reveal">
+                <h2 class="section-heading">Perguntas frequentes</h2>
+            </div>
+            <div class="faq-list">
+                <details class="faq-item reveal">
+                    <summary class="faq-question">Quanto custa criar um site?</summary>
+                    <div class="faq-answer"><p>O investimento depende do objetivo, quantidade de p&aacute;ginas, integra&ccedil;&otilde;es, n&iacute;vel de personaliza&ccedil;&atilde;o e estrat&eacute;gia necess&aacute;ria para o projeto. Ap&oacute;s entendermos seu cen&aacute;rio, apresentamos uma proposta espec&iacute;fica.</p></div>
+                </details>
+                <details class="faq-item reveal">
+                    <summary class="faq-question">Quanto tempo leva para desenvolver?</summary>
+                    <div class="faq-answer"><p>O prazo varia de acordo com a complexidade do projeto. Depois do diagn&oacute;stico inicial, definimos um cronograma claro com todas as etapas.</p></div>
+                </details>
+                <details class="faq-item reveal">
+                    <summary class="faq-question">Voc&ecirc;s trabalham com SEO?</summary>
+                    <div class="faq-answer"><p>Sim. A estrutura t&eacute;cnica do projeto &eacute; pensada considerando mecanismos de busca, performance, arquitetura de informa&ccedil;&atilde;o e boas pr&aacute;ticas de SEO.</p></div>
+                </details>
+                <details class="faq-item reveal">
+                    <summary class="faq-question">O site funciona no celular?</summary>
+                    <div class="faq-answer"><p>Sim. Todos os projetos s&atilde;o desenvolvidos com abordagem responsiva e foco na experi&ecirc;ncia mobile.</p></div>
+                </details>
+                <details class="faq-item reveal">
+                    <summary class="faq-question">Voc&ecirc;s fazem apenas o desenvolvimento?</summary>
+                    <div class="faq-answer"><p>N&atilde;o. Podemos atuar desde estrat&eacute;gia, arquitetura e copy at&eacute; design, desenvolvimento, SEO, analytics e otimiza&ccedil;&atilde;o.</p></div>
+                </details>
+                <details class="faq-item reveal">
+                    <summary class="faq-question">Posso integrar meu CRM?</summary>
+                    <div class="faq-answer"><p>Sim. Dependendo da plataforma utilizada, podemos integrar formul&aacute;rios, CRM, automa&ccedil;&otilde;es, APIs e outras ferramentas utilizadas pela sua opera&ccedil;&atilde;o.</p></div>
+                </details>
+                <details class="faq-item reveal">
+                    <summary class="faq-question">Voc&ecirc;s fazem manuten&ccedil;&atilde;o ap&oacute;s o lan&ccedil;amento?</summary>
+                    <div class="faq-answer"><p>Sim. Podemos estruturar planos de suporte, manuten&ccedil;&atilde;o e evolu&ccedil;&atilde;o cont&iacute;nua conforme a necessidade do projeto.</p></div>
+                </details>
+            </div>
+        </section>
+
+        <!-- ===== CTA Final ===== -->
+        <section class="cta-final" id="contato">
+            <div class="cta-final-inner reveal">
+                <h2 class="cta-final-title">Seu pr&oacute;ximo cliente pode come&ccedil;ar pelo seu site.</h2>
+                <p class="cta-final-body">Se sua presen&ccedil;a digital n&atilde;o representa o n&iacute;vel da sua empresa, existe uma oportunidade para melhorar.</p>
+                <div class="cta-final-actions">
+                    <a href="#" class="btn btn-primary">Quero falar com a ORVION</a>
+                    <a href="#" class="btn btn-ghost">Solicitar diagn&oacute;stico</a>
+                </div>
+        </section>
+
+        </div>
+    </main>
+
+    <!-- ===== Footer ===== -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="footer-logo">ORVION</span>
+                <p class="footer-tagline">Estrat&eacute;gia. Design. Tecnologia. Performance.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#servicos">Servi&ccedil;os</a>
+                <a href="#processo">Processo</a>
+                <a href="#projetos">Projetos</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contato">Contato</a>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 ORVION. Todos os direitos reservados.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
