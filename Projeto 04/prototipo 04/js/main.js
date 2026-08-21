@@ -1,6 +1,6 @@
 /* ============================================================
    ORVION — Landing Page
-   Loading, Nav, Mobile Menu, Scroll Reveal, Terminal Typing,
+   Loading, Nav, Mobile Menu, Scroll Reveal, 3D Magazine,
    Marquee, Sticky Services
    ============================================================ */
 
@@ -113,10 +113,10 @@
 
     /* ---------- Hero Scroll Fade & Scale ---------- */
     var heroContent = document.querySelector(".hero-content");
-    var heroTerminal = document.querySelector(".hero-terminal");
+    var heroMagazine = document.querySelector(".hero-magazine");
 
     function fadeHeroOnScroll() {
-        if (!heroContent || !heroTerminal) return;
+        if (!heroContent || !heroMagazine) return;
         var scrollY = window.scrollY;
         var fadeEnd = window.innerHeight * 0.75;
 
@@ -129,63 +129,139 @@
             heroContent.style.opacity = opacity;
             heroContent.style.transform = "scale(" + scale + ") translateY(" + translateY + "px)";
 
-            heroTerminal.style.opacity = opacity;
-            heroTerminal.style.transform = "scale(" + scale + ") translateY(" + translateY + "px)";
+            heroMagazine.style.opacity = opacity;
+            heroMagazine.style.transform = "scale(" + scale + ") translateY(" + translateY + "px)";
         } else {
             heroContent.style.opacity = 0;
-            heroTerminal.style.opacity = 0;
+            heroMagazine.style.opacity = 0;
         }
     }
 
     window.addEventListener("scroll", fadeHeroOnScroll, { passive: true });
     fadeHeroOnScroll();
 
-    /* ---------- Terminal Typing ---------- */
-    var typedEl = document.getElementById("typed-text");
-    var phrases = [
-        "ORVION",
-        "Seu site precisa vender",
-        "Performance + SEO",
-        "Estratégia & Conversão",
-        "Experiência que converte"
-    ];
-    var phraseIdx = 0;
-    var charIdx = 0;
-    var isDeleting = false;
-    var typingSpeed = 80;
+    /* ---------- 3D Magazine ---------- */
+    var magazine = document.getElementById("magazine");
+    var magazineScene = document.querySelector(".magazine-scene");
 
-    function typeEffect() {
-        if (!typedEl) return;
+    if (magazine && magazineScene) {
+        var TOTAL_PAGES = 4;
+        var PAGE_TURN_INTERVAL = 3000;
+        var RESTART_DELAY = 2000;
+        var magazineCurrentPage = 0;
+        var magazineTimer = null;
+        var magazinePaused = false;
+        var magazineInView = false;
 
-        var current = phrases[phraseIdx];
-
-        if (!isDeleting) {
-            typedEl.textContent = current.substring(0, charIdx + 1);
-            charIdx++;
-
-            if (charIdx === current.length) {
-                isDeleting = true;
-                typingSpeed = 2000;
-            } else {
-                typingSpeed = 70 + Math.random() * 60;
+        function magazineGoToPage(n) {
+            for (var i = 1; i <= TOTAL_PAGES; i++) {
+                magazine.classList.remove("is-turning-" + i);
             }
-        } else {
-            typedEl.textContent = current.substring(0, charIdx - 1);
-            charIdx--;
+            if (n > 0 && n <= TOTAL_PAGES) {
+                void magazine.offsetHeight;
+                magazine.classList.add("is-turning-" + n);
+            }
+            magazineCurrentPage = n;
+        }
 
-            if (charIdx === 0) {
-                isDeleting = false;
-                phraseIdx = (phraseIdx + 1) % phrases.length;
-                typingSpeed = 400;
+        function magazineNextPage() {
+            if (magazineCurrentPage < TOTAL_PAGES) {
+                magazineGoToPage(magazineCurrentPage + 1);
+                magazineScheduleNext();
             } else {
-                typingSpeed = 35;
+                setTimeout(function () {
+                    magazineReset();
+                    setTimeout(function () {
+                        if (!magazinePaused && magazineInView) magazineScheduleNext();
+                    }, 800);
+                }, RESTART_DELAY);
             }
         }
 
-        setTimeout(typeEffect, typingSpeed);
-    }
+        function magazineScheduleNext() {
+            clearTimeout(magazineTimer);
+            if (!magazinePaused && magazineInView) {
+                magazineTimer = setTimeout(magazineNextPage, PAGE_TURN_INTERVAL);
+            }
+        }
 
-    setTimeout(typeEffect, 2800);
+        function magazineReset() {
+            for (var i = 1; i <= TOTAL_PAGES; i++) {
+                magazine.classList.remove("is-turning-" + i);
+            }
+            magazineCurrentPage = 0;
+            var pages = magazine.querySelectorAll(".magazine-page");
+            pages.forEach(function (p) { p.style.transition = "none"; });
+            void magazine.offsetHeight;
+            pages.forEach(function (p) { p.style.transition = ""; });
+        }
+
+        function magazineStartAutoplay() {
+            if (magazinePaused || !magazineInView) return;
+            magazineReset();
+            setTimeout(magazineScheduleNext, 1500);
+        }
+
+        /* Pause on hover */
+        magazineScene.addEventListener("mouseenter", function () {
+            if (!magazinePaused) clearTimeout(magazineTimer);
+        });
+        magazineScene.addEventListener("mouseleave", function () {
+            if (!magazinePaused && magazineInView) magazineScheduleNext();
+        });
+
+        /* Visibility observer */
+        var magazineObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting && !magazinePaused) {
+                    magazineInView = true;
+                    magazineStartAutoplay();
+                } else {
+                    magazineInView = false;
+                    clearTimeout(magazineTimer);
+                }
+            });
+        }, { threshold: 0.3 });
+        magazineObserver.observe(magazineScene);
+
+        /* Tilt on mouse move */
+        var tiltTargetX = 2, tiltTargetY = -15;
+        var tiltCurrentX = 2, tiltCurrentY = -15;
+
+        magazineScene.addEventListener("mousemove", function (e) {
+            var rect = magazineScene.getBoundingClientRect();
+            var x = (e.clientX - rect.left) / rect.width;
+            var y = (e.clientY - rect.top) / rect.height;
+            tiltTargetY = -15 + (x - 0.5) * 30;
+            tiltTargetX = 2 + (y - 0.5) * -10;
+        });
+        magazineScene.addEventListener("mouseleave", function () {
+            tiltTargetY = -15;
+            tiltTargetX = 2;
+        });
+
+        function tiltAnimate() {
+            tiltCurrentX += (tiltTargetX - tiltCurrentX) * 0.06;
+            tiltCurrentY += (tiltTargetY - tiltCurrentY) * 0.06;
+            magazine.style.setProperty("--tilt-x", tiltCurrentX + "deg");
+            magazine.style.setProperty("--tilt-y", tiltCurrentY + "deg");
+            requestAnimationFrame(tiltAnimate);
+        }
+        tiltAnimate();
+
+        /* Click to advance */
+        magazineScene.addEventListener("click", function () {
+            if (magazineCurrentPage < TOTAL_PAGES) {
+                clearTimeout(magazineTimer);
+                magazineNextPage();
+            } else {
+                magazineReset();
+                setTimeout(function () {
+                    if (!magazinePaused && magazineInView) magazineScheduleNext();
+                }, 600);
+            }
+        });
+    }
 
     /* ---------- Active Nav Link on Scroll ---------- */
     var sections = document.querySelectorAll("main section[id]");
