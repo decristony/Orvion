@@ -2,3 +2,12 @@ node_modules/
 .DS_Store
 Thumbs.db
 *.log
+
+# Projetos antigos mantidos apenas localmente
+/projeto 01/
+/projeto 02/
+/projeto 03/
+/Projeto 04/
+/component/
+/component-hero-section/
+/7e1d3524cb3c95cb_*.jpeg

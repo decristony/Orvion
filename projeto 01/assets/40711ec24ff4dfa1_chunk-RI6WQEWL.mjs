@@ -1,2 +1,0 @@
-function a(e,t){return{description:"Landin is a premium agency and landing page template, perfect for showcasing your brand with a sleek, modern design, responsive layouts, and easy customization.",robots:"max-image-preview:large",socialImage:"https://framerusercontent.com/assets/eB4kLBCFbohpyEjQGutHBTMViQ.png",title:"Landin - Premium Agency & Landing Page"}}export{a};
-//# sourceMappingURL=chunk-RI6WQEWL.mjs.map
