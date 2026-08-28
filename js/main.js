@@ -113,6 +113,125 @@
     });
   });
 
+  /* ---------- Hero mockups: coverflow com as imagens dos protótipos ----------
+     Os cards são montados a partir de js/mockups.js (manifesto sem servidor).
+     Para incluir uma imagem nova, basta adicionar o nome do arquivo ao array
+     "images" em js/mockups.js — funciona até abrindo o index.html direto
+     (protocolo file://), sem precisar de servidor. */
+  (function () {
+    var stage = document.querySelector("[data-coverflow]");
+    var indicatorsWrap = document.querySelector(".mock-indicators");
+    var manifest = window.ORVION_MOCKUPS;
+    if (!stage || !indicatorsWrap || !manifest || !manifest.folder) return;
+
+    var folder = manifest.folder;
+    var images = Array.isArray(manifest.images) ? manifest.images : [];
+    var cards = [];
+    var dots = [];
+    var current = 0;
+    var timer = null;
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var INTERVAL = 4500;
+
+    function fileUrl(base, name) {
+      return base.split("/").map(encodeURIComponent).join("/") + "/" + encodeURIComponent(name);
+    }
+
+    function url(name) {
+      return fileUrl(folder, name);
+    }
+
+    // Fallback: se a imagem não carregar da pasta original (alguns navegadores
+    // restringem file:// entre pastas com acento/espaço), usa a cópia local.
+    function fallbackUrl(name) {
+      return "assets/img/mockups/" + encodeURIComponent(name);
+    }
+
+    function build() {
+      stage.classList.remove("is-empty");
+      stage.innerHTML = "";
+      indicatorsWrap.innerHTML = "";
+      cards = [];
+      dots = [];
+      current = 0;
+
+      images.forEach(function (name, i) {
+        var card = document.createElement("div");
+        card.className = "cf-card";
+        var img = document.createElement("img");
+        img.src = url(name);
+        img.alt = name.replace(/\.[^.]+$/, "");
+        img.loading = "lazy";
+        img.addEventListener("error", function () {
+          if (img.getAttribute("data-fb") !== "1") {
+            img.setAttribute("data-fb", "1");
+            img.src = fallbackUrl(name);
+          }
+        });
+        card.appendChild(img);
+        stage.appendChild(card);
+        cards.push(card);
+
+        var dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "mi";
+        dot.setAttribute("role", "tab");
+        dot.addEventListener("click", function () {
+          go(i);
+        });
+        indicatorsWrap.appendChild(dot);
+        dots.push(dot);
+      });
+
+      if (!cards.length) {
+        stage.classList.add("is-empty");
+        stop();
+        return;
+      }
+      layout();
+      stop();
+      if (!reduceMotion) timer = setInterval(step, INTERVAL);
+    }
+
+    function layout() {
+      var n = images.length;
+      cards.forEach(function (card, i) {
+        card.classList.remove("is-center", "is-left", "is-right", "is-hidden");
+        if (i === current) card.classList.add("is-center");
+        else if ((current + 1) % n === i) card.classList.add("is-right");
+        else if ((current - 1 + n) % n === i) card.classList.add("is-left");
+        else card.classList.add("is-hidden");
+        card.style.zIndex =
+          i === current ? "3" : (i === (current + 1) % n || i === (current - 1 + n) % n) ? "2" : "1";
+      });
+      dots.forEach(function (dot, i) {
+        var active = i === current;
+        dot.classList.toggle("is-active", active);
+        dot.setAttribute("aria-selected", active ? "true" : "false");
+        dot.setAttribute("tabindex", active ? "0" : "-1");
+      });
+    }
+
+    function step() {
+      current = (current + 1) % images.length;
+      layout();
+    }
+
+    function go(i) {
+      stop();
+      current = ((i % images.length) + images.length) % images.length;
+      layout();
+      if (!reduceMotion) timer = setInterval(step, INTERVAL);
+    }
+
+    function stop() {
+      clearInterval(timer);
+      timer = null;
+    }
+
+    build();
+  })();
+
   /* ---------- Custom cursor dot ---------- */
   if (window.matchMedia("(min-width: 1200px) and (pointer: fine)").matches) {
     var dot = document.createElement("div");

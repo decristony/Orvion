@@ -16,6 +16,13 @@
   --radius: 15px;
   --nav-h: 64px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Hero mockups — editorial palette */
+  --hero-bg: #f5f5f3;
+  --hero-teal: #0e9f84;
+  --hero-ink: #141515;
+  --hero-muted: rgba(20, 21, 21, 0.55);
+  --mock-ease: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -294,47 +301,21 @@ section { scroll-margin-top: calc(var(--nav-h) + 16px); }
   justify-content: center;
 }
 
-/* ---------- Hero animated stripes background ---------- */
+/* ---------- Hero clean editorial background ---------- */
 
 .hero-bg {
   position: absolute;
-  inset: var(--nav-h) 40px 0 40px;
+  inset: 0;
   z-index: 0;
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
   pointer-events: none;
+  background:
+    radial-gradient(1100px 600px at 78% 20%, rgba(190, 195, 192, 0.14) 0%, transparent 62%),
+    radial-gradient(900px 620px at 30% 100%, rgba(200, 203, 200, 0.1) 0%, transparent 60%),
+    linear-gradient(180deg, #fafaf8 0%, var(--hero-bg) 100%);
 }
 
-.hero-bg-inner {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
-}
-
-.stripes { flex: 1 0 0; height: 100%; overflow: hidden; }
-.stripes-left {
-  -webkit-mask-image: linear-gradient(270deg, rgba(0, 0, 0, 0) 0%, #000 100%);
-          mask-image: linear-gradient(270deg, rgba(0, 0, 0, 0) 0%, #000 100%);
-}
-.stripes-right {
-  -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, #000 100%);
-          mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, #000 100%);
-}
-
-.stripes-track {
-  display: flex;
-  width: max-content;
-  height: 100%;
-  animation: ticker 48s linear infinite;
-}
-.stripes-right .stripes-track { animation-direction: reverse; }
-
-.stripes-track li {
-  flex: 0 0 75px;
-  height: 100%;
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, var(--bg) 100%);
+.hero {
+  background: var(--hero-bg);
 }
 
 .hero-container {
@@ -344,23 +325,34 @@ section { scroll-margin-top: calc(var(--nav-h) + 16px); }
   min-height: 85vh;
   margin-inline: 40px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  justify-content: space-between;
+  gap: 24px;
+  text-align: left;
   border-left: 1px dashed var(--line);
   border-right: 1px dashed var(--line);
   padding: calc(var(--nav-h) + clamp(56px, 9vw, 116px)) 40px clamp(56px, 8vw, 100px);
 }
 
 @media (max-width: 1199.98px) {
-  .hero-bg { inset-inline: 15px; }
   .hero-container { margin-inline: 15px; padding-inline: 15px; }
 }
 
 @media (max-width: 809.98px) {
-  .hero-bg { inset-inline: 5px; }
   .hero-container { margin-inline: 5px; padding-inline: 10px; }
+}
+
+/* ---------- Hero copy (40%) ---------- */
+
+.hero-copy {
+  position: relative;
+  z-index: 3;
+  flex: 0 1 40%;
+  max-width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-bottom: 64px;
 }
 
 .hero-badge {
@@ -385,9 +377,9 @@ section { scroll-margin-top: calc(var(--nav-h) + 16px); }
 
 .hero-title {
   margin-top: 26px;
-  font-size: clamp(46px, 8.6vw, 102px);
+  font-size: clamp(46px, 7.4vw, 96px);
   line-height: 0.98;
-  max-width: 12ch;
+  max-width: 11ch;
 }
 .hero-title .w {
   display: inline-block;
@@ -405,7 +397,7 @@ section { scroll-margin-top: calc(var(--nav-h) + 16px); }
 
 .hero-sub {
   margin-top: 22px;
-  max-width: 520px;
+  max-width: 440px;
   font-size: 18px;
   color: var(--gray);
 }
@@ -413,10 +405,176 @@ section { scroll-margin-top: calc(var(--nav-h) + 16px); }
 .hero-buttons {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 10px;
   margin-top: 34px;
 }
+
+/* ==========================================================================
+   Hero mockups — coverflow com imagens reais dos protótipos
+   Os cards são gerados a partir da pasta de mockups (server.js -> /mockups.json).
+   Um card por vez em destaque ao centro; as laterais aparecem cortadas,
+   desfocadas (blur) e com opacidade menor quando não estão ativas.
+   ========================================================================== */
+
+.hero-mocks {
+  position: absolute;
+  top: calc(var(--nav-h) + 2vh);
+  right: 40px;
+  left: 44%;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.hero-coverflow {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* — Card individual (imagem do mockup) — */
+
+.cf-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  overflow: hidden;
+  --cf-w: clamp(400px, 44vw, 580px);
+  --cf-h: clamp(300px, 31vw, 430px);
+  width: var(--cf-w);
+  height: var(--cf-h);
+  border-radius: clamp(14px, 1.6vw, 20px);
+  box-shadow: 0 60px 90px -40px rgba(15, 15, 15, 0.45);
+  will-change: transform, opacity, filter;
+  transition: transform 0.9s var(--mock-ease), opacity 0.9s var(--mock-ease), filter 0.9s var(--mock-ease);
+  pointer-events: none;
+}
+
+.cf-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* — Estado central (destaque: nítido, escala cheia, opacidade total) — */
+
+.cf-card.is-center {
+  transform: translate(-50%, -50%) translateX(0) scale(1);
+  opacity: 1;
+  filter: none;
+  z-index: 3;
+}
+
+/* — Lateral esquerda: meia face cortada na borda, desfocada e mais clara — */
+
+.cf-card.is-left {
+  transform: translate(-50%, -50%) translateX(calc(var(--cf-w) * -0.78)) scale(0.7);
+  opacity: 0.55;
+  filter: blur(3px);
+  z-index: 2;
+}
+
+/* — Lateral direita: meia face cortada na borda, desfocada e mais clara — */
+
+.cf-card.is-right {
+  transform: translate(-50%, -50%) translateX(calc(var(--cf-w) * 0.78)) scale(0.7);
+  opacity: 0.55;
+  filter: blur(3px);
+  z-index: 2;
+}
+
+/* — Sair da cena (não visível) — */
+
+.cf-card.is-hidden {
+  transform: translate(-50%, -50%) translateX(calc(var(--cf-w) * 1.8)) scale(0.6);
+  opacity: 0;
+  filter: blur(6px);
+  z-index: 1;
+  visibility: hidden;
+}
+
+/* — Estado vazio (sem imagens na pasta) — */
+
+.hero-coverflow.is-empty::after {
+  content: "Adicione imagens 'hero section N' na pasta de mockups.";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  padding: 18px 20px;
+  border: 1px dashed rgba(255, 255, 255, 0.35);
+  border-radius: 16px;
+  color: var(--hero-muted, rgba(255, 255, 255, 0.7));
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+  background: rgba(15, 15, 15, 0.3);
+}
+
+/* ==== Carousel indicators (geradas dinamicamente) ==== */
+
+.mock-indicators {
+  position: absolute;
+  right: clamp(16px, 3vw, 48px);
+  bottom: clamp(16px, 4vw, 40px);
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.mi {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #c6c9c6;
+  transition: all 0.5s var(--mock-ease);
+}
+.mi.is-active {
+  width: 26px;
+  height: 6px;
+  border-radius: 20px;
+  background: var(--hero-ink);
+}
+
+/* ==== Responsive ==== */
+
+@media (max-width: 1199.98px) {
+  .hero-mocks { right: 15px; left: 43%; }
+  .cf-card {
+    --cf-w: clamp(340px, 42vw, 520px);
+    --cf-h: clamp(260px, 30vw, 380px);
+  }
+}
+
+@media (max-width: 809.98px) {
+  .hero-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+  }
+  .hero-copy { max-width: 100%; flex: none; }
+  .hero-mocks {
+    position: relative;
+    top: auto;
+    right: auto;
+    left: auto;
+    bottom: auto;
+    width: 100%;
+    min-height: 300px;
+    margin-top: 10px;
+  }
+  .mock-indicators { right: 20px; bottom: 8px; }
+  .cf-card {
+    --cf-w: min(86vw, 460px);
+    --cf-h: clamp(240px, 62vw, 340px);
+  }
+  .cf-card.is-left { translate: -50% -50%; transform: translate(-50%, -50%) translateX(-30vw) scale(0.55); }
+  .cf-card.is-right { transform: translate(-50%, -50%) translateX(30vw) scale(0.55); }
+}
+
 
 /* ==========================================================================
    Logos (faixa de celulas com ticker vertical, como na referencia)
@@ -1044,10 +1202,6 @@ section { scroll-margin-top: calc(var(--nav-h) + 16px); }
   .cases-grid { grid-template-columns: 1fr; }
   .step { grid-template-columns: 70px 1fr; gap: 14px; }
   .footer-top { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 640px) {
-  .stripes-track li { flex-basis: 60px; }
 }
 
 @media (max-width: 809.98px) {
