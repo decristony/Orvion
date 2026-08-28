@@ -36,6 +36,26 @@
     revealEls.forEach(function (el) { el.classList.add("visible"); });
   }
 
+  /* ---------- Section cascade: stagger .reveal children on scroll ---------- */
+  var sections = document.querySelectorAll("section.section, section.hero");
+  if ("IntersectionObserver" in window && sections.length) {
+    var sio = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var kids = entry.target.querySelectorAll(".reveal");
+          kids.forEach(function (el, i) {
+            if (el.getAttribute("style") && /--delay/.test(el.getAttribute("style"))) return;
+            el.style.setProperty("--delay", Math.min(i * 0.06, 0.6).toFixed(2) + "s");
+          });
+          sio.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.08 }
+    );
+    sections.forEach(function (s) { sio.observe(s); });
+  }
+
   /* ---------- Animated counters ---------- */
   var counters = document.querySelectorAll(".counter");
 
@@ -113,6 +133,28 @@
     });
   });
 
+  /* ---------- Custom cursor dot ---------- */
+  if (window.matchMedia("(min-width: 1200px) and (pointer: fine)").matches) {
+    var dot = document.createElement("div");
+    dot.className = "cursor-dot";
+    document.body.appendChild(dot);
+
+    var cx = -100, cy = -100, mx = cx, my = cy;
+    window.addEventListener("pointermove", function (e) {
+      mx = e.clientX;
+      my = e.clientY;
+    });
+    document.addEventListener("mouseleave", function () { dot.classList.add("is-hidden"); });
+    document.addEventListener("mouseenter", function () { dot.classList.remove("is-hidden"); });
+
+    (function follow() {
+      cx += (mx - cx) * 0.2;
+      cy += (my - cy) * 0.2;
+      dot.style.transform = "translate3d(" + cx + "px," + cy + "px,0)";
+      requestAnimationFrame(follow);
+    })();
+  }
+
   /* ---------- Hero mockups: coverflow com as imagens dos protótipos ----------
      Os cards são montados a partir de js/mockups.js (manifesto sem servidor).
      Para incluir uma imagem nova, basta adicionar o nome do arquivo ao array
@@ -120,7 +162,7 @@
      (protocolo file://), sem precisar de servidor. */
   (function () {
     var stage = document.querySelector("[data-coverflow]");
-    var indicatorsWrap = document.querySelector(".mock-indicators");
+    var indicatorsWrap = document.querySelector(".stage-dots");
     var manifest = window.ORVION_MOCKUPS;
     if (!stage || !indicatorsWrap || !manifest || !manifest.folder) return;
 
@@ -131,20 +173,10 @@
     var current = 0;
     var timer = null;
     var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var INTERVAL = 4500;
-
-    function fileUrl(base, name) {
-      return base.split("/").map(encodeURIComponent).join("/") + "/" + encodeURIComponent(name);
-    }
+    var INTERVAL = 6500;
 
     function url(name) {
-      return fileUrl(folder, name);
-    }
-
-    // Fallback: se a imagem não carregar da pasta original (alguns navegadores
-    // restringem file:// entre pastas com acento/espaço), usa a cópia local.
-    function fallbackUrl(name) {
-      return "assets/img/mockups/" + encodeURIComponent(name);
+      return folder.split("/").map(encodeURIComponent).join("/") + "/" + encodeURIComponent(name);
     }
 
     function build() {
@@ -162,19 +194,12 @@
         img.src = url(name);
         img.alt = name.replace(/\.[^.]+$/, "");
         img.loading = "lazy";
-        img.addEventListener("error", function () {
-          if (img.getAttribute("data-fb") !== "1") {
-            img.setAttribute("data-fb", "1");
-            img.src = fallbackUrl(name);
-          }
-        });
         card.appendChild(img);
         stage.appendChild(card);
         cards.push(card);
 
-        var dot = document.createElement("button");
-        dot.type = "button";
-        dot.className = "mi";
+        var dot = document.createElement("span");
+        dot.className = "sd";
         dot.setAttribute("role", "tab");
         dot.addEventListener("click", function () {
           go(i);
@@ -206,9 +231,8 @@
       });
       dots.forEach(function (dot, i) {
         var active = i === current;
-        dot.classList.toggle("is-active", active);
+        dot.classList.toggle("active", active);
         dot.setAttribute("aria-selected", active ? "true" : "false");
-        dot.setAttribute("tabindex", active ? "0" : "-1");
       });
     }
 
@@ -230,27 +254,21 @@
     }
 
     build();
+
+    // Pausar o auto-avanço quando a hero sai da tela (já era o comportamento da referência)
+    var heroStage = document.querySelector(".hero-stage");
+    if (heroStage && "IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            stop();
+            if (!reduceMotion) timer = setInterval(step, INTERVAL);
+          } else {
+            stop();
+          }
+        });
+      }, { threshold: 0.05 }).observe(heroStage);
+    }
   })();
 
-  /* ---------- Custom cursor dot ---------- */
-  if (window.matchMedia("(min-width: 1200px) and (pointer: fine)").matches) {
-    var dot = document.createElement("div");
-    dot.className = "cursor-dot";
-    document.body.appendChild(dot);
-
-    var cx = -100, cy = -100, mx = cx, my = cy;
-    window.addEventListener("pointermove", function (e) {
-      mx = e.clientX;
-      my = e.clientY;
-    });
-    document.addEventListener("mouseleave", function () { dot.classList.add("is-hidden"); });
-    document.addEventListener("mouseenter", function () { dot.classList.remove("is-hidden"); });
-
-    (function follow() {
-      cx += (mx - cx) * 0.2;
-      cy += (my - cy) * 0.2;
-      dot.style.transform = "translate3d(" + cx + "px," + cy + "px,0)";
-      requestAnimationFrame(follow);
-    })();
-  }
 })();
