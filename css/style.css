@@ -785,7 +785,7 @@ section { scroll-margin-top: calc(var(--nav-h) + 16px); }
 }
 .about-watermark {
   position: absolute;
-  top: 2%;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
   z-index: 0;
