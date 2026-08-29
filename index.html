@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Halant:wght@500;600;700&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=6">
+  <link rel="stylesheet" href="css/style.css?v=8">
 </head>
 <body>
 
@@ -93,6 +93,8 @@
 
         <div class="hero-stage" aria-hidden="true">
           <div class="mockup-scene" data-coverflow></div>
+          <button class="cf-arrow cf-arrow--prev" aria-label="Slide anterior">&#10094;</button>
+          <button class="cf-arrow cf-arrow--next" aria-label="Próximo slide">&#10095;</button>
           <div class="stage-dots"></div>
         </div>
 
@@ -155,36 +157,14 @@
     </div>
 
     <!-- ============ SOBRE / VENDER ============ -->
-    <section class="about section" id="sobre">
+    <section class="about section section--dark" id="sobre">
+      <span class="about-watermark" aria-hidden="true"><span class="wm-l">o</span><span class="wm-l">r</span><span class="wm-l">v</span><span class="wm-l">i</span><span class="wm-l">o</span><span class="wm-l">n</span></span>
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-label">001/ Quem somos</span>
           <h2>Seu site está preparado para vender?</h2>
-          <p class="section-copy">Um site bonito chama atenção. Um site estratégico gera oportunidades.</p>
-          <p class="section-copy">Na ORVION, unimos <strong>estratégia, design, copy, tecnologia e performance</strong> para criar experiências digitais que ajudam sua empresa a conquistar mais clientes.</p>
-        </div>
-
-        <div class="stats-grid">
-          <div class="stat-chip reveal">
-            <span class="stat-value"><span class="counter" data-target="120">0</span>+</span>
-            <span class="stat-label">projetos entregues</span>
-          </div>
-          <div class="stat-chip reveal" style="--delay:.08s">
-            <span class="stat-value">98+</span>
-            <span class="stat-label">PageSpeed em projetos otimizados</span>
-          </div>
-          <div class="stat-chip reveal" style="--delay:.16s">
-            <span class="stat-value">100%</span>
-            <span class="stat-label">responsivo</span>
-          </div>
-          <div class="stat-chip reveal" style="--delay:.24s">
-            <span class="stat-value stat-value-text">Foco</span>
-            <span class="stat-label">em conversão</span>
-          </div>
         </div>
       </div>
     </section>
-
     <!-- ============ PROJETOS ============ -->
     <section class="cases section" id="projetos">
       <div class="container">
@@ -194,48 +174,79 @@
           <p class="section-sub">Não acreditamos em sites feitos apenas para preencher uma vitrine. Cada projeto nasce com um objetivo comercial: <strong>atrair, convencer e converter.</strong></p>
         </div>
 
-        <div class="cases-grid">
-          <a class="case-card card reveal" href="#">
-            <div class="case-img">
-              <img src="assets/img/case-etery.png" alt="Projeto 01 — Redesign, performance e CRO" loading="lazy">
-              <span class="case-tag">Redesign + Performance + CRO</span>
-            </div>
-            <div class="case-body">
-              <h3>Projeto 01</h3>
-              <p>Um novo posicionamento digital para transformar visitantes em oportunidades comerciais.</p>
-              <div class="case-result">
-                <span>Resultado:</span>
-                <strong>+X% em conversões</strong>
+        <div class="cases-list">
+          <a class="case-row reveal" href="https://decristony.github.io/OdontoVitta/" target="_blank" rel="noopener">
+            <div class="case-row-inner">
+              <div class="case-row-info">
+                <div class="case-row-meta">
+                  <span class="case-row-num">01</span>
+                  <span class="case-row-line" aria-hidden="true"></span>
+                  <span class="case-row-cat">Redesign + Performance + CRO</span>
+                </div>
+                <h3 class="case-row-title">OdontoVitta</h3>
+                <p class="case-row-desc">Um novo posicionamento digital para transformar visitantes em oportunidades comerciais.</p>
+              </div>
+              <div class="case-row-media">
+                <div class="case-row-media-pad">
+                  <img src="assets/img/pages/site-01.webp" alt="OdontoVitta" loading="lazy">
+                </div>
               </div>
             </div>
           </a>
 
-          <a class="case-card card reveal" href="#" style="--delay:.1s">
-            <div class="case-img">
-              <img src="assets/img/case-genesy.png" alt="Projeto 02 — Site institucional e SEO" loading="lazy">
-              <span class="case-tag">Site Institucional + SEO</span>
-            </div>
-            <div class="case-body">
-              <h3>Projeto 02</h3>
-              <p>Arquitetura desenvolvida para aumentar autoridade e facilitar a descoberta da empresa no Google.</p>
-              <div class="case-result">
-                <span>Resultado:</span>
-                <strong>+X% em tráfego orgânico</strong>
+          <a class="case-row reveal" href="https://decristony.github.io/Aura-Premium/" target="_blank" rel="noopener">
+            <div class="case-row-inner">
+              <div class="case-row-info">
+                <div class="case-row-meta">
+                  <span class="case-row-num">02</span>
+                  <span class="case-row-line" aria-hidden="true"></span>
+                  <span class="case-row-cat">Site Institucional + SEO</span>
+                </div>
+                <h3 class="case-row-title">Aura Premium</h3>
+                <p class="case-row-desc">Arquitetura desenvolvida para aumentar autoridade e facilitar a descoberta da empresa no Google.</p>
+              </div>
+              <div class="case-row-media">
+                <div class="case-row-media-pad">
+                  <img src="assets/img/pages/site-02.webp" alt="Aura Premium" loading="lazy">
+                </div>
               </div>
             </div>
           </a>
 
-          <a class="case-card card reveal" href="#" style="--delay:.2s">
-            <div class="case-img">
-              <img src="assets/img/case-zenon.png" alt="Projeto 03 — Landing page e tráfego" loading="lazy">
-              <span class="case-tag">Landing Page + Tráfego</span>
+          <a class="case-row reveal" href="https://decristony.github.io/Luxury-Cardapio/" target="_blank" rel="noopener">
+            <div class="case-row-inner">
+              <div class="case-row-info">
+                <div class="case-row-meta">
+                  <span class="case-row-num">03</span>
+                  <span class="case-row-line" aria-hidden="true"></span>
+                  <span class="case-row-cat">Landing Page + Tráfego</span>
+                </div>
+                <h3 class="case-row-title">Luxury Cardápio</h3>
+                <p class="case-row-desc">Uma experiência construída para reduzir distrações e aumentar a geração de leads.</p>
+              </div>
+              <div class="case-row-media">
+                <div class="case-row-media-pad">
+                  <img src="assets/img/pages/site-03.webp" alt="Luxury Cardápio" loading="lazy">
+                </div>
+              </div>
             </div>
-            <div class="case-body">
-              <h3>Projeto 03</h3>
-              <p>Uma experiência construída para reduzir distrações e aumentar a geração de leads.</p>
-              <div class="case-result">
-                <span>Resultado:</span>
-                <strong>X% de conversão</strong>
+          </a>
+
+          <a class="case-row reveal" href="https://decristony.github.io/Mendes-e-Advogados/" target="_blank" rel="noopener">
+            <div class="case-row-inner">
+              <div class="case-row-info">
+                <div class="case-row-meta">
+                  <span class="case-row-num">05</span>
+                  <span class="case-row-line" aria-hidden="true"></span>
+                  <span class="case-row-cat">Site Institucional</span>
+                </div>
+                <h3 class="case-row-title">Mendes e Advogados</h3>
+                <p class="case-row-desc">Uma presença digital sólida e confiável para fortalecer a autoridade do escritório e gerar novos contatos.</p>
+              </div>
+              <div class="case-row-media">
+                <div class="case-row-media-pad">
+                  <img src="assets/img/pages/site-05.webp" alt="Mendes e Advogados" loading="lazy">
+                </div>
               </div>
             </div>
           </a>
@@ -688,6 +699,6 @@
   </footer>
 
   <script src="js/mockups.js?v=5"></script>
-  <script src="js/main.js?v=5"></script>
+  <script src="js/main.js?v=6"></script>
 </body>
 </html>

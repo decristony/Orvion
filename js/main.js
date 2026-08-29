@@ -173,7 +173,7 @@
     var current = 0;
     var timer = null;
     var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var INTERVAL = 6500;
+    var INTERVAL = 4000;
 
     function url(name) {
       return folder.split("/").map(encodeURIComponent).join("/") + "/" + encodeURIComponent(name);
@@ -241,6 +241,25 @@
       layout();
     }
 
+    function prev() {
+      stop();
+      current = (current - 1 + images.length) % images.length;
+      layout();
+      if (!reduceMotion) timer = setInterval(step, INTERVAL);
+    }
+
+    function next() {
+      stop();
+      current = (current + 1) % images.length;
+      layout();
+      if (!reduceMotion) timer = setInterval(step, INTERVAL);
+    }
+
+    var prevBtn = document.querySelector(".cf-arrow--prev");
+    var nextBtn = document.querySelector(".cf-arrow--next");
+    if (prevBtn) prevBtn.addEventListener("click", prev);
+    if (nextBtn) nextBtn.addEventListener("click", next);
+
     function go(i) {
       stop();
       current = ((i % images.length) + images.length) % images.length;
@@ -269,6 +288,81 @@
         });
       }, { threshold: 0.05 }).observe(heroStage);
     }
+  })();
+
+  /* ---------- Scroll suave controlado pelo mouse (substitui o scroll normal) ----------
+     A página começa na hero. Conforme o mouse desce na altura da viewport, o site
+     sobe suavemente até o fim do documento (~2s para completar todo o percurso). */
+  (function () {
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    var raf = null;
+    var target = window.scrollY || window.pageYOffset || 0;
+    var current = target;
+    var last = 0;
+
+    function maxScroll() {
+      return Math.max(
+        document.documentElement.scrollHeight - window.innerHeight,
+        0
+      );
+    }
+
+    function frame(ts) {
+      var dt = Math.min(last ? ts - last : 16, 50) / 1000;
+      last = ts;
+      var m = maxScroll();
+      target = Math.min(Math.max(target, 0), m);
+      var k = 1 - Math.exp(-dt / 0.7); /* ~2s para completar o percurso */
+      current += (target - current) * k;
+      if (Math.abs(target - current) > 0.4 || Math.abs(current - (window.scrollY || 0)) > 0.4) {
+        window.scrollTo(0, current);
+        raf = requestAnimationFrame(frame);
+      } else {
+        window.scrollTo(0, target);
+        current = target;
+        raf = null;
+      }
+    }
+
+    /* Posição do mouse define o alvo do scroll (topo = início = hero). */
+    window.addEventListener(
+      "pointermove",
+      function (e) {
+        if (e.pointerType && e.pointerType !== "mouse") return;
+        var vh = window.innerHeight || 1;
+        var ratio = Math.min(Math.max(e.clientY / vh, 0), 1);
+        target = ratio * maxScroll();
+        if (!raf) {
+          current = window.scrollY || window.pageYOffset || 0;
+          last = 0;
+          raf = requestAnimationFrame(frame);
+        }
+      },
+      { passive: true }
+    );
+
+    /* Links de âncora: pular suavemente até a seção alvo. */
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        var id = link.getAttribute("href");
+        if (!id || id === "#") return;
+        var el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        target = Math.max(el.getBoundingClientRect().top + (window.scrollY || 0) - 80, 0);
+        if (!raf) {
+          current = window.scrollY || window.pageYOffset || 0;
+          last = 0;
+          raf = requestAnimationFrame(frame);
+        }
+      });
+    });
+
+    window.addEventListener("resize", function () {
+      target = Math.min(Math.max(target, 0), maxScroll());
+    });
   })();
 
 })();
