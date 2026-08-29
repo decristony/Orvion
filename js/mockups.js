@@ -1,4 +1,4 @@
-/* ORVION — Manifesto das imagens dos mockups da hero.
+/* ORVION — Manifesto das imagens dos mockups da hero (prototipo 3.3).
    ------------------------------------------------------------
    Para adicionar uma nova campanha/slide ao carrossel:
      1. Coloque a imagem na pasta  public/mockups  (ex.: "hero section 04.webp")
@@ -9,6 +9,7 @@ window.ORVION_MOCKUPS = {
   images: [
     "hero section 01.webp",
     "hero section 02.webp",
-    "Hero section 03.webp"
+    "Hero section 03.webp",
+    "hero section 04.webp"
   ]
 };

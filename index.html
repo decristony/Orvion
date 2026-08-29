@@ -3,16 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Cache-Control" content="no-store">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
   <title>ORVION — Sites rápidos, estratégicos e orientados à conversão</title>
   <meta name="description" content="Sites rápidos, estratégicos e orientados à conversão para empresas que querem transformar visitantes em clientes.">
   <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Halant:wght@500;600;700&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=9">
+  <link rel="stylesheet" href="css/style.css?v=13">
 </head>
 <body>
 
@@ -34,7 +31,7 @@
       </nav>
 
       <a class="btn btn-primary nav-btn" href="#contato">
-        <span class="btn-label"><span>Solicitar diagnóstico</span><span>Solicitar diagnóstico</span></span>
+        <span class="btn-label"><span>Solicitar orçamento</span><span>Solicitar orçamento</span></span>
         <span class="btn-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
@@ -51,7 +48,7 @@
       <a class="menu-link" href="#projetos">Projetos</a>
       <a class="menu-link" href="#metodo">Método</a>
       <a class="menu-link" href="#faq">FAQs</a>
-      <a class="btn btn-primary" href="#contato"><span class="btn-label"><span>Solicitar diagnóstico</span><span>Solicitar diagnóstico</span></span></a>
+      <a class="btn btn-primary" href="#contato"><span class="btn-label"><span>Solicitar orçamento</span><span>Solicitar orçamento</span></span></a>
     </div>
   </header>
 
@@ -59,216 +56,135 @@
 
     <!-- ============ HERO ============ -->
     <div class="top-zone">
-    <section class="hero">
-      <div class="container hero-layout">
+      <section class="hero" id="hero">
+        <div class="container hero-layout">
 
-        <div class="hero-content">
-          <div class="hero-badge reveal">
-            <p>Estratégia &middot; Design &middot; Tecnologia &middot; Performance</p>
+          <div class="hero-content">
+            <div class="hero-badge reveal">
+              <span class="badge-pulse-dot" aria-hidden="true"></span>
+              <p>Estratégia &middot; Design &middot; Tecnologia &middot; Performance</p>
+            </div>
+
+            <h1 class="hero-title" id="hero-title" aria-label="Sites que transformam visitantes em clientes.">
+              <span class="w">Sites</span> <span class="w">que</span> <span class="w hl">transformam</span> <span class="w">visitantes</span> <span class="w">em</span> <span class="w">clientes</span>
+            </h1>
+
+            <p class="hero-sub reveal">Cada clique é uma oportunidade de negócio. Caminhos claros, storytelling persuasivo e design de alta conversão — construídos para transformar visitantes em oportunidades reais para a sua empresa.</p>
+
+            <div class="hero-buttons reveal">
+              <a class="btn btn-primary btn-lg" href="#contato">
+                <span class="btn-label"><span>Entrar em contato com o dev</span><span>Entrar em contato com o dev</span></span>
+                <span class="btn-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                </span>
+              </a>
+              <a class="btn btn-secondary btn-lg" href="#projetos">
+                <span class="btn-label"><span>Ver nossos projetos</span><span>Ver nossos projetos</span></span>
+                <span class="btn-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                </span>
+              </a>
+            </div>
+
+            <div class="hero-proof reveal" style="--delay: .24s">
+              <div class="hero-proof-avatars" aria-hidden="true">
+                <img src="assets/img/avatar-1.png" alt="Cliente ORVION" width="28" height="28">
+                <img src="assets/img/avatar-2.png" alt="Cliente ORVION" width="28" height="28">
+                <img src="assets/img/avatar-3.png" alt="Cliente ORVION" width="28" height="28">
+              </div>
+              <span><strong>+50 projetos entregues</strong> &bull; Foco total em conversão e Core Web Vitals</span>
+            </div>
           </div>
 
-          <h1 class="hero-title" id="hero-title" aria-label="Sites que transformam visitantes em clientes.">
-            <span class="w">Sites</span> <span class="w">que</span> <span class="w hl">transformam</span> <span class="w">visitantes</span> <span class="w">em</span> <span class="w">clientes</span>
-          </h1>
+          <div class="hero-stage" aria-label="Apresentação dos projetos recentes">
+            <div class="mockup-scene" data-coverflow></div>
+            <button class="cf-arrow cf-arrow--prev" aria-label="Slide anterior" title="Anterior">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button class="cf-arrow cf-arrow--next" aria-label="Próximo slide" title="Próximo">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+            <div class="stage-dots" role="tablist" aria-label="Navegação dos projetos"></div>
+          </div>
 
-          <p class="hero-sub reveal">Para empresas que querem transformar visitantes em clientes.</p>
+        </div>
+      </section>
 
-          <div class="hero-buttons reveal">
-            <a class="btn btn-primary btn-lg" href="#contato">
-              <span class="btn-label"><span>Quero transformar meu site</span><span>Quero transformar meu site</span></span>
-              <span class="btn-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-              </span>
-            </a>
-            <a class="btn btn-secondary btn-lg" href="#projetos">
-              <span class="btn-label"><span>Ver nossos projetos</span><span>Ver nossos projetos</span></span>
-              <span class="btn-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-              </span>
-            </a>
+      <!-- ============ LOGOS ============ -->
+      <section class="logos" id="logos" aria-label="Empresas que confiam na ORVION">
+        <div class="logos-caption">
+          <span>Tecnologia, estratégia e design para marcas em expansão</span>
+        </div>
+        <div class="logos-strip">
+          <div class="logo-cell">
+            <div class="logo-roll">
+              <img src="assets/img/client-1.svg" alt="Cliente" loading="lazy">
+              <img src="assets/img/client-1.svg" alt="" loading="lazy" aria-hidden="true">
+            </div>
+          </div>
+          <div class="logo-cell">
+            <div class="logo-roll">
+              <img src="assets/img/client-2.svg" alt="Cliente" loading="lazy">
+              <img src="assets/img/client-2.svg" alt="" loading="lazy" aria-hidden="true">
+            </div>
+          </div>
+          <div class="logo-cell">
+            <div class="logo-roll">
+              <img src="assets/img/client-3.svg" alt="Cliente" loading="lazy">
+              <img src="assets/img/client-3.svg" alt="" loading="lazy" aria-hidden="true">
+            </div>
+          </div>
+          <div class="logo-cell">
+            <div class="logo-roll">
+              <img src="assets/img/client-4.svg" alt="Cliente" loading="lazy">
+              <img src="assets/img/client-4.svg" alt="" loading="lazy" aria-hidden="true">
+            </div>
+          </div>
+          <div class="logo-cell">
+            <div class="logo-roll">
+              <img src="assets/img/client-5.svg" alt="Cliente" loading="lazy">
+              <img src="assets/img/client-5.svg" alt="" loading="lazy" aria-hidden="true">
+            </div>
+          </div>
+          <div class="logo-cell">
+            <div class="logo-roll">
+              <img src="assets/img/client-6.svg" alt="Cliente" loading="lazy">
+              <img src="assets/img/client-6.svg" alt="" loading="lazy" aria-hidden="true">
+            </div>
+          </div>
+          <div class="logo-cell">
+            <div class="logo-roll">
+              <img src="assets/img/client-7.svg" alt="Cliente" loading="lazy">
+              <img src="assets/img/client-7.svg" alt="" loading="lazy" aria-hidden="true">
+            </div>
+          </div>
+          <div class="logo-cell">
+            <div class="logo-roll">
+              <img src="assets/img/client-8.svg" alt="Cliente" loading="lazy">
+              <img src="assets/img/client-8.svg" alt="" loading="lazy" aria-hidden="true">
+            </div>
           </div>
         </div>
-
-        <div class="hero-stage" aria-hidden="true">
-          <div class="mockup-scene" data-coverflow></div>
-          <button class="cf-arrow cf-arrow--prev" aria-label="Slide anterior">&#10094;</button>
-          <button class="cf-arrow cf-arrow--next" aria-label="Próximo slide">&#10095;</button>
-          <div class="stage-dots"></div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ============ LOGOS ============ -->
-    <section class="logos" id="logos" aria-label="Empresas que confiam na ORVION">
-      <div class="logos-strip">
-        <div class="logo-cell">
-          <div class="logo-roll">
-            <img src="assets/img/client-1.svg" alt="" loading="lazy">
-            <img src="assets/img/client-1.svg" alt="" loading="lazy" aria-hidden="true">
-          </div>
-        </div>
-        <div class="logo-cell">
-          <div class="logo-roll">
-            <img src="assets/img/client-2.svg" alt="" loading="lazy">
-            <img src="assets/img/client-2.svg" alt="" loading="lazy" aria-hidden="true">
-          </div>
-        </div>
-        <div class="logo-cell">
-          <div class="logo-roll">
-            <img src="assets/img/client-3.svg" alt="" loading="lazy">
-            <img src="assets/img/client-3.svg" alt="" loading="lazy" aria-hidden="true">
-          </div>
-        </div>
-        <div class="logo-cell">
-          <div class="logo-roll">
-            <img src="assets/img/client-4.svg" alt="" loading="lazy">
-            <img src="assets/img/client-4.svg" alt="" loading="lazy" aria-hidden="true">
-          </div>
-        </div>
-        <div class="logo-cell">
-          <div class="logo-roll">
-            <img src="assets/img/client-5.svg" alt="" loading="lazy">
-            <img src="assets/img/client-5.svg" alt="" loading="lazy" aria-hidden="true">
-          </div>
-        </div>
-        <div class="logo-cell">
-          <div class="logo-roll">
-            <img src="assets/img/client-6.svg" alt="" loading="lazy">
-            <img src="assets/img/client-6.svg" alt="" loading="lazy" aria-hidden="true">
-          </div>
-        </div>
-        <div class="logo-cell">
-          <div class="logo-roll">
-            <img src="assets/img/client-7.svg" alt="" loading="lazy">
-            <img src="assets/img/client-7.svg" alt="" loading="lazy" aria-hidden="true">
-          </div>
-        </div>
-        <div class="logo-cell">
-          <div class="logo-roll">
-            <img src="assets/img/client-8.svg" alt="" loading="lazy">
-            <img src="assets/img/client-8.svg" alt="" loading="lazy" aria-hidden="true">
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
     </div>
 
-    <!-- ============ SOBRE / VENDER ============ -->
-    <section class="about section section--dark" id="sobre">
-      <span class="about-watermark" aria-hidden="true"><span class="wm-l">o</span><span class="wm-l">r</span><span class="wm-l">v</span><span class="wm-l">i</span><span class="wm-l">o</span><span class="wm-l">n</span></span>
+    <!-- ============ SOBRE / VENDER (01 - BRANCO) ============ -->
+    <section class="about section-panel panel--light" id="sobre">
+      <span class="about-watermark" aria-hidden="true"><span>O</span><span>R</span><span>V</span><span>I</span><span>O</span><span>N</span></span>
       <div class="container">
         <div class="section-head reveal">
           <h2>Seu site está preparado para vender?</h2>
         </div>
       </div>
     </section>
-    <!-- ============ PROJETOS ============ -->
-    <section class="cases section" id="projetos">
+
+    <!-- ============ O QUE FAZEMOS (02 - PRETO) ============ -->
+    <section class="services section-panel panel--dark" id="servicos">
       <div class="container">
         <div class="section-head reveal">
-          <span class="section-label">002/ Projetos</span>
-          <h2>Projetos que transformam presença digital em resultado.</h2>
-          <p class="section-sub">Não acreditamos em sites feitos apenas para preencher uma vitrine. Cada projeto nasce com um objetivo comercial: <strong>atrair, convencer e converter.</strong></p>
-        </div>
-
-        <div class="cases-list">
-          <a class="case-row reveal" href="https://decristony.github.io/OdontoVitta/" target="_blank" rel="noopener">
-            <div class="case-row-inner">
-              <div class="case-row-info">
-                <div class="case-row-meta">
-                  <span class="case-row-num">01</span>
-                  <span class="case-row-line" aria-hidden="true"></span>
-                  <span class="case-row-cat">Redesign + Performance + CRO</span>
-                </div>
-                <h3 class="case-row-title">OdontoVitta</h3>
-                <p class="case-row-desc">Um novo posicionamento digital para transformar visitantes em oportunidades comerciais.</p>
-              </div>
-              <div class="case-row-media">
-                <div class="case-row-media-pad">
-                  <img src="assets/img/pages/site-01.webp" alt="OdontoVitta" loading="lazy">
-                </div>
-              </div>
-            </div>
-          </a>
-
-          <a class="case-row reveal" href="https://decristony.github.io/Aura-Premium/" target="_blank" rel="noopener">
-            <div class="case-row-inner">
-              <div class="case-row-info">
-                <div class="case-row-meta">
-                  <span class="case-row-num">02</span>
-                  <span class="case-row-line" aria-hidden="true"></span>
-                  <span class="case-row-cat">Site Institucional + SEO</span>
-                </div>
-                <h3 class="case-row-title">Aura Premium</h3>
-                <p class="case-row-desc">Arquitetura desenvolvida para aumentar autoridade e facilitar a descoberta da empresa no Google.</p>
-              </div>
-              <div class="case-row-media">
-                <div class="case-row-media-pad">
-                  <img src="assets/img/pages/site-02.webp" alt="Aura Premium" loading="lazy">
-                </div>
-              </div>
-            </div>
-          </a>
-
-          <a class="case-row reveal" href="https://decristony.github.io/Luxury-Cardapio/" target="_blank" rel="noopener">
-            <div class="case-row-inner">
-              <div class="case-row-info">
-                <div class="case-row-meta">
-                  <span class="case-row-num">03</span>
-                  <span class="case-row-line" aria-hidden="true"></span>
-                  <span class="case-row-cat">Landing Page + Tráfego</span>
-                </div>
-                <h3 class="case-row-title">Luxury Cardápio</h3>
-                <p class="case-row-desc">Uma experiência construída para reduzir distrações e aumentar a geração de leads.</p>
-              </div>
-              <div class="case-row-media">
-                <div class="case-row-media-pad">
-                  <img src="assets/img/pages/site-03.webp" alt="Luxury Cardápio" loading="lazy">
-                </div>
-              </div>
-            </div>
-          </a>
-
-          <a class="case-row reveal" href="https://decristony.github.io/Mendes-e-Advogados/" target="_blank" rel="noopener">
-            <div class="case-row-inner">
-              <div class="case-row-info">
-                <div class="case-row-meta">
-                  <span class="case-row-num">05</span>
-                  <span class="case-row-line" aria-hidden="true"></span>
-                  <span class="case-row-cat">Site Institucional</span>
-                </div>
-                <h3 class="case-row-title">Mendes e Advogados</h3>
-                <p class="case-row-desc">Uma presença digital sólida e confiável para fortalecer a autoridade do escritório e gerar novos contatos.</p>
-              </div>
-              <div class="case-row-media">
-                <div class="case-row-media-pad">
-                  <img src="assets/img/pages/site-05.webp" alt="Mendes e Advogados" loading="lazy">
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <div class="cases-more reveal">
-          <a class="btn btn-secondary" href="#">
-            <span class="btn-label"><span>Ver todos os projetos</span><span>Ver todos os projetos</span></span>
-            <span class="btn-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-            </span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ SERVIÇOS ============ -->
-    <section class="services section" id="servicos">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="section-label">003/ O que fazemos</span>
+          <span class="section-label">002/ O que fazemos</span>
           <h2>Tudo o que seu site precisa para gerar resultados.</h2>
           <p class="section-sub">Um projeto de alta performance não depende apenas de código: exige estratégia, mensagem clara, experiência intuitiva e tecnologia preparada para entregar velocidade.</p>
         </div>
@@ -313,8 +229,95 @@
       </div>
     </section>
 
-    <!-- ============ MÉTODO ============ -->
-    <section class="process section" id="metodo">
+    <!-- ============ PROJETOS (03 - BRANCO) ============ -->
+    <section class="cases section-panel panel--light" id="projetos">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-label">003/ Projetos</span>
+          <h2>Projetos que transformam presença digital em resultado.</h2>
+          <p class="section-sub">Não acreditamos em sites feitos apenas para preencher uma vitrine. Cada projeto nasce com um objetivo comercial: <strong>atrair, convencer e converter.</strong></p>
+        </div>
+
+        <div class="case-list">
+          <a class="case-row group reveal" href="https://decristony.github.io/OdontoVitta/" target="_blank" rel="noopener">
+            <div class="case-row-info">
+              <div class="case-row-meta">
+                <span class="case-row-num">01</span>
+                <span class="case-row-rule" aria-hidden="true"></span>
+                <span class="case-row-cat">Redesign + Performance + CRO</span>
+              </div>
+              <h3>Odonto Vita</h3>
+              <p>Um novo posicionamento digital para transformar visitantes em oportunidades comerciais.</p>
+              <span class="case-row-result"><span>Resultado:</span> <strong>+38% em conversões</strong></span>
+            </div>
+            <div class="case-row-media">
+              <img src="public/portfolio/Site 01.webp" alt="Projeto 01 — Redesign, performance e CRO" loading="lazy">
+            </div>
+          </a>
+
+          <a class="case-row group reveal" href="https://decristony.github.io/Aura-Premium/" target="_blank" rel="noopener" style="--delay:.08s">
+            <div class="case-row-info">
+              <div class="case-row-meta">
+                <span class="case-row-num">02</span>
+                <span class="case-row-rule" aria-hidden="true"></span>
+                <span class="case-row-cat">Site Institucional + SEO</span>
+              </div>
+              <h3>Liora Aura</h3>
+              <p>Arquitetura desenvolvida para aumentar autoridade e facilitar a descoberta da empresa no Google.</p>
+              <span class="case-row-result"><span>Resultado:</span> <strong>+145% em tráfego orgânico</strong></span>
+            </div>
+            <div class="case-row-media">
+              <img src="public/portfolio/Site 02.webp" alt="Projeto 02 — Site institucional e SEO" loading="lazy">
+            </div>
+          </a>
+
+          <a class="case-row group reveal" href="https://decristony.github.io/Luxury-Cardapio/" target="_blank" rel="noopener" style="--delay:.16s">
+            <div class="case-row-info">
+              <div class="case-row-meta">
+                <span class="case-row-num">03</span>
+                <span class="case-row-rule" aria-hidden="true"></span>
+                <span class="case-row-cat">Landing Page + Tráfego</span>
+              </div>
+              <h3>La Maison</h3>
+              <p>Uma experiência construída para reduzir distrações e aumentar a geração de leads.</p>
+              <span class="case-row-result"><span>Resultado:</span> <strong>7,2% de conversão</strong></span>
+            </div>
+            <div class="case-row-media">
+              <img src="public/portfolio/Site 03.webp" alt="Projeto 03 — Landing page e tráfego" loading="lazy">
+            </div>
+          </a>
+
+          <a class="case-row group reveal" href="https://santosrobert.com.br/" target="_blank" rel="noopener" style="--delay:.24s">
+            <div class="case-row-info">
+              <div class="case-row-meta">
+                <span class="case-row-num">04</span>
+                <span class="case-row-rule" aria-hidden="true"></span>
+                <span class="case-row-cat">E-commerce + Performance</span>
+              </div>
+              <h3>Santos e Robert</h3>
+              <p>Uma vitrine digital construída para reduzir atritos e transformar visita em venda, com foco total em velocidade mobile.</p>
+              <span class="case-row-result"><span>Resultado:</span> <strong>+29% em vendas online</strong></span>
+            </div>
+            <div class="case-row-media">
+              <img src="public/portfolio/site 04.webp" alt="Projeto 04 — E-commerce e performance" loading="lazy">
+            </div>
+          </a>
+        </div>
+
+        <div class="cases-more reveal">
+          <a class="btn btn-secondary" href="#">
+            <span class="btn-label"><span>Ver todos os projetos</span><span>Ver todos os projetos</span></span>
+            <span class="btn-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MÉTODO (04 - PRETO) ============ -->
+    <section class="process section-panel panel--dark" id="metodo">
       <div class="container">
         <div class="section-head reveal">
           <span class="section-label">004/ Nosso método</span>
@@ -369,8 +372,8 @@
       </div>
     </section>
 
-    <!-- ============ PERFORMANCE ============ -->
-    <section class="metrics section" id="performance">
+    <!-- ============ PERFORMANCE (05 - BRANCO) ============ -->
+    <section class="metrics section-panel panel--light" id="performance">
       <div class="container">
         <div class="section-head reveal">
           <span class="section-label">005/ Performance</span>
@@ -401,8 +404,8 @@
       </div>
     </section>
 
-    <!-- ============ PARCERIA ============ -->
-    <section class="alliance section" id="parceria">
+    <!-- ============ PARCERIA (06 - PRETO) ============ -->
+    <section class="alliance section-panel panel--dark" id="parceria">
       <div class="container">
         <div class="section-head reveal">
           <span class="section-label">006/ Parceria</span>
@@ -426,8 +429,8 @@
       </div>
     </section>
 
-    <!-- ============ POR QUE ORVION ============ -->
-    <section class="whyus section" id="porque">
+    <!-- ============ POR QUE ORVION (07 - BRANCO) ============ -->
+    <section class="whyus section-panel panel--light" id="porque">
       <div class="container">
         <div class="section-head reveal">
           <span class="section-label">007/ Por que ORVION?</span>
@@ -435,7 +438,7 @@
         </div>
 
         <div class="reasons-grid">
-          <article class="card reason-card is-dark reveal">
+          <article class="card reason-card reveal">
             <span class="card-num">01</span>
             <h3>Estratégia antes do código</h3>
             <p>Não começamos pelo layout. Começamos entendendo o problema.</p>
@@ -468,8 +471,8 @@
       </div>
     </section>
 
-    <!-- ============ DEPOIMENTOS ============ -->
-    <section class="reviews section" id="depoimentos">
+    <!-- ============ DEPOIMENTOS (08 - PRETO) ============ -->
+    <section class="reviews section-panel panel--dark" id="depoimentos">
       <div class="container">
         <div class="section-head reveal">
           <span class="section-label">008/ Depoimentos</span>
@@ -532,8 +535,8 @@
       </div>
     </section>
 
-    <!-- ============ FAQS ============ -->
-    <section class="faqs section" id="faq">
+    <!-- ============ FAQS (09 - BRANCO) ============ -->
+    <section class="faqs section-panel panel--light" id="faq">
       <div class="container">
         <div class="section-head reveal">
           <span class="section-label">009/ Perguntas frequentes</span>
@@ -600,23 +603,23 @@
       </div>
     </section>
 
-    <!-- ============ CTA FINAL ============ -->
-    <section class="cta-final section" id="contato">
+    <!-- ============ CONTATO / CTA FINAL (10 - PRETO - ÚLTIMO PAINEL INTERMEDIÁRIO) ============ -->
+    <section class="cta-final section-panel panel--dark" id="contato">
       <div class="container">
         <div class="cta-block reveal">
           <span class="section-label">010/ Contato</span>
           <h2>Seu próximo cliente pode começar pelo seu site.</h2>
           <p class="section-copy">Se sua presença digital não representa o nível da sua empresa, existe uma oportunidade para melhorar. Conte para a ORVION o que você está tentando alcançar: analisamos seu cenário e mostramos quais pontos podem ser transformados em oportunidades.</p>
           <div class="hero-buttons">
-            <a class="btn btn-primary btn-lg" href="#">
+            <a class="btn btn-primary btn-lg" href="#contato">
               <span class="btn-label"><span>Quero falar com a ORVION</span><span>Quero falar com a ORVION</span></span>
               <span class="btn-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
               </span>
             </a>
-            <a class="btn btn-secondary btn-lg" href="#">
-              <span class="btn-label"><span>Solicitar diagnóstico</span><span>Solicitar diagnóstico</span></span>
+            <a class="btn btn-secondary btn-lg" href="#contato">
+              <span class="btn-label"><span>Solicitar orçamento</span><span>Solicitar orçamento</span></span>
               <span class="btn-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
@@ -627,7 +630,7 @@
       </div>
     </section>
 
-    <!-- ============ MARQUEE CTA ============ -->
+    <!-- ============ MARQUEE CTA (FORA DO STACKING - SCROLL NORMAL) ============ -->
     <section class="cta" aria-hidden="true">
       <a class="cta-marquee" href="#contato" tabindex="-1">
         <div class="cta-track" data-ticker>
@@ -646,7 +649,7 @@
 
   </main>
 
-  <!-- ============ FOOTER ============ -->
+  <!-- ============ FOOTER (FORA DO STACKING - SCROLL NORMAL) ============ -->
   <footer class="footer">
     <div class="container">
       <div class="footer-top">
@@ -654,13 +657,13 @@
           <p class="brand-name">ORVION</p>
           <p class="brand-tag"><strong>Estratégia. Design. Tecnologia. Performance.</strong></p>
           <p class="brand-sub">Criamos experiências digitais para empresas que querem crescer.</p>
-            <a class="btn btn-primary" href="#contato">
-              <span class="btn-label"><span>Solicitar diagnóstico</span><span>Solicitar diagnóstico</span></span>
-              <span class="btn-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
-              </span>
-            </a>
+          <a class="btn btn-primary" href="#contato">
+            <span class="btn-label"><span>Solicitar orçamento</span><span>Solicitar orçamento</span></span>
+            <span class="btn-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+            </span>
+          </a>
         </div>
 
         <nav class="footer-cols" aria-label="Rodapé">
@@ -693,12 +696,12 @@
       <div class="footer-bottom">
         <span>&copy;2026 ORVION.</span>
         <span>Todos os direitos reservados.</span>
-        <a href="#contato">Solicitar diagnóstico</a>
+        <a href="#contato">Solicitar orçamento</a>
       </div>
     </div>
   </footer>
 
-  <script src="js/mockups.js?v=5"></script>
-  <script src="js/main.js?v=6"></script>
+  <script src="js/mockups.js?v=1"></script>
+  <script src="js/main.js?v=1"></script>
 </body>
 </html>
