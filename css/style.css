@@ -833,8 +833,6 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 .logo-cell:nth-child(4) .logo-roll { animation-delay: 0.39s; }
 .logo-cell:nth-child(5) .logo-roll { animation-delay: 0.52s; }
 .logo-cell:nth-child(6) .logo-roll { animation-delay: 0.65s; }
-.logo-cell:nth-child(7) .logo-roll { animation-delay: 0.78s; }
-.logo-cell:nth-child(8) .logo-roll { animation-delay: 0.91s; }
 
 @keyframes logo-roll {
   0%, 30%   { transform: translateY(0);     filter: blur(0); }
@@ -847,15 +845,14 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
   width: 100%;
   height: 100%;
   object-fit: contain;
-  padding: 24px;
-  opacity: 0.55;
-  filter: brightness(0) invert(1);
-  transform: scale(0.94);
-  transition: opacity 0.3s var(--ease), filter 0.3s var(--ease), transform 0.3s var(--ease);
+  padding: 18px;
+  opacity: 0.75;
+  transform: scale(0.9);
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
 }
 .logo-cell:hover .logo-roll img {
-  opacity: 0.95;
-  transform: scale(1.04);
+  opacity: 1;
+  transform: scale(0.96);
 }
 
 /* ==========================================================================
@@ -901,10 +898,11 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 #metodo       { z-index: 5; }
 #performance  { z-index: 6; }
 #parceria     { z-index: 7; }
-#porque       { z-index: 8; }
-#depoimentos  { z-index: 9; }
-#faq          { z-index: 10; }
-#contato      { z-index: 11; }
+#time         { z-index: 8; }
+#porque       { z-index: 9; }
+#depoimentos  { z-index: 10; }
+#faq          { z-index: 11; }
+#contato      { z-index: 12; }
 
 /* Projetos: rola em fluxo normal (fora do sticky) para os 4 case studies ficarem visíveis */
 #projetos {
@@ -1016,25 +1014,49 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 }
 
 /* ==========================================================================
-   Section 01: Sobre / Vender (Light) & Watermark ORVION
+   Section 01: Sobre a ORVION (Segunda Dobra - Light) & Watermark ORVION
    ========================================================================== */
 
 .about {
-  min-height: 80vh;
+  min-height: auto;
   justify-content: center;
 }
 
 .about > .container {
   align-items: center;
   text-align: center;
-  padding: clamp(60px, 8vw, 100px) 0 clamp(40px, 5vw, 64px);
-}
-
-.about .section-head {
-  text-align: center;
-  max-width: 840px;
+  padding: clamp(72px, 9vw, 120px) clamp(16px, 3vw, 40px);
   position: relative;
   z-index: 2;
+}
+
+.about-head {
+  max-width: 880px;
+  margin-inline: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-head .section-label {
+  margin-bottom: 14px;
+}
+
+.about-head h2 {
+  font-size: clamp(40px, 5.6vw, 76px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink-2);
+  margin-top: 40px;
+}
+
+.about-desc {
+  margin-top: 18px;
+  font-size: clamp(16px, 1.2vw, 18.5px);
+  line-height: 1.65;
+  color: var(--gray);
+  max-width: 720px;
 }
 
 /* Watermark ORVION: texto no topo com letras aparecendo e sumindo em loop */
@@ -1046,13 +1068,12 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
   z-index: 0;
   font-family: "Halant", serif;
   font-weight: 600;
-  font-size: clamp(100px, 16vw, 280px);
+  font-size: clamp(90px, 15vw, 240px);
   line-height: 1;
   white-space: nowrap;
   letter-spacing: -0.02em;
   text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.12);
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  color: rgba(0, 0, 0, 0.05);
   pointer-events: none;
   user-select: none;
 }
@@ -1085,6 +1106,299 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
     transform: none;
     filter: none;
   }
+}
+
+/* ==========================================================================
+   Section 07: QUEM SOMOS / NOSSO TIME (Light)
+   ========================================================================== */
+
+.team {
+  min-height: 100vh;
+  justify-content: center;
+  position: relative;
+}
+
+.team > .container {
+  align-items: stretch;
+  text-align: left;
+  padding: clamp(48px, 6vw, 84px) clamp(16px, 3vw, 40px);
+  gap: clamp(32px, 4vw, 48px);
+  position: relative;
+  z-index: 2;
+}
+
+.team-head {
+  max-width: 860px;
+  margin-inline: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.team-head .section-label {
+  margin-bottom: 12px;
+}
+
+.team-head h2 {
+  font-size: clamp(30px, 3.8vw, 48px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--ink-2);
+}
+
+.team-desc {
+  margin-top: 14px;
+  font-size: clamp(15.5px, 1.15vw, 17px);
+  line-height: 1.6;
+  color: var(--gray);
+  max-width: 680px;
+}
+
+/* Cards dos Fundadores */
+.about-founders {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(20px, 2.5vw, 32px);
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
+  align-items: stretch;
+}
+
+.founder-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 32% 68%;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.03),
+    0 1px 3px rgba(0, 0, 0, 0.02);
+  transition:
+    transform 0.4s var(--ease),
+    border-color 0.4s var(--ease),
+    box-shadow 0.4s var(--ease);
+}
+
+.founder-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(45, 161, 164, 0.35);
+  box-shadow:
+    0 16px 36px -8px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(45, 161, 164, 0.15);
+}
+
+/* Founder Media - Grayscale por padrão, ganha cor apenas no hover (igual aos projetos) */
+.founder-media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+  background: #eaedf2;
+  overflow: hidden;
+}
+
+.founder-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  filter: grayscale(1);
+  opacity: 0.85;
+  transition:
+    filter 0.5s var(--ease),
+    opacity 0.5s var(--ease),
+    transform 0.6s var(--ease);
+}
+
+.founder-card:hover .founder-media img {
+  filter: grayscale(0);
+  opacity: 1;
+  transform: scale(1.03);
+}
+
+.founder-badge-tag {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: rgba(17, 18, 22, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+
+/* Founder Content */
+.founder-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(22px, 2.4vw, 32px);
+  gap: 18px;
+  background: #ffffff;
+}
+
+.founder-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.founder-identity {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.founder-name {
+  font-family: "Halant", serif;
+  font-size: clamp(21px, 1.8vw, 25px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--ink-2);
+}
+
+.founder-role {
+  font-family: "Geist", sans-serif;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--gray);
+  letter-spacing: -0.005em;
+}
+
+.founder-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-radius: 10px;
+  background: rgba(45, 161, 164, 0.08);
+  border: 1px solid rgba(45, 161, 164, 0.18);
+  color: var(--accent);
+  transition: transform 0.3s var(--ease), background 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+.founder-card:hover .founder-mark {
+  background: var(--accent);
+  color: #ffffff;
+  transform: rotate(8deg) scale(1.05);
+}
+
+/* Founder Quote */
+.founder-quote {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  font-size: clamp(14px, 1.05vw, 15.5px);
+  line-height: 1.6;
+  color: #2b2d33;
+  font-style: normal;
+  border-left: 2px solid rgba(45, 161, 164, 0.4);
+  padding-left: 14px;
+}
+
+.founder-quote p {
+  color: #2b2d33;
+  margin: 0;
+}
+
+/* Founder Footer */
+.founder-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--line-light);
+  margin-top: auto;
+}
+
+.founder-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 11px;
+  border-radius: 30px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.22);
+  font-size: 12px;
+  font-weight: 500;
+  color: #065f46;
+}
+
+.status-dot {
+  position: relative;
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: status-pulse 2s infinite;
+}
+
+@keyframes status-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.founder-pillar {
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--gray-2);
+}
+
+/* Manifesto strip at bottom */
+.about-manifesto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 14px 24px;
+  border-radius: 40px;
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px dashed var(--line-light-strong);
+  max-width: 760px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+.manifesto-text {
+  font-size: clamp(13.5px, 1.1vw, 15px);
+  color: var(--gray);
+  line-height: 1.45;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.manifesto-highlight {
+  color: var(--ink-2);
+  font-weight: 600;
 }
 
 /* ==========================================================================
@@ -1213,23 +1527,50 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
   flex-direction: column;
 }
 
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.services-row {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  padding: 16px 0;
+  width: 100%;
+  user-select: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.services-track {
+  display: flex;
   gap: 20px;
+  width: max-content;
+  animation: services-ticker 55s linear infinite;
+}
+.services-row:hover .services-track {
+  animation-play-state: paused;
+}
+
+@keyframes services-ticker {
+  to { transform: translateX(-50%); }
 }
 
 .service-card {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  width: clamp(280px, 26vw, 340px);
+  flex-shrink: 0;
   padding: 32px 28px;
   border-radius: 20px;
-  transition: transform 0.3s var(--ease), box-shadow 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
+  will-change: transform;
 }
-.service-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+.panel--dark .service-card:hover {
+  transform: scale(1.05);
+  border-color: rgba(45, 161, 164, 0.6);
+  box-shadow:
+    0 0 0 1px rgba(45, 161, 164, 0.3),
+    0 0 26px rgba(45, 161, 164, 0.4),
+    0 18px 40px rgba(0, 0, 0, 0.25);
 }
 
 .card-num {
@@ -1740,14 +2081,14 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
   :root { --panel-radius: 40px; }
   .section-panel { width: 95vw; }
   .hero-layout { margin-inline: 15px; padding-inline: 15px; }
-  .services-grid { grid-template-columns: repeat(2, 1fr); }
   .reasons-grid { grid-template-columns: repeat(2, 1fr); }
   .metrics-grid { grid-template-columns: repeat(2, 1fr); }
   .metric-cell:nth-child(odd) { border-left: 0; }
   .metric-cell:nth-child(n+3) { border-top: 1px dashed var(--line-light); }
-  .logos-strip { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .logos-strip { grid-template-columns: repeat(4, 1fr); }
   .logo-cell:nth-child(4n + 1) { border-left: 0; }
   .logo-cell:nth-child(n + 5) { border-top: 1px dashed var(--line-dark); }
+  .founder-card { grid-template-columns: 34% 66%; }
 }
 
 @media (max-width: 899.98px) {
@@ -1757,6 +2098,7 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
   .step { grid-template-columns: 60px 1fr; gap: 12px; }
   .footer-top { grid-template-columns: 1fr; }
   .cf-card { --cf-w: clamp(320px, 44vw, 440px); }
+  .about-founders { grid-template-columns: 1fr; gap: 24px; max-width: 640px; }
 }
 
 @media (max-width: 809.98px) {
@@ -1764,10 +2106,17 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
   .section-panel { width: 96vw; padding-inline: 14px; }
   .section-panel > .container { padding-inline: 10px; gap: 36px; }
 
+  .about { min-height: auto; }
+  .about-founders { grid-template-columns: 1fr; gap: 20px; max-width: 100%; }
+  .founder-card { grid-template-columns: 1fr; border-radius: 16px; }
+  .founder-media { min-height: 280px; height: clamp(260px, 60vw, 340px); }
+  .founder-content { padding: 22px 18px; gap: 16px; }
+  .about-manifesto { border-radius: 20px; padding: 12px 16px; }
+  .manifesto-text { font-size: 13.5px; text-align: center; }
+
   .menu, .nav-btn { display: none; }
   .nav-toggle { display: flex; }
 
-  .services-grid { grid-template-columns: 1fr; }
   .reasons-grid { grid-template-columns: 1fr; }
   .case-row-info { padding: 24px 2px; }
 
