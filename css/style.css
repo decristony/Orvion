@@ -376,8 +376,8 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
   display: flex;
   justify-content: center;
   background:
-    radial-gradient(ellipse 70% 60% at 76% 48%, rgba(1, 179, 239, 0.2) 0%, rgba(11, 12, 14, 0) 70%),
-    radial-gradient(ellipse 45% 45% at 18% 28%, rgba(1, 179, 239, 0.1) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 60% at 76% 48%, rgba(1, 30, 202, 0.2) 0%, rgba(11, 12, 14, 0) 70%),
+    radial-gradient(ellipse 45% 45% at 18% 28%, rgba(1, 30, 202, 0.1) 0%, transparent 60%),
     var(--bg-dark);
   color: #ffffff;
   overflow: hidden;
@@ -533,7 +533,7 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
   height: 105%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(1, 179, 239, 0.22) 0%, rgba(1, 179, 239, 0.06) 45%, transparent 72%);
+  background: radial-gradient(circle, rgba(1, 30, 202, 0.22) 0%, rgba(1, 30, 202, 0.06) 45%, transparent 72%);
   pointer-events: none;
   z-index: 0;
   filter: blur(24px);
@@ -898,10 +898,10 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 #sobre        { z-index: 2; margin-top: 0; }
 #servicos     { z-index: 3; }
 #projetos     { z-index: 4; }
-#performance  { z-index: 5; }
-#parceria     { z-index: 6; }
-#time         { z-index: 7; }
-#sobre-orvion { z-index: 8; }
+#sobre-orvion { z-index: 5; }
+#performance  { z-index: 6; }
+#parceria     { z-index: 7; }
+#time         { z-index: 8; }
 #depoimentos  { z-index: 9; }
 #faq          { z-index: 10; }
 #contato      { z-index: 11; }
@@ -1499,7 +1499,7 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 }
 
 /* ==========================================================================
-   Section 03: Serviços / O que fazemos (Light)
+   Section 02: Serviços / O que fazemos (Light)
    ========================================================================== */
 
 .services .section-head {
@@ -1617,7 +1617,7 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 }
 
 /* ==========================================================================
-   Section 05: Parceria (Dark)
+   Section 06: Parceria (Dark)
    ========================================================================== */
 
 .alliance .section-head {
@@ -1708,7 +1708,7 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 }
 
 /* ==========================================================================
-   Section 06: Sobre (Dark)
+   Section 04: Sobre a ORVION (Dark)
    ========================================================================== */
 
 .reasons-grid {
