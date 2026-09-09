@@ -189,7 +189,7 @@
     window.addEventListener("pointermove", function (e) {
       mx = e.clientX;
       my = e.clientY;
-      overDark = e.target && !!e.target.closest(".section--dark");
+      overDark = e.target && !!e.target.closest(".panel--dark");
       glow.classList.toggle("is-active", overDark);
       setTrail(!overDark);
     });
