@@ -78,9 +78,11 @@
 
   /* ---------- Animated counters ---------- */
   var counters = document.querySelectorAll(".counter");
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function animateCounter(el) {
     var target = parseInt(el.getAttribute("data-target"), 10) || 0;
+    if (reduceMotion) { el.textContent = target.toString(); return; }
     var duration = 1600;
     var start = null;
 
@@ -94,12 +96,29 @@
     requestAnimationFrame(frame);
   }
 
+  // Só conta quando o reveal da dobra já revelou o número em cena.
+  function startCounterWhenRevealed(el) {
+    var blocker = el.closest(".reveal");
+    if (!blocker || blocker.classList.contains("visible")) { animateCounter(el); return; }
+    if ("MutationObserver" in window) {
+      var mo = new MutationObserver(function () {
+        if (blocker.classList.contains("visible")) {
+          mo.disconnect();
+          animateCounter(el);
+        }
+      });
+      mo.observe(blocker, { attributes: true, attributeFilter: ["class"] });
+    } else {
+      animateCounter(el);
+    }
+  }
+
   if ("IntersectionObserver" in window && counters.length) {
     var cio = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
-            animateCounter(entry.target);
+            startCounterWhenRevealed(entry.target);
             cio.unobserve(entry.target);
           }
         });
@@ -109,7 +128,8 @@
     counters.forEach(function (c) { cio.observe(c); });
   } else {
     counters.forEach(function (c) {
-      c.textContent = c.getAttribute("data-target");
+      if (reduceMotion) { c.textContent = c.getAttribute("data-target"); return; }
+      startCounterWhenRevealed(c);
     });
   }
 
@@ -150,15 +170,42 @@
     });
   }
 
-  /* ---------- FAQs: close others when one opens ---------- */
+  /* ---------- FAQs: abertura suave + fecha outros ---------- */
   var faqItems = document.querySelectorAll(".faq-item");
   faqItems.forEach(function (item) {
+    var answer = item.querySelector(".faq-a");
+    if (!answer) return;
+
+    answer.style.maxHeight = "0px";
+    answer.style.opacity = "0";
+    answer.style.paddingBottom = "0px";
+
+    if (reduceMotion) {
+      answer.style.transition = "none";
+    }
+
+    function applyState() {
+      if (item.open) {
+        answer.style.maxHeight = answer.scrollHeight + "px";
+        answer.style.opacity = "1";
+        answer.style.paddingBottom = "24px";
+      } else {
+        answer.style.maxHeight = "0px";
+        answer.style.opacity = "0";
+        answer.style.paddingBottom = "0px";
+      }
+    }
+
     item.addEventListener("toggle", function () {
-      if (!item.open) return;
-      faqItems.forEach(function (other) {
-        if (other !== item) other.open = false;
-      });
+      if (item.open) {
+        faqItems.forEach(function (other) {
+          if (other !== item) other.open = false;
+        });
+      }
+      applyState();
     });
+
+    if (item.open) applyState();
   });
 
   /* ---------- Custom cursor dot ---------- */
