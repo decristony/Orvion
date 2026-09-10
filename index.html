@@ -59,7 +59,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Halant:wght@500;600;700&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=17">
+  <link rel="stylesheet" href="css/style.css?v=26">
 </head>
 <body>
 
@@ -67,15 +67,15 @@
   <header class="nav" id="header">
     <div class="container nav-inner">
       <a class="logo" href="#hero" aria-label="ORVION - Início">
-        <img src="assets/img/logo.png" alt="Logo ORVION" width="28" height="28" decoding="async" fetchpriority="high">
+        <img src="assets/img/logo-full.webp" alt="Logo ORVION" height="30" decoding="async" fetchpriority="high">
       </a>
 
       <nav class="menu" aria-label="Principal">
         <a class="menu-link is-active" href="#hero">Início</a>
         <span class="dot" aria-hidden="true"></span>
-<a class="menu-link" href="#sobre-orvion">Sobre</a>
+<a class="menu-link" href="#projetos">Projetos</a>
         <span class="dot" aria-hidden="true"></span>
-        <a class="menu-link" href="#projetos">Projetos</a>
+        <a class="menu-link" href="#sobre-orvion">Sobre</a>
         <span class="dot" aria-hidden="true"></span>
         <a class="menu-link" href="#time">Time</a>
         <span class="dot" aria-hidden="true"></span>
@@ -95,13 +95,14 @@
       </button>
     </div>
 
-    <div class="mobile-menu">
-      <a class="menu-link" href="#hero">Início</a>
-      <a class="menu-link" href="#sobre-orvion">Sobre</a>
-      <a class="menu-link" href="#projetos">Projetos</a>
-      <a class="menu-link" href="#time">Time</a>
-      <a class="menu-link" href="#faq">FAQs</a>
-      <a class="btn btn-primary" href="#contato"><span class="btn-label"><span>Solicitar orçamento</span><span>Solicitar orçamento</span></span></a>
+    <div class="mobile-menu" id="mobile-menu">
+      <div class="mobile-menu-links">
+        <a class="menu-link is-active" href="#hero">Início</a>
+        <a class="menu-link" href="#projetos">Projetos</a>
+        <a class="menu-link" href="#sobre-orvion">Sobre</a>
+        <a class="menu-link" href="#time">Time</a>
+        <a class="menu-link" href="#faq">FAQs</a>
+      </div>
     </div>
   </header>
 
@@ -121,7 +122,7 @@
 
             <div class="hero-buttons reveal">
               <a class="btn btn-primary btn-lg" href="#contato">
-                <span class="btn-label"><span>Entrar em contato com o dev</span><span>Entrar em contato com o dev</span></span>
+                <span class="btn-label"><span>Solicitar orçamento</span><span>Solicitar orçamento</span></span>
                 <span class="btn-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
@@ -262,76 +263,47 @@
 
     <!-- ============ PROJETOS (03 - BRANCO) ============ -->
     <section class="cases section-panel panel--light" id="projetos">
+      <span class="cases-watermark" aria-hidden="true"><span>P</span><span>R</span><span>O</span><span>J</span><span>E</span><span>T</span><span>O</span><span>S</span></span>
       <div class="container">
         <div class="section-head reveal">
           <h2>Projetos que transformam presença digital em resultado.</h2>
-          <p class="section-sub">Não acreditamos em sites feitos apenas para preencher uma vitrine. Cada projeto nasce com um objetivo comercial: <strong>atrair, convencer e converter.</strong></p>
         </div>
 
-        <div class="case-list">
-          <a class="case-row group reveal" href="https://decristony.github.io/OdontoVitta/" target="_blank" rel="noopener">
-            <div class="case-row-info">
-              <div class="case-row-meta">
-                <span class="case-row-num">01</span>
-                <span class="case-row-rule" aria-hidden="true"></span>
-                <span class="case-row-cat">Redesign + Performance + CRO</span>
-              </div>
-              <h3>Odonto Vita</h3>
-              <p>Um novo posicionamento digital para transformar visitantes em oportunidades comerciais.</p>
-              <span class="case-row-result"><span>Resultado:</span> <strong>+38% em conversões</strong></span>
-            </div>
-            <div class="case-row-media">
-              <img src="public/portfolio/Site 01.webp" alt="Projeto 01 — Redesign, performance e CRO" loading="lazy" decoding="async">
-            </div>
-          </a>
+        <div class="cases-showcase" data-cases-showcase>
+          <div class="cases-layout">
 
-          <a class="case-row group reveal" href="https://decristony.github.io/Aura-Premium/" target="_blank" rel="noopener" style="--delay:.08s">
-            <div class="case-row-info">
-              <div class="case-row-meta">
-                <span class="case-row-num">02</span>
-                <span class="case-row-rule" aria-hidden="true"></span>
-                <span class="case-row-cat">Site Institucional + SEO</span>
+            <div class="cases-main">
+              <div class="cases-main-glass">
+                <div class="cases-main-screen">
+                  <img class="cases-main-img" src="public/portfolio/Site 01.webp" alt="" decoding="async">
+                </div>
+                <div class="cases-main-title">
+                  <span class="cases-main-num">01</span>
+                  <span class="cases-main-name">Odonto Vita</span>
+                </div>
               </div>
-              <h3>Liora Aura</h3>
-              <p>Arquitetura desenvolvida para aumentar autoridade e facilitar a descoberta da empresa no Google.</p>
-              <span class="case-row-result"><span>Resultado:</span> <strong>+145% em tráfego orgânico</strong></span>
             </div>
-            <div class="case-row-media">
-              <img src="public/portfolio/Site 02.webp" alt="Projeto 02 — Site institucional e SEO" loading="lazy" decoding="async">
-            </div>
-          </a>
 
-          <a class="case-row group reveal" href="https://decristony.github.io/Luxury-Cardapio/" target="_blank" rel="noopener" style="--delay:.16s">
-            <div class="case-row-info">
-              <div class="case-row-meta">
-                <span class="case-row-num">03</span>
-                <span class="case-row-rule" aria-hidden="true"></span>
-                <span class="case-row-cat">Landing Page + Tráfego</span>
-              </div>
-              <h3>La Maison</h3>
-              <p>Uma experiência construída para reduzir distrações e aumentar a geração de leads.</p>
-              <span class="case-row-result"><span>Resultado:</span> <strong>7,2% de conversão</strong></span>
+            <div class="cases-thumbs">
+              <button class="cases-thumb active" data-index="0" aria-label="Projeto 01 — Odonto Vita">
+                <div class="cases-thumb-img"><img src="public/portfolio/Site 01.webp" alt="" decoding="async"></div>
+                <span class="cases-thumb-label">01</span>
+              </button>
+              <button class="cases-thumb" data-index="1" aria-label="Projeto 02 — Santos e Robert">
+                <div class="cases-thumb-img"><img src="public/portfolio/site 04.webp" alt="" decoding="async"></div>
+                <span class="cases-thumb-label">02</span>
+              </button>
+              <button class="cases-thumb" data-index="2" aria-label="Projeto 03 — La Maison">
+                <div class="cases-thumb-img"><img src="public/portfolio/Site 03.webp" alt="" decoding="async"></div>
+                <span class="cases-thumb-label">03</span>
+              </button>
+              <button class="cases-thumb" data-index="3" aria-label="Projeto 04 — Liora Aura">
+                <div class="cases-thumb-img"><img src="public/portfolio/Site 02.webp" alt="" decoding="async"></div>
+                <span class="cases-thumb-label">04</span>
+              </button>
             </div>
-            <div class="case-row-media">
-              <img src="public/portfolio/Site 03.webp" alt="Projeto 03 — Landing page e tráfego" loading="lazy" decoding="async">
-            </div>
-          </a>
 
-          <a class="case-row group reveal" href="https://santosrobert.com.br/" target="_blank" rel="noopener" style="--delay:.24s">
-            <div class="case-row-info">
-              <div class="case-row-meta">
-                <span class="case-row-num">04</span>
-                <span class="case-row-rule" aria-hidden="true"></span>
-                <span class="case-row-cat">E-commerce + Performance</span>
-              </div>
-              <h3>Santos e Robert</h3>
-              <p>Uma vitrine digital construída para reduzir atritos e transformar visita em venda, com foco total em velocidade mobile.</p>
-              <span class="case-row-result"><span>Resultado:</span> <strong>+29% em vendas online</strong></span>
-            </div>
-            <div class="case-row-media">
-              <img src="public/portfolio/site 04.webp" alt="Projeto 04 — E-commerce e performance" loading="lazy" decoding="async">
-            </div>
-          </a>
+          </div>
         </div>
 
         <div class="cases-more reveal">
@@ -379,12 +351,12 @@
               <div class="so-stat-label">Anos de experiência</div>
             </div>
             <div class="so-stat-item">
-              <div class="so-stat-num"><span class="counter" data-target="100">0</span>%</div>
-              <div class="so-stat-label">Projetos personalizados</div>
+              <div class="so-stat-num"><span class="counter" data-target="1.2" data-decimals="1">0</span>s</div>
+              <div class="so-stat-label">Carregamento médio</div>
             </div>
             <div class="so-stat-item">
-              <div class="so-stat-num"><span class="counter" data-target="360">0</span>°</div>
-              <div class="so-stat-label">Solução digital completa</div>
+              <div class="so-stat-num"><span class="counter" data-target="200">0</span>+</div>
+              <div class="so-stat-label">Projetos entregues</div>
             </div>
           </div>
         </div>

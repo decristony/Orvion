@@ -80,9 +80,14 @@
   var counters = document.querySelectorAll(".counter");
   var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  function formatCounter(el, value) {
+    var decimals = parseInt(el.getAttribute("data-decimals"), 10) || 0;
+    return value.toFixed(decimals).replace(".", ",");
+  }
+
   function animateCounter(el) {
-    var target = parseInt(el.getAttribute("data-target"), 10) || 0;
-    if (reduceMotion) { el.textContent = target.toString(); return; }
+    var target = parseFloat(el.getAttribute("data-target")) || 0;
+    if (reduceMotion) { el.textContent = formatCounter(el, target); return; }
     var duration = 1600;
     var start = null;
 
@@ -90,7 +95,7 @@
       if (!start) start = ts;
       var p = Math.min((ts - start) / duration, 1);
       var eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(target * eased).toString();
+      el.textContent = formatCounter(el, target * eased);
       if (p < 1) requestAnimationFrame(frame);
     }
     requestAnimationFrame(frame);
@@ -128,7 +133,7 @@
     counters.forEach(function (c) { cio.observe(c); });
   } else {
     counters.forEach(function (c) {
-      if (reduceMotion) { c.textContent = c.getAttribute("data-target"); return; }
+      if (reduceMotion) { c.textContent = formatCounter(c, parseFloat(c.getAttribute("data-target")) || 0); return; }
       startCounterWhenRevealed(c);
     });
   }
@@ -157,18 +162,76 @@
   }
 
   if (nav && toggle) {
-    toggle.addEventListener("click", function () {
-      var open = nav.classList.toggle("open");
+    function setOpen(open) {
+      nav.classList.toggle("open", open);
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      document.body.classList.toggle("nav-open", open);
+    }
+
+    toggle.addEventListener("click", function () {
+      setOpen(!nav.classList.contains("open"));
     });
 
     nav.querySelectorAll(".mobile-menu a").forEach(function (link) {
       link.addEventListener("click", function () {
-        nav.classList.remove("open");
-        toggle.setAttribute("aria-expanded", "false");
+        setOpen(false);
       });
     });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && nav.classList.contains("open")) setOpen(false);
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!nav.classList.contains("open")) return;
+      if (nav.contains(e.target)) return;
+      setOpen(false);
+    });
   }
+
+  /* ---------- Scrollspy: menu ativo (imune ao sticky fold) ---------- */
+  var desktopSpy = Array.prototype.slice.call(document.querySelectorAll(".menu .menu-link"));
+  var mobileSpy = Array.prototype.slice.call(document.querySelectorAll(".mobile-menu .menu-link"));
+  var spyItems = desktopSpy.concat(mobileSpy);
+
+  function spyFlowTop(el) {
+    var y = 0, node = el;
+    while (node) { y += node.offsetTop || 0; node = node.offsetParent; }
+    return y;
+  }
+
+  function updateSpy() {
+    if (!spyItems.length) return;
+    var threshold = window.scrollY + 92; // --nav-h (68px) + 24px
+    var active = spyItems[0];
+    spyItems.forEach(function (link) {
+      var target = document.querySelector(link.getAttribute("href"));
+      if (target && spyFlowTop(target) <= threshold) active = link;
+    });
+    spyItems.forEach(function (link) {
+      link.classList.toggle("is-active", link === active);
+    });
+  }
+
+  window.addEventListener("scroll", updateSpy, { passive: true });
+  window.addEventListener("resize", updateSpy);
+  updateSpy();
+
+  /* ---------- Anchor navigation (fixes sticky fold stack) ---------- */
+  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      var href = link.getAttribute("href");
+      if (!href || href.length < 2 || href.charAt(1) === "#") return;
+      var target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      var y = 0, el = target;
+      while (el) { y += el.offsetTop || 0; el = el.offsetParent; }
+      var top = y - 92; // --nav-h (68px) + 24px, espelha o scroll-margin-top
+      window.scrollTo({ top: Math.max(top, 0), behavior: reduceMotion ? "auto" : "smooth" });
+      if (history.replaceState) history.replaceState(null, "", href);
+    });
+  });
 
   /* ---------- FAQs: abertura suave + fecha outros ---------- */
   var faqItems = document.querySelectorAll(".faq-item");
@@ -463,6 +526,234 @@
         });
       }, { threshold: 0.05 }).observe(heroStage);
     }
+  })();
+
+  /* ---------- Cases: Screenshot Showcase ---------- */
+  (function () {
+    var root = document.querySelector("[data-cases-showcase]");
+    if (!root) return;
+
+    var mainImg   = root.querySelector(".cases-main-img");
+    var mainGlass = root.querySelector(".cases-main-glass");
+    var mainNum   = root.querySelector(".cases-main-num");
+    var mainName  = root.querySelector(".cases-main-name");
+    var thumbs    = Array.prototype.slice.call(root.querySelectorAll(".cases-thumb"));
+    if (!mainImg || !thumbs.length) return;
+
+    var PROJECTS = [
+      { img: "public/portfolio/Site 01.webp", num: "01", name: "Odonto Vita", url: "https://decristony.github.io/OdontoVitta/" },
+      { img: "public/portfolio/site 04.webp", num: "02", name: "Santos e Robert", url: "https://santosrobert.com.br/" },
+      { img: "public/portfolio/Site 03.webp", num: "03", name: "La Maison", url: "https://decristony.github.io/Luxury-Cardapio/" },
+      { img: "public/portfolio/Site 02.webp", num: "04", name: "Liora Aura", url: "https://decristony.github.io/Aura-Premium/" }
+    ];
+
+    var SCROLL_DOWN_MS = 12000;
+    var PAUSE_BOTTOM_MS = 1400;
+    var SCROLL_UP_MS = 2600;
+    var PAUSE_TOP_MS = 700;
+
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var current = 0;
+    var phase = "idle";      // loading | down | bottom | up | top | idle
+    var phaseStart = 0;
+    var pausedFlag = false;
+    var pauseStarted = 0;
+    var raf = null;
+    var loadTimer = null;
+
+    // Preload all screenshots up front
+    PROJECTS.forEach(function (p) { var img = new Image(); img.src = p.img; });
+
+    function ready() {
+      return mainImg.complete && mainImg.naturalWidth > 0;
+    }
+
+    function maxY() {
+      var screen = mainImg.parentElement;
+      var d = mainImg.clientHeight - screen.clientHeight;
+      return d > 0 ? d : 1;
+    }
+
+    function easeInOut(p) { return p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; }
+    function easeOut(p) { return 1 - Math.pow(1 - p, 3); }
+
+    function updateActive() {
+      thumbs.forEach(function (t, i) {
+        t.classList.toggle("active", i === current);
+        t.setAttribute("aria-pressed", i === current ? "true" : "false");
+      });
+    }
+
+    function goTo(index) {
+      if (index < 0 || index >= PROJECTS.length) return;
+      if (index === current && phase !== "idle") { return; }
+
+      current = index;
+      var p = PROJECTS[index];
+
+      // Page-pull transition on the main glass
+      mainGlass.classList.remove("switching");
+      void mainGlass.offsetWidth;
+      mainGlass.classList.add("switching");
+
+      // Update thumbnails stack + active state
+      updateActive();
+
+      // Title
+      mainNum.textContent = p.num;
+      mainName.textContent = p.name;
+
+      // Swap screenshot and reset to top
+      mainImg.style.transition = "none";
+      mainImg.src = p.img;
+      mainImg.style.transform = "translateY(0px)";
+
+      // Start vertical scroll
+      var start = function () {
+        mainImg.style.transition = "";
+        phase = "down";
+        phaseStart = performance.now();
+      };
+      if (mainImg.complete && mainImg.naturalWidth > 0) {
+        phase = "loading";
+        if (loadTimer) clearTimeout(loadTimer);
+        loadTimer = setTimeout(start, reduceMotion ? 900 : 80);
+      } else {
+        mainImg.onload = start;
+      }
+    }
+
+    function loop(now) {
+      raf = requestAnimationFrame(loop);
+      if (pausedFlag) return;
+      // Wait for the screenshot to be measurable before scrolling
+      if (!ready()) { phaseStart = now; return; }
+
+      var elapsed = now - phaseStart;
+      var dist = maxY();
+
+      if (phase === "down") {
+        var d = Math.min(1, elapsed / SCROLL_DOWN_MS);
+        mainImg.style.transform = "translateY(" + (-dist * easeInOut(d)) + "px)";
+        if (d >= 1) { phase = "bottom"; phaseStart = now; mainImg.style.transform = "translateY(" + (-dist) + "px)"; }
+      } else if (phase === "bottom") {
+        if (elapsed >= PAUSE_BOTTOM_MS) { phase = "up"; phaseStart = now; }
+      } else if (phase === "up") {
+        var u = Math.min(1, elapsed / SCROLL_UP_MS);
+        mainImg.style.transform = "translateY(" + (-dist * (1 - easeOut(u))) + "px)";
+        if (u >= 1) { phase = "top"; phaseStart = now; mainImg.style.transform = "translateY(0px)"; }
+      } else if (phase === "top") {
+        if (elapsed >= PAUSE_TOP_MS) {
+          phase = "idle";
+          goTo((current + 1) % PROJECTS.length);
+        }
+      }
+    }
+
+    function startLoop() {
+      if (raf) return;
+      raf = requestAnimationFrame(loop);
+    }
+    function stopLoop() {
+      if (raf) { cancelAnimationFrame(raf); raf = null; }
+    }
+
+    // Pause / resume keeps the scroll progression continuous
+    function pauseCycle() {
+      if (pausedFlag) return;
+      pausedFlag = true;
+      pauseStarted = performance.now();
+    }
+    function resumeCycle() {
+      if (!pausedFlag) return;
+      pausedFlag = false;
+      phaseStart += performance.now() - pauseStarted;
+    }
+
+    // Thumbnail clicks: switch project immediately
+    thumbs.forEach(function (thumb) {
+      thumb.addEventListener("click", function () {
+        var idx = parseInt(this.getAttribute("data-index"), 10);
+        pauseCycle();
+        goTo(idx);
+        resumeCycle();
+      });
+    });
+
+    // Hover on a thumbnail: pause the autoplay temporarily
+    thumbs.forEach(function (thumb) {
+      thumb.addEventListener("mouseenter", pauseCycle);
+      thumb.addEventListener("mouseleave", resumeCycle);
+      thumb.addEventListener("focus", pauseCycle);
+      thumb.addEventListener("blur", resumeCycle);
+    });
+
+    // Touch swipe on the main screen: change project
+    if (mainGlass) {
+      var startY = 0;
+      var startT = 0;
+      var swipedAt = 0;
+      mainGlass.addEventListener("touchstart", function (e) {
+        startY = e.touches[0].clientY;
+        startT = Date.now();
+      }, { passive: true });
+      mainGlass.addEventListener("touchend", function (e) {
+        if (!e.changedTouches || !e.changedTouches.length) return;
+        var diff = e.changedTouches[0].clientY - startY;
+        if (Math.abs(diff) > 40) {
+          swipedAt = Date.now();
+          pauseCycle();
+          goTo((current + (diff > 0 ? -1 : 1) + PROJECTS.length) % PROJECTS.length);
+          resumeCycle();
+        }
+      }, { passive: true });
+
+      // Open the active project's site
+      mainGlass.addEventListener("click", function () {
+        if (Date.now() - swipedAt < 500) return;
+        var p = PROJECTS[current];
+        if (p && p.url) window.open(p.url, "_blank", "noopener");
+      });
+    }
+
+    // Keyboard navigation
+    root.setAttribute("tabindex", "0");
+    root.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+        e.preventDefault();
+        pauseCycle(); goTo((current + 1) % PROJECTS.length); resumeCycle();
+      }
+      if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+        e.preventDefault();
+        pauseCycle(); goTo((current - 1 + PROJECTS.length) % PROJECTS.length); resumeCycle();
+      }
+    });
+
+    // Pause when the section leaves the viewport
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { resumeCycle(); if (!reduceMotion) startLoop(); }
+          else { pauseCycle(); stopLoop(); }
+        });
+      }, { threshold: 0.1 }).observe(root);
+    }
+
+    // Init
+    updateActive();
+    mainNum.textContent = PROJECTS[0].num;
+    mainName.textContent = PROJECTS[0].name;
+
+    // Reduced motion: show a static screenshot, no auto-scroll
+    if (reduceMotion) {
+      mainImg.style.transform = "translateY(0px)";
+      phase = "idle";
+      return;
+    }
+
+    phase = "down";
+    phaseStart = performance.now();
+    startLoop();
   })();
 
 })();
