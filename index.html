@@ -59,7 +59,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Halant:wght@500;600;700&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=26">
+  <link rel="stylesheet" href="css/style.css?v=40">
 </head>
 <body>
 
@@ -105,6 +105,8 @@
       </div>
     </div>
   </header>
+
+  <div class="menu-scrim" aria-hidden="true"></div>
 
   <main>
 
@@ -497,7 +499,8 @@
           <p class="section-sub team-desc">A Orvion une criatividade, visão estratégica e engenharia de software sênior para desenvolver produtos digitais modernos, funcionais e memoráveis.</p>
         </div>
 
-        <div class="about-founders reveal" style="--delay: .12s">
+        <div class="about-founders reveal" data-founders-carousel style="--delay: .12s">
+          <div class="founders-track">
           <!-- CARD 1 — LEONARDO -->
           <article class="founder-card group">
             <div class="founder-media">
@@ -594,6 +597,9 @@
               </div>
             </div>
           </article>
+          </div>
+
+          <div class="founders-dots" aria-hidden="true"></div>
         </div>
 
         <div class="about-manifesto reveal" style="--delay: .26s">
@@ -866,6 +872,6 @@
   </footer>
 
   <script src="js/mockups.js?v=1"></script>
-  <script src="js/main.js?v=1"></script>
+  <script src="js/main.js?v=2"></script>
 </body>
 </html>

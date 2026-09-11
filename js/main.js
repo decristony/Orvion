@@ -756,4 +756,111 @@
     startLoop();
   })();
 
+  /* ---------- Founders: carrossel mobile (1 card por vez) ---------- */
+  (function () {
+    var root = document.querySelector("[data-founders-carousel]");
+    if (!root) return;
+
+    var track = root.querySelector(".founders-track");
+    var cards = track ? Array.prototype.slice.call(track.children) : [];
+    var dotsWrap = root.querySelector(".founders-dots");
+    if (!track || cards.length < 2 || !dotsWrap) return;
+
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var mobileQuery = window.matchMedia("(max-width: 640.98px)");
+    var INTERVAL = 5000;
+    var current = 0;
+    var timer = null;
+
+    var dots = cards.map(function (card, i) {
+      var d = document.createElement("span");
+      d.className = "fdot";
+      d.setAttribute("role", "tab");
+      d.setAttribute("aria-label", "Membro " + (i + 1));
+      d.addEventListener("click", function () { go(i); });
+      dotsWrap.appendChild(d);
+      return d;
+    });
+
+    function isMobile() { return mobileQuery.matches; }
+
+    function go(i) {
+      current = ((i % cards.length) + cards.length) % cards.length;
+      track.style.transform = "translateX(" + (-current * 100) + "%)";
+      if (!isMobile()) return;
+      cards.forEach(function (card, c) {
+        card.setAttribute("aria-hidden", c === current ? "false" : "true");
+      });
+      dots.forEach(function (dot, c) {
+        dot.classList.toggle("active", c === current);
+      });
+    }
+
+    function step() { go(current + 1); }
+    function prev() { stop(); go(current - 1); startAuto(); }
+    function next() { stop(); go(current + 1); startAuto(); }
+
+    function startAuto() {
+      stop();
+      if (isMobile() && !reduceMotion && cards.length > 1) {
+        timer = setInterval(step, INTERVAL);
+      }
+    }
+    function stop() {
+      if (timer) { clearInterval(timer); timer = null; }
+    }
+
+    // Swipe
+    var startX = 0;
+    root.addEventListener("touchstart", function (e) {
+      if (!isMobile()) return;
+      if (e.touches && e.touches.length) startX = e.touches[0].clientX;
+    }, { passive: true });
+
+    root.addEventListener("touchend", function (e) {
+      if (!isMobile() || !e.changedTouches || !e.changedTouches.length) return;
+      var diff = e.changedTouches[0].clientX - startX;
+      if (Math.abs(diff) > 40) {
+        if (diff > 0) prev();
+        else next();
+      }
+    }, { passive: true });
+
+    // Keyboard
+    root.setAttribute("tabindex", "0");
+    root.addEventListener("keydown", function (e) {
+      if (!isMobile()) return;
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); next(); }
+      if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); prev(); }
+    });
+
+    // Tablet/desktop: reseta o carrossel e mostra os cards na grade
+    function onMq() {
+      if (isMobile()) {
+        go(current);
+        startAuto();
+      } else {
+        stop();
+        track.style.transform = "translateX(0px)";
+        cards.forEach(function (card) { card.removeAttribute("aria-hidden"); });
+      }
+    }
+    if (mobileQuery.addEventListener) mobileQuery.addEventListener("change", onMq);
+    else if (mobileQuery.addListener) mobileQuery.addListener(onMq);
+
+    // Pausa quando a seção sai de vista
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) startAuto();
+          else stop();
+        });
+      }, { threshold: 0.1 }).observe(root);
+    }
+
+    // Init
+    go(0);
+    startAuto();
+  })();
+
 })();

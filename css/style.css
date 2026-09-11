@@ -1151,13 +1151,37 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 
 /* Cards dos Fundadores */
 .about-founders {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(20px, 2.5vw, 32px);
+  position: relative;
   width: 100%;
   max-width: 1240px;
   margin-inline: auto;
+}
+
+.founders-track {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(20px, 2.5vw, 32px);
   align-items: stretch;
+}
+
+.founders-dots {
+  display: none;
+}
+
+.fdot {
+  width: 7.5px;
+  height: 7.5px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+  transition: width 0.3s var(--ease), background 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.fdot.active {
+  width: 22px;
+  border-radius: 10px;
+  background: var(--accent-dark);
+  box-shadow: 0 2px 10px rgba(1, 30, 202, 0.35);
 }
 
 .founder-card {
@@ -2517,8 +2541,8 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 @media (max-width: 991.98px) {
   .section-panel .so-container {
     grid-template-columns: 1fr;
-    gap: 48px;
-    padding-block: 60px;
+    gap: 36px;
+    padding-block: 40px;
   }
   
   .so-content {
@@ -2548,38 +2572,94 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 }
 
 @media (max-width: 640.98px) {
-  .so-stats {
-    grid-template-columns: repeat(3, 1fr);
+  .section-panel .so-container {
+    gap: 20px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  .so-title {
+    font-size: 26px;
+    line-height: 1.22;
+    margin-bottom: 12px;
+    max-width: 100%;
+  }
+
+  .so-body {
     gap: 10px;
-    justify-items: center;
-  }
-  
-  .so-stat-item {
-    align-items: center;
-    gap: 4px;
-  }
-
-  .so-stat-num {
-    font-size: clamp(22px, 7vw, 32px);
-    margin-bottom: 2px;
-  }
-
-  .so-stat-label {
-    max-width: none;
-    font-size: 9.5px;
-    letter-spacing: 0.05em;
+    margin-bottom: 16px;
   }
 
   .so-body p {
     text-align: center;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .so-body p:nth-child(n + 2) {
+    display: none;
+  }
+
+  .so-action {
+    margin-bottom: 18px;
+    width: 100%;
+    max-width: 340px;
+  }
+
+  .so-action .btn {
+    width: 100%;
+    justify-content: center;
+    white-space: normal;
+    text-align: center;
+    padding: 13px 20px;
+  }
+
+  .so-action .btn-label {
+    height: auto;
+    overflow: visible;
+  }
+
+  .so-action .btn-label span {
+    position: relative;
+    display: inline;
+    transition: none;
+  }
+
+  .so-action .btn-label span:nth-child(2) {
+    display: none;
+  }
+
+  /* Mobile: botão abaixo dos cards do dashboard */
+  .so-content {
+    display: contents;
+  }
+
+  .so-title {
+    order: 1;
+  }
+
+  .so-body {
+    order: 2;
+  }
+
+  .so-visual {
+    order: 3;
+  }
+
+  .so-action {
+    order: 4;
+    margin-inline: auto;
+  }
+
+  .so-stats {
+    display: none;
   }
 
   .so-stage {
     height: auto;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    max-width: 420px;
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
 
   .so-card {
@@ -2587,10 +2667,110 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
     width: 100%;
     transform: none;
     animation: none;
+    padding: 12px 14px;
+    border-radius: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 12px;
   }
 
   .so-card--solutions {
-    grid-column: 1 / -1;
+    display: none;
+  }
+
+  .so-card-head {
+    flex: 1 1 0;
+    min-width: 0;
+    margin-bottom: 0;
+    gap: 6px;
+  }
+
+  .so-card-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+  }
+
+  .so-card-icon svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .so-card-title {
+    font-size: 11px;
+  }
+
+  .so-card-metric {
+    flex: 0 0 auto;
+    margin-bottom: 0;
+    font-size: clamp(18px, 5vw, 22px);
+  }
+
+  .so-card-desc {
+    display: none;
+  }
+
+  .so-chip {
+    flex: 0 0 auto;
+    margin-bottom: 0;
+    padding: 3px 9px;
+    font-size: 9.5px;
+  }
+
+  .so-bar {
+    flex: 0 0 100%;
+    height: 5px;
+    margin-top: 2px;
+  }
+
+  .so-chart {
+    flex: 0 0 auto;
+    height: 22px;
+    margin-top: 2px;
+  }
+
+  /* Performance: cards compactos cabendo em qualquer tela */
+  #performance .metrics-grid {
+    gap: 10px;
+  }
+
+  #performance .metric-cell {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 14px 16px;
+    border-radius: 16px;
+    text-align: left;
+  }
+
+  #performance .metric-value {
+    flex: 0 0 auto;
+    margin-bottom: 0;
+    font-size: clamp(24px, 7vw, 36px);
+  }
+
+  #performance .metric-value-text {
+    font-size: clamp(14px, 4.2vw, 20px);
+  }
+
+  #performance .metric-label {
+    min-width: 0;
+    max-width: 55%;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: clamp(9px, 2.8vw, 12px);
+    line-height: 1;
+  }
+
+  /* ORVION atrás do título no mobile */
+  .about-watermark.performance-watermark {
+    top: clamp(20px, 5vw, 40px);
+    transform: translateX(-50%);
+    font-size: clamp(88px, 26vw, 140px);
   }
 }
 
@@ -2998,6 +3178,11 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
   .section-panel { width: 100vw; padding-inline: 14px; }
   .section-panel > .container { padding-inline: 10px; gap: 36px; }
 
+  #sobre-orvion {
+    padding-top: 36px;
+    padding-bottom: 36px;
+  }
+
   .about { min-height: auto; }
   .about-founders { grid-template-columns: 1fr; gap: 20px; max-width: 100%; }
   .founder-card { grid-template-columns: 1fr; border-radius: 16px; }
@@ -3030,13 +3215,13 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
       linear-gradient(135deg,
         rgba(255, 255, 255, 0.05),
         rgba(255, 255, 255, 0.012)),
-      rgba(13, 15, 18, 0.84);
-    -webkit-backdrop-filter: blur(60px) saturate(70%);
-    backdrop-filter: blur(60px) saturate(70%);
-    border-left: 1px solid rgba(255, 255, 255, 0.12);
+      rgba(10, 10, 10, 0.55);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow:
-      -20px 0 80px rgba(0, 0, 0, 0.18),
-      inset 1px 0 0 rgba(255, 255, 255, 0.08);
+      -16px 0 40px rgba(0, 0, 0, 0.35),
+      inset 1px 0 0 rgba(255, 255, 255, 0.04);
     z-index: 1;
     transform: translateX(102%);
     visibility: hidden;
@@ -3046,6 +3231,12 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
     transform: translateX(0);
     visibility: visible;
     transition: transform 0.5s var(--ease), visibility 0s;
+  }
+  .nav.open {
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border-bottom-color: transparent;
   }
   body.nav-open { overflow: hidden; }
   .nav-inner { position: relative; z-index: 2; }
@@ -3110,4 +3301,159 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
   .logo-cell:nth-child(n + 4) { border-top: 1px dashed var(--line-dark); }
 
   .footer-cols { grid-template-columns: 1fr 1fr; gap: 30px 18px; }
+}
+
+/* ==========================================================================
+   Team (NOSSO TIME): cards lado a lado no mobile/tablet — pós Responsive
+   (vence a cascata dos breakpoints 899/809 do bloco Responsive acima)
+   ========================================================================== */
+
+@media (max-width: 899.98px) {
+  .founders-track {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(12px, 2.5vw, 20px);
+  }
+}
+
+@media (max-width: 809.98px) {
+  .founder-card {
+    grid-template-columns: 1fr;
+    border-radius: 14px;
+  }
+
+  .founder-media {
+    min-height: 0;
+    height: clamp(150px, 38vw, 210px);
+  }
+
+  .founder-media img {
+    filter: grayscale(0);
+    opacity: 1;
+    object-position: center 40%;
+  }
+
+  .founder-content {
+    padding: 16px 14px;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 640.98px) {
+  #time {
+    min-height: 100dvh;
+    justify-content: center;
+    padding-top: 14px;
+    padding-bottom: 16px;
+  }
+
+  #time > .container {
+    gap: 12px;
+    padding-block: 4px;
+  }
+
+  .team-head h2 {
+    font-size: clamp(20px, 5.5vw, 24px);
+  }
+
+  .team-desc {
+    font-size: 13px;
+    margin-top: 4px;
+  }
+
+  .about-founders {
+    overflow: hidden;
+  }
+
+  .founders-track {
+    display: flex;
+    transition: transform 0.55s var(--ease);
+  }
+
+  .founder-card {
+    flex: 0 0 80%;
+    margin-inline: 10%;
+    border-radius: 12px;
+  }
+
+  .founder-media {
+    min-height: 0;
+    height: clamp(200px, 54vw, 280px);
+    width: 88%;
+    margin-inline: auto;
+  }
+
+  .founder-media img {
+    filter: grayscale(0);
+    opacity: 1;
+  }
+
+  .founder-badge-tag {
+    bottom: 8px;
+    left: 8px;
+    font-size: 9px;
+    padding: 3px 8px;
+  }
+
+  .founder-content {
+    padding: 14px 16px 16px;
+    gap: 8px;
+  }
+
+  .founder-header {
+    gap: 6px;
+  }
+
+  .founder-mark {
+    display: none;
+  }
+
+  .founder-name {
+    font-size: clamp(18px, 5vw, 23px);
+  }
+
+  .founder-role {
+    font-size: 12px;
+  }
+
+  .founder-quote {
+    font-size: 13px;
+    line-height: 1.4;
+    padding-left: 10px;
+  }
+
+  .founder-footer {
+    padding-top: 8px;
+    gap: 6px;
+  }
+
+  .founder-status {
+    font-size: 10.5px;
+    padding: 3px 8px;
+  }
+
+  .founder-pillar {
+    font-size: 9px;
+  }
+
+  .founder-socials {
+    gap: 6px;
+  }
+
+  .founder-social {
+    width: 30px;
+    height: 30px;
+  }
+
+  .founder-social svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .founders-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 14px;
+  }
 }
