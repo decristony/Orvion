@@ -189,24 +189,53 @@
     });
   }
 
+  /* ---------- Seções e Topo em Fluxo (imune ao sticky fold stack) ---------- */
+  function getSectionScrollTop(target) {
+    if (!target) return 0;
+    if (target.id === "hero" || target.closest(".top-zone")) return 0;
+
+    var main = document.querySelector("main");
+    if (!main) {
+      var y = 0, el = target;
+      while (el) { y += el.offsetTop || 0; el = el.offsetParent; }
+      return y;
+    }
+
+    var block = target;
+    while (block && block.parentElement !== main) {
+      block = block.parentElement;
+    }
+    if (!block) return 0;
+
+    var top = 0;
+    var current = main.firstElementChild;
+    while (current && current !== block) {
+      if (current.offsetParent !== null || current.offsetHeight > 0) {
+        top += current.offsetHeight;
+      }
+      current = current.nextElementSibling;
+    }
+
+    return top;
+  }
+
   /* ---------- Scrollspy: menu ativo (imune ao sticky fold) ---------- */
   var desktopSpy = Array.prototype.slice.call(document.querySelectorAll(".menu .menu-link"));
   var mobileSpy = Array.prototype.slice.call(document.querySelectorAll(".mobile-menu .menu-link"));
   var spyItems = desktopSpy.concat(mobileSpy);
 
-  function spyFlowTop(el) {
-    var y = 0, node = el;
-    while (node) { y += node.offsetTop || 0; node = node.offsetParent; }
-    return y;
-  }
-
   function updateSpy() {
     if (!spyItems.length) return;
-    var threshold = window.scrollY + 92; // --nav-h (68px) + 24px
+    var currentY = window.scrollY || window.pageYOffset || 0;
+    var threshold = currentY + 120;
     var active = spyItems[0];
     spyItems.forEach(function (link) {
-      var target = document.querySelector(link.getAttribute("href"));
-      if (target && spyFlowTop(target) <= threshold) active = link;
+      var href = link.getAttribute("href");
+      if (!href || href.length < 2 || href.charAt(1) === "#") return;
+      var target = document.querySelector(href);
+      if (target && getSectionScrollTop(target) <= threshold) {
+        active = link;
+      }
     });
     spyItems.forEach(function (link) {
       link.classList.toggle("is-active", link === active);
@@ -217,7 +246,69 @@
   window.addEventListener("resize", updateSpy);
   updateSpy();
 
-  /* ---------- Anchor navigation (fixes sticky fold stack) ---------- */
+  /* ---------- Smooth animated scroll (garante a transição ultra-suave) ---------- */
+  var activeScrollAnim = null;
+
+  function smoothScrollTo(targetY) {
+    if (activeScrollAnim) {
+      cancelAnimationFrame(activeScrollAnim);
+      activeScrollAnim = null;
+    }
+
+    var startY = window.scrollY || window.pageYOffset || 0;
+    var diff = targetY - startY;
+
+    if (reduceMotion || Math.abs(diff) < 2) {
+      window.scrollTo(0, targetY);
+      return;
+    }
+
+    var prevScrollBehavior = document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior = "auto";
+
+    var startTime = null;
+    // Duração sedosa calibrada: mínimo 650ms, máximo 1150ms
+    var duration = Math.min(1150, Math.max(650, Math.abs(diff) * 0.48));
+
+    // Curva easeInOutQuart: aceleração imperceptível e desaceleração longa e aveludada
+    function smoothEase(t) {
+      return t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
+    }
+
+    function cleanup() {
+      document.documentElement.style.scrollBehavior = prevScrollBehavior;
+      activeScrollAnim = null;
+      window.removeEventListener("wheel", cancelAnim, { passive: true });
+      window.removeEventListener("touchmove", cancelAnim, { passive: true });
+    }
+
+    function cancelAnim() {
+      if (activeScrollAnim) {
+        cancelAnimationFrame(activeScrollAnim);
+        cleanup();
+      }
+    }
+
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      var p = Math.min((ts - startTime) / duration, 1);
+      var eased = smoothEase(p);
+      window.scrollTo(0, startY + diff * eased);
+
+      if (p < 1) {
+        activeScrollAnim = requestAnimationFrame(step);
+      } else {
+        window.scrollTo(0, targetY);
+        cleanup();
+      }
+    }
+
+    window.addEventListener("wheel", cancelAnim, { passive: true, once: true });
+    window.addEventListener("touchmove", cancelAnim, { passive: true, once: true });
+    activeScrollAnim = requestAnimationFrame(step);
+  }
+
+  /* ---------- Anchor navigation (corrige a transição da volta no menu) ---------- */
   document.querySelectorAll('a[href^="#"]').forEach(function (link) {
     link.addEventListener("click", function (e) {
       var href = link.getAttribute("href");
@@ -225,10 +316,9 @@
       var target = document.querySelector(href);
       if (!target) return;
       e.preventDefault();
-      var y = 0, el = target;
-      while (el) { y += el.offsetTop || 0; el = el.offsetParent; }
-      var top = y - 92; // --nav-h (68px) + 24px, espelha o scroll-margin-top
-      window.scrollTo({ top: Math.max(top, 0), behavior: reduceMotion ? "auto" : "smooth" });
+
+      var top = getSectionScrollTop(target);
+      smoothScrollTo(top);
       if (history.replaceState) history.replaceState(null, "", href);
     });
   });

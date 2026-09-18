@@ -882,7 +882,12 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  box-shadow: 0 -28px 70px rgba(0, 0, 0, 0.45);
+  box-shadow:
+    0 -35px 85px rgba(0, 0, 0, 0.42),
+    0 -14px 35px rgba(0, 0, 0, 0.22),
+    0 -3px 10px rgba(0, 0, 0, 0.1);
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .section-panel > .container {
@@ -930,8 +935,9 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
   border: 1px solid rgba(255, 255, 255, 0.85);
   border-bottom: none;
   box-shadow:
-    0 -24px 60px rgba(0, 0, 0, 0.18),
-    0 -4px 12px rgba(0, 0, 0, 0.08),
+    0 -32px 80px rgba(0, 0, 0, 0.22),
+    0 -12px 28px rgba(0, 0, 0, 0.1),
+    0 -2px 6px rgba(0, 0, 0, 0.05),
     0 0 0 1px rgba(255, 255, 255, 0.6) inset;
 }
 
@@ -966,8 +972,9 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
   border: 1px solid rgba(255, 255, 255, 0.09);
   border-bottom: none;
   box-shadow:
-    0 -28px 70px rgba(0, 0, 0, 0.45),
-    0 -6px 16px rgba(0, 0, 0, 0.3),
+    0 -35px 85px rgba(0, 0, 0, 0.48),
+    0 -14px 35px rgba(0, 0, 0, 0.28),
+    0 -3px 8px rgba(0, 0, 0, 0.15),
     0 0 0 1px rgba(255, 255, 255, 0.05) inset;
 }
 
