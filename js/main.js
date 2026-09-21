@@ -876,7 +876,8 @@
 
     function go(i) {
       current = ((i % cards.length) + cards.length) % cards.length;
-      track.style.transform = "translateX(" + (-current * 100) + "%)";
+      var stepPct = isMobile() ? (100 / cards.length) : 100;
+      track.style.transform = "translateX(" + (-current * stepPct) + "%)";
       if (!isMobile()) return;
       cards.forEach(function (card, c) {
         card.setAttribute("aria-hidden", c === current ? "false" : "true");
@@ -902,16 +903,21 @@
 
     // Swipe
     var startX = 0;
+    var startY = 0;
     root.addEventListener("touchstart", function (e) {
       if (!isMobile()) return;
-      if (e.touches && e.touches.length) startX = e.touches[0].clientX;
+      if (e.touches && e.touches.length) {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+      }
     }, { passive: true });
 
     root.addEventListener("touchend", function (e) {
       if (!isMobile() || !e.changedTouches || !e.changedTouches.length) return;
-      var diff = e.changedTouches[0].clientX - startX;
-      if (Math.abs(diff) > 40) {
-        if (diff > 0) prev();
+      var diffX = e.changedTouches[0].clientX - startX;
+      var diffY = e.changedTouches[0].clientY - startY;
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+        if (diffX > 0) prev();
         else next();
       }
     }, { passive: true });

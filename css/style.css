@@ -2621,18 +2621,18 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
     padding: 13px 20px;
   }
 
-  .so-action .btn-label {
+  .btn .btn-label {
     height: auto;
     overflow: visible;
   }
 
-  .so-action .btn-label span {
+  .btn .btn-label span {
     position: relative;
     display: inline;
     transition: none;
   }
 
-  .so-action .btn-label span:nth-child(2) {
+  .btn .btn-label span:nth-child(2) {
     display: none;
   }
 
@@ -2764,13 +2764,28 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 
   #performance .metric-label {
     min-width: 0;
-    max-width: 55%;
+    max-width: 60%;
     text-align: right;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: clamp(9px, 2.8vw, 12px);
-    line-height: 1;
+    white-space: normal;
+    font-size: clamp(10px, 2.9vw, 12.5px);
+    line-height: 1.25;
+  }
+
+  /* Parceria: tags bem distribuídas sem sinal '+' solto na linha */
+  .pill-row {
+    gap: 8px 10px;
+    margin-block: 14px;
+    max-width: 360px;
+    margin-inline: auto;
+  }
+
+  .pill {
+    padding: 8px 16px;
+    font-size: 13.5px;
+  }
+
+  .plus {
+    font-size: 15px;
   }
 
   /* ORVION atrás do título no mobile */
@@ -3191,6 +3206,25 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
   }
 
   .about { min-height: auto; }
+
+  /* FAQs & Contato: fluxo natural sem travamento sticky de overflow */
+  #faq {
+    position: relative;
+    top: auto;
+    min-height: auto;
+    overflow: visible;
+    padding-top: clamp(48px, 7vw, 72px);
+    padding-bottom: clamp(48px, 7vw, 72px);
+  }
+
+  #contato {
+    position: relative;
+    top: auto;
+    min-height: auto;
+    overflow: visible;
+    padding-top: clamp(56px, 8vw, 84px);
+    padding-bottom: clamp(56px, 8vw, 84px);
+  }
   .about-founders { grid-template-columns: 1fr; gap: 20px; max-width: 100%; }
   .founder-card { grid-template-columns: 1fr; border-radius: 16px; }
   .founder-media { min-height: 280px; height: clamp(260px, 60vw, 340px); }
@@ -3347,10 +3381,11 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 
 @media (max-width: 640.98px) {
   #time {
-    min-height: 100dvh;
+    min-height: auto;
     justify-content: center;
-    padding-top: 14px;
-    padding-bottom: 16px;
+    padding-top: 24px;
+    padding-bottom: 28px;
+    overflow: visible;
   }
 
   #time > .container {
