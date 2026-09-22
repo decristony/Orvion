@@ -2579,27 +2579,43 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 }
 
 @media (max-width: 640.98px) {
+  #sobre-orvion {
+    position: relative;
+    top: auto;
+    min-height: auto;
+    overflow: visible;
+    padding-top: 28px;
+    padding-bottom: 34px;
+  }
+
+  /* Garante que os textos e botão fiquem 100% visíveis no mobile sem atraso de observer */
+  #sobre-orvion .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
   .section-panel .so-container {
-    gap: 20px;
-    padding-top: 24px;
-    padding-bottom: 24px;
+    gap: 18px;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   .so-title {
-    font-size: 26px;
-    line-height: 1.22;
+    font-size: clamp(23px, 6.5vw, 28px);
+    line-height: 1.2;
     margin-bottom: 12px;
     max-width: 100%;
   }
 
   .so-body {
     gap: 10px;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
 
   .so-body p {
     text-align: center;
-    font-size: 15px;
+    font-size: 14.5px;
     line-height: 1.5;
   }
 
@@ -2608,7 +2624,10 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
   }
 
   .so-action {
-    margin-bottom: 18px;
+    order: 4;
+    margin-top: 10px;
+    margin-bottom: 0;
+    margin-inline: auto;
     width: 100%;
     max-width: 340px;
   }
@@ -2651,11 +2670,8 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 
   .so-visual {
     order: 3;
-  }
-
-  .so-action {
-    order: 4;
-    margin-inline: auto;
+    width: 100%;
+    max-width: 100%;
   }
 
   .so-stats {
@@ -2667,6 +2683,11 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
     display: grid;
     grid-template-columns: 1fr;
     gap: 8px;
+  }
+
+  .so-stage::before {
+    inset: -20px -15px;
+    filter: blur(40px);
   }
 
   .so-card {
@@ -3200,9 +3221,14 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
   .section-panel { width: 100vw; padding-inline: 14px; }
   .section-panel > .container { padding-inline: 10px; gap: 36px; }
 
+  /* Sobre a ORVION: fluxo natural sem travamento sticky de overflow */
   #sobre-orvion {
-    padding-top: 36px;
-    padding-bottom: 36px;
+    position: relative;
+    top: auto;
+    min-height: auto;
+    overflow: visible;
+    padding-top: clamp(40px, 6vw, 64px);
+    padding-bottom: clamp(40px, 6vw, 64px);
   }
 
   .about { min-height: auto; }
