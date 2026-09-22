@@ -3218,6 +3218,17 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 
 @media (max-width: 809.98px) {
   :root { --panel-radius: 28px; }
+  /* No mobile, nenhum painel pode ficar preso (sticky) cobrindo a tela enquanto a
+     próxima seção (relative) rola por cima dele: causa overlap de camadas, piscadas
+     e quebra visual na transição. Todos os painéis passam a fluir naturalmente. */
+  .section-panel {
+    position: relative;
+    top: auto;
+    min-height: auto;
+    overflow: visible;
+    transform: none;
+    will-change: auto;
+  }
   .section-panel { width: 100vw; padding-inline: 14px; }
   .section-panel > .container { padding-inline: 10px; gap: 36px; }
 
