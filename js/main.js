@@ -891,7 +891,7 @@
 
     function go(i) {
       current = ((i % cards.length) + cards.length) % cards.length;
-      var stepPct = isMobile() ? (100 / cards.length) : 100;
+      var stepPct = 100;
       track.style.transform = "translateX(" + (-current * stepPct) + "%)";
       if (!isMobile()) return;
       cards.forEach(function (card, c) {
