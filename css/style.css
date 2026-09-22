@@ -31,6 +31,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: var(--bg-dark);
+  overflow-x: hidden;
 }
 
 body {
@@ -871,7 +872,7 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 .section-panel {
   position: sticky;
   top: 0;
-  width: 100vw;
+  width: 100%;
   margin-inline: auto;
   min-height: 100vh;
   min-height: 100svh;
@@ -2585,7 +2586,7 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
     position: relative;
     top: auto;
     min-height: auto;
-    overflow: visible;
+    overflow: hidden;
     padding-top: 28px;
     padding-bottom: 34px;
   }
@@ -3191,7 +3192,7 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 
 @media (max-width: 1199.98px) {
   :root { --panel-radius: 40px; }
-  .section-panel { width: 100vw; }
+  .section-panel { width: 100%; }
   .hero-layout { margin-inline: 15px; padding-inline: 15px; }
   .metrics-grid { grid-template-columns: repeat(2, 1fr); }
   .metric-cell:nth-child(odd) { border-left: 0; }
@@ -3226,7 +3227,7 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
      painéis longos abaixo (#sobre-orvion, #faq, #contato) fluem naturalmente para
      não cortar conteúdo inalcançável. O anti-flicker vem do min-height: 100svh. */
   .section-panel {
-    width: 100vw;
+    width: 100%;
     padding-inline: 14px;
     will-change: auto;
     transform: none;
@@ -3234,12 +3235,14 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
   }
   .section-panel > .container { padding-inline: 10px; gap: 36px; }
 
-  /* Sobre a ORVION: fluxo natural sem travamento sticky de overflow */
+  /* Sobre a ORVION: fluxo natural sem travamento sticky de overflow.
+     overflow: hidden clipa os decorativos (glows que vazam 50px+) mas o
+     conteudo segue acessivel porque min-height: auto deixa a altura = conteudo. */
   #sobre-orvion {
     position: relative;
     top: auto;
     min-height: auto;
-    overflow: visible;
+    overflow: hidden;
     padding-top: clamp(40px, 6vw, 64px);
     padding-bottom: clamp(40px, 6vw, 64px);
   }
@@ -3251,7 +3254,7 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
     position: relative;
     top: auto;
     min-height: auto;
-    overflow: visible;
+    overflow: hidden;
     padding-top: clamp(48px, 7vw, 72px);
     padding-bottom: clamp(48px, 7vw, 72px);
   }
@@ -3260,11 +3263,27 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
     position: relative;
     top: auto;
     min-height: auto;
-    overflow: visible;
+    overflow: hidden;
     padding-top: clamp(56px, 8vw, 84px);
     padding-bottom: clamp(56px, 8vw, 84px);
   }
   .about-founders { grid-template-columns: 1fr; gap: 20px; max-width: 100%; }
+
+  /* Mobile: decorativos pesados do #sobre-orvion viram estáticos.
+     Blur(100px) animado + so-float + backdrop-filter causam repaint por frame e
+     flicker fixo na transição #projetos -> #sobre-orvion. */
+  .so-stage::before { animation: none; filter: blur(48px); }
+  .so-card--perf, .so-card--sec, .so-card--seo { animation: none; will-change: auto; }
+  .so-card { -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .so-chip::before { animation: none; }
+  .so-visual.visible .so-bar-fill { animation: none; }
+  .so-bar-fill { width: 98%; }
+  .so-bar-shine { animation: none; transform: none; }
+  .so-card-icon--lock { animation: none; }
+  .so-card--seo .so-card-icon { animation: none; }
+  .so-visual.visible .so-chart-bar { animation: none; }
+  .so-chart-bar { transform: scaleY(1); }
+  .so-chart-dot { animation: none; opacity: 1; }
   .founder-card { grid-template-columns: 1fr; border-radius: 16px; }
   .founder-media { min-height: 280px; height: clamp(260px, 60vw, 340px); }
   .founder-content { padding: 22px 18px; gap: 16px; }
