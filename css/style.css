@@ -3225,7 +3225,13 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
      continuam sticky no mobile para preservar o efeito de empilhamento. Apenas os
      painéis longos abaixo (#sobre-orvion, #faq, #contato) fluem naturalmente para
      não cortar conteúdo inalcançável. O anti-flicker vem do min-height: 100svh. */
-  .section-panel { width: 100vw; padding-inline: 14px; }
+  .section-panel {
+    width: 100vw;
+    padding-inline: 14px;
+    will-change: auto;
+    transform: none;
+    box-shadow: none;
+  }
   .section-panel > .container { padding-inline: 10px; gap: 36px; }
 
   /* Sobre a ORVION: fluxo natural sem travamento sticky de overflow */
