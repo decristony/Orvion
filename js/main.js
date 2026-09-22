@@ -829,6 +829,21 @@
       }, { threshold: 0.1 }).observe(root);
     }
 
+    // A seção que segue (#sobre-orvion) é relativa e rola POR CIMA do sticky #projetos:
+    // mesmo coberto, o showcase continua "no viewport". Pausa a rolagem enquanto ela
+    // cobre o painel para evitar flicker/camadas sobrepostas no mobile.
+    if ("IntersectionObserver" in window) {
+      var floater = document.getElementById("sobre-orvion");
+      if (floater) {
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) pauseCycle();
+            else resumeCycle();
+          });
+        }, { threshold: 0.02 }).observe(floater);
+      }
+    }
+
     // Init
     updateActive();
     mainNum.textContent = PROJECTS[0].num;

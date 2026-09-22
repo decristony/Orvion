@@ -426,6 +426,7 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
   gap: 40px;
   width: 100%;
   min-height: calc(100vh - 80px);
+  min-height: calc(100svh - 80px);
   margin-inline: 40px;
   padding: calc(var(--nav-h) + clamp(28px, 4vw, 56px)) 40px clamp(40px, 5vw, 68px);
   border-left: 1px dashed var(--line-dark);
@@ -873,7 +874,7 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
   width: 100vw;
   margin-inline: auto;
   min-height: 100vh;
-  border-radius: var(--panel-radius) var(--panel-radius) 0 0;
+  min-height: 100svh;
   padding-inline: clamp(20px, 4vw, 48px);
   padding-top: clamp(64px, 7vw, 96px);
   padding-bottom: clamp(64px, 7vw, 96px);
@@ -1120,6 +1121,7 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 
 .team {
   min-height: 100vh;
+  min-height: 100svh;
   justify-content: center;
 }
 
@@ -2979,6 +2981,7 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 
 .cta-final {
   min-height: 100vh;
+  min-height: 100svh;
   justify-content: center;
 }
 
@@ -3218,17 +3221,10 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 
 @media (max-width: 809.98px) {
   :root { --panel-radius: 28px; }
-  /* No mobile, nenhum painel pode ficar preso (sticky) cobrindo a tela enquanto a
-     próxima seção (relative) rola por cima dele: causa overlap de camadas, piscadas
-     e quebra visual na transição. Todos os painéis passam a fluir naturalmente. */
-  .section-panel {
-    position: relative;
-    top: auto;
-    min-height: auto;
-    overflow: visible;
-    transform: none;
-    will-change: auto;
-  }
+  /* Os painéis curtos (#sobre, #servicos, #projetos, #performance, #parceria, #time)
+     continuam sticky no mobile para preservar o efeito de empilhamento. Apenas os
+     painéis longos abaixo (#sobre-orvion, #faq, #contato) fluem naturalmente para
+     não cortar conteúdo inalcançável. O anti-flicker vem do min-height: 100svh. */
   .section-panel { width: 100vw; padding-inline: 14px; }
   .section-panel > .container { padding-inline: 10px; gap: 36px; }
 
