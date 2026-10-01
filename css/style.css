@@ -4391,3 +4391,272 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
     transform: translate(-50%, -50%) scale(0.90) rotateY(0deg) !important;
   }
 }
+
+
+/* ========================================================================== 
+   Floating WhatsApp CTA
+   ========================================================================== */
+.whatsapp-float {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 9998;
+  width: 66px;
+  height: 66px;
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+  filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.28));
+  opacity: 0;
+  transform: translateY(22px) scale(0.82);
+  animation: whatsapp-float-enter 0.72s cubic-bezier(.2,.8,.2,1) 0.8s forwards;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.28s var(--ease),
+    filter 0.28s var(--ease);
+}
+
+
+.whatsapp-float img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.whatsapp-float:hover {
+  transform: translateY(-4px) scale(1.055);
+  filter:
+    drop-shadow(0 16px 26px rgba(0, 0, 0, 0.32))
+    drop-shadow(0 0 12px rgba(1, 179, 239, 0.22));
+}
+
+
+.whatsapp-float:active {
+  transform: translateY(0) scale(0.93);
+  transition-duration: 0.09s;
+}
+
+.whatsapp-float:focus-visible {
+  outline: 3px solid rgba(1, 179, 239, 0.9);
+  outline-offset: 5px;
+}
+
+@keyframes whatsapp-float-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(22px) scale(0.82) rotate(6deg);
+  }
+  65% {
+    opacity: 1;
+    transform: translateY(-3px) scale(1.035) rotate(-1deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+
+@media (max-width: 809.98px) {
+  .whatsapp-float {
+    right: 18px;
+    bottom: 18px;
+    width: 58px;
+    height: 58px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-float {
+    opacity: 1;
+    transform: none;
+    animation: none;
+    transition: none;
+  }
+
+}
+
+
+/* ==========================================================================
+   Projects expansion v25
+   ========================================================================== */
+@media (min-width: 900px) {
+  .cases-thumbs {
+    max-height: clamp(430px, 64vh, 650px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    padding-right: 4px;
+  }
+  .cases-thumbs::-webkit-scrollbar { width: 4px; }
+  .cases-thumbs::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.18);
+    border-radius: 999px;
+  }
+}
+@media (max-width: 899.98px) {
+  .cases-thumbs {
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    padding: 10px 4px 8px;
+  }
+  .cases-thumbs::-webkit-scrollbar { display: none; }
+  .cases-thumb {
+    flex: 0 0 26%;
+    width: 26%;
+    scroll-snap-align: center;
+  }
+}
+
+
+/* ========================================================================== 
+   Projects navigation v26
+   Hero-style bullet navigation + reliable mobile swipe
+   ========================================================================== */
+.cases-nav-wrap {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  flex: 0 0 auto;
+}
+
+.cases-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 8px 7px;
+  background: rgba(20, 22, 28, 0.8);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.24);
+}
+
+.cases-dot {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.28);
+  cursor: pointer;
+  transition: transform .25s var(--ease), background .25s var(--ease), box-shadow .25s var(--ease);
+}
+.cases-dot:hover { transform: scale(1.2); background: rgba(255,255,255,.55); }
+.cases-dot.active {
+  background: var(--accent-turquoise);
+  box-shadow: 0 0 0 3px rgba(1,179,239,.15), 0 0 12px rgba(1,179,239,.55);
+  transform: scale(1.18);
+}
+
+@media (min-width: 900px) {
+  .cases-thumbs {
+    overflow-y: auto;
+    scrollbar-width: none;
+    padding-right: 0;
+  }
+  .cases-thumbs::-webkit-scrollbar { display: none; }
+  .cases-dots {
+    flex-direction: column;
+    align-self: center;
+  }
+}
+
+@media (max-width: 899.98px) {
+  .cases-nav-wrap {
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .cases-thumbs {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+    scrollbar-width: none;
+  }
+  .cases-thumbs::-webkit-scrollbar { display: none; }
+  .cases-dots {
+    flex-direction: row;
+    align-self: center;
+  }
+  .cases-main-glass {
+    touch-action: pan-y;
+  }
+}
+
+
+/* ========================================================================== 
+   Projects mobile arrows v27
+   ========================================================================== */
+.cases-mobile-arrows {
+  display: none;
+}
+
+@media (max-width: 899.98px) {
+  .cases-dots {
+    display: none !important;
+  }
+
+  .cases-mobile-arrows {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    width: 100%;
+    margin: 14px 0 10px;
+  }
+
+  .cases-mobile-arrow {
+    appearance: none;
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(12, 18, 28, 0.14);
+    background: transparent;
+    color: #11151d;
+    cursor: pointer;
+    transition: transform .22s var(--ease), border-color .22s var(--ease), color .22s var(--ease), background .22s var(--ease);
+  }
+
+  .cases-mobile-arrow svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .cases-mobile-arrow:active {
+    transform: scale(.92);
+    background: rgba(1, 179, 239, .08);
+    border-color: rgba(1, 179, 239, .35);
+    color: var(--accent-turquoise);
+  }
+
+  .cases-nav-wrap {
+    gap: 0;
+  }
+}
+
+
+/* Projects CTA spacing v28 */
+#projetos .cases-more {
+  padding-top: 20px;
+}

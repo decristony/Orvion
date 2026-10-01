@@ -435,10 +435,10 @@
     var INTERVAL = 4200;
 
     var caseMeta = [
-      { url: "orvion.agency/cases/saas-tech", badge: "⚡ PageSpeed 99+", icon: "⚡" },
-      { url: "orvion.agency/cases/ecommerce-cro", badge: "📈 +185% Conversão", icon: "📈" },
-      { url: "orvion.agency/cases/institucional-pro", badge: "🎯 UX/UI & Estratégia", icon: "🎯" },
-      { url: "orvion.agency/cases/landing-performance", badge: "🚀 Core Web Vitals 100", icon: "🚀" }
+      { url: "orvionweb.com/cases/saas-tech", badge: "⚡ PageSpeed 99+", icon: "⚡" },
+      { url: "orvionweb.com/cases/ecommerce-cro", badge: "📈 +185% Conversão", icon: "📈" },
+      { url: "orvionweb.com/cases/institucional-pro", badge: "🎯 UX/UI & Estratégia", icon: "🎯" },
+      { url: "orvionweb.com/cases/landing-performance", badge: "🚀 Core Web Vitals 100", icon: "🚀" }
     ];
 
     function url(name) {
@@ -624,13 +624,20 @@
     var mainNum   = root.querySelector(".cases-main-num");
     var mainName  = root.querySelector(".cases-main-name");
     var thumbs    = Array.prototype.slice.call(root.querySelectorAll(".cases-thumb"));
+    var dotsWrap  = root.querySelector(".cases-dots");
+    var prevBtn   = root.querySelector(".cases-mobile-arrow--prev");
+    var nextBtn   = root.querySelector(".cases-mobile-arrow--next");
+    var caseDots  = [];
     if (!mainImg || !thumbs.length) return;
 
     var PROJECTS = [
-      { img: "public/portfolio/Site 01.webp", num: "01", name: "Odonto Vita", url: "https://decristony.github.io/OdontoVitta/" },
-      { img: "public/portfolio/site 04.webp", num: "02", name: "Santos e Robert", url: "https://santosrobert.com.br/" },
-      { img: "public/portfolio/Site 03.webp", num: "03", name: "La Maison", url: "https://decristony.github.io/Luxury-Cardapio/" },
-      { img: "public/portfolio/Site 02.webp", num: "04", name: "Liora Aura", url: "https://decristony.github.io/Aura-Premium/" }
+      { img: "public/portfolio/IFORTEC.webp", num: "01", name: "IFORTEC", url: "" },
+      { img: "public/portfolio/Dr Diego.webp", num: "02", name: "Dr. Diego", url: "" },
+      { img: "public/portfolio/site 04.webp", num: "03", name: "Santos e Robert", url: "https://santosrobert.com.br/" },
+      { img: "public/portfolio/Site 01.webp", num: "04", name: "Odonto Vita", url: "https://decristony.github.io/OdontoVitta/" },
+      { img: "public/portfolio/Site 03.webp", num: "05", name: "La Maison", url: "https://decristony.github.io/Luxury-Cardapio/" },
+      { img: "public/portfolio/Site 02.webp", num: "06", name: "Liora Aura", url: "https://decristony.github.io/Aura-Premium/" },
+      { img: "public/portfolio/Camila Ribeiro.webp", num: "07", name: "Camila Ribeiro", url: "" }
     ];
 
     var SCROLL_DOWN_MS = 12000;
@@ -663,11 +670,37 @@
     function easeInOut(p) { return p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; }
     function easeOut(p) { return 1 - Math.pow(1 - p, 3); }
 
+    if (dotsWrap) {
+      dotsWrap.innerHTML = "";
+      PROJECTS.forEach(function (p, i) {
+        var dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "cases-dot";
+        dot.setAttribute("role", "tab");
+        dot.setAttribute("aria-label", "Ver projeto " + p.num + " — " + p.name);
+        dot.addEventListener("click", function () {
+          pauseCycle();
+          goTo(i);
+          resumeCycle();
+        });
+        dotsWrap.appendChild(dot);
+        caseDots.push(dot);
+      });
+    }
+
     function updateActive() {
       thumbs.forEach(function (t, i) {
         t.classList.toggle("active", i === current);
         t.setAttribute("aria-pressed", i === current ? "true" : "false");
       });
+      caseDots.forEach(function (d, i) {
+        d.classList.toggle("active", i === current);
+        d.setAttribute("aria-selected", i === current ? "true" : "false");
+      });
+      var activeThumb = thumbs[current];
+      if (activeThumb && activeThumb.scrollIntoView) {
+        activeThumb.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+      }
     }
 
     function goTo(index) {
@@ -757,6 +790,22 @@
       phaseStart += performance.now() - pauseStarted;
     }
 
+    // Mobile arrow navigation
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function () {
+        pauseCycle();
+        goTo((current - 1 + PROJECTS.length) % PROJECTS.length);
+        resumeCycle();
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function () {
+        pauseCycle();
+        goTo((current + 1) % PROJECTS.length);
+        resumeCycle();
+      });
+    }
+
     // Thumbnail clicks: switch project immediately
     thumbs.forEach(function (thumb) {
       thumb.addEventListener("click", function () {
@@ -777,23 +826,48 @@
 
     // Touch swipe on the main screen: change project
     if (mainGlass) {
+      var startX = 0;
       var startY = 0;
-      var startT = 0;
       var swipedAt = 0;
       mainGlass.addEventListener("touchstart", function (e) {
+        startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
-        startT = Date.now();
       }, { passive: true });
       mainGlass.addEventListener("touchend", function (e) {
         if (!e.changedTouches || !e.changedTouches.length) return;
-        var diff = e.changedTouches[0].clientY - startY;
-        if (Math.abs(diff) > 40) {
+        var diffX = e.changedTouches[0].clientX - startX;
+        var diffY = e.changedTouches[0].clientY - startY;
+        if (Math.abs(diffX) > 42 && Math.abs(diffX) > Math.abs(diffY)) {
           swipedAt = Date.now();
           pauseCycle();
-          goTo((current + (diff > 0 ? -1 : 1) + PROJECTS.length) % PROJECTS.length);
+          goTo((current + (diffX > 0 ? -1 : 1) + PROJECTS.length) % PROJECTS.length);
           resumeCycle();
         }
       }, { passive: true });
+
+      var dragStartX = 0;
+      var dragging = false;
+      mainGlass.addEventListener("pointerdown", function (e) {
+        if (e.pointerType === "touch") return;
+        dragging = true;
+        dragStartX = e.clientX;
+        pauseCycle();
+        try { mainGlass.setPointerCapture(e.pointerId); } catch (_) {}
+      });
+      mainGlass.addEventListener("pointerup", function (e) {
+        if (!dragging || e.pointerType === "touch") return;
+        dragging = false;
+        var diff = e.clientX - dragStartX;
+        if (Math.abs(diff) > 45) {
+          swipedAt = Date.now();
+          goTo((current + (diff > 0 ? -1 : 1) + PROJECTS.length) % PROJECTS.length);
+        }
+        resumeCycle();
+      });
+      mainGlass.addEventListener("pointercancel", function () {
+        dragging = false;
+        resumeCycle();
+      });
 
       // Open the active project's site
       mainGlass.addEventListener("click", function () {
