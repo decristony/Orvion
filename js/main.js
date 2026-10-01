@@ -634,14 +634,22 @@
     var caseDots  = [];
     if (!mainImg || !thumbs.length) return;
 
+    // Resolve portfolio assets from the site root represented by this script URL.
+    // This works from /, /pt/, /en/, GitHub Pages subpaths and regular hosting.
+    var mainScript = document.querySelector('script[src*="js/main.js"]');
+    var siteRoot = mainScript ? new URL("../", mainScript.src) : new URL("./", window.location.href);
+    function portfolioAsset(file) {
+      return new URL("public/portfolio/" + file, siteRoot).href;
+    }
+
     var PROJECTS = [
-      { img: "/public/portfolio/IFORTEC.webp", num: "01", name: "IFORTEC", url: "" },
-      { img: "/public/portfolio/Dr Diego.webp", num: "02", name: "Dr. Diego", url: "" },
-      { img: "/public/portfolio/site 04.webp", num: "03", name: "Santos e Robert", url: "https://santosrobert.com.br/" },
-      { img: "/public/portfolio/Site 01.webp", num: "04", name: "Odonto Vita", url: "https://decristony.github.io/OdontoVitta/" },
-      { img: "/public/portfolio/Site 03.webp", num: "05", name: "La Maison", url: "https://decristony.github.io/Luxury-Cardapio/" },
-      { img: "/public/portfolio/Site 02.webp", num: "06", name: "Liora Aura", url: "https://decristony.github.io/Aura-Premium/" },
-      { img: "/public/portfolio/Camila Ribeiro.webp", num: "07", name: "Camila Ribeiro", url: "" }
+      { img: portfolioAsset("IFORTEC.webp"), num: "01", name: "IFORTEC", url: "" },
+      { img: portfolioAsset("Dr Diego.webp"), num: "02", name: "Dr. Diego", url: "" },
+      { img: portfolioAsset("site 04.webp"), num: "03", name: "Santos e Robert", url: "https://santosrobert.com.br/" },
+      { img: portfolioAsset("Site 01.webp"), num: "04", name: "Odonto Vita", url: "https://decristony.github.io/OdontoVitta/" },
+      { img: portfolioAsset("Site 03.webp"), num: "05", name: "La Maison", url: "https://decristony.github.io/Luxury-Cardapio/" },
+      { img: portfolioAsset("Site 02.webp"), num: "06", name: "Liora Aura", url: "https://decristony.github.io/Aura-Premium/" },
+      { img: portfolioAsset("Camila Ribeiro.webp"), num: "07", name: "Camila Ribeiro", url: "" }
     ];
 
     var SCROLL_DOWN_MS = 12000;
@@ -702,8 +710,16 @@
         d.setAttribute("aria-selected", i === current ? "true" : "false");
       });
       var activeThumb = thumbs[current];
-      if (activeThumb && activeThumb.scrollIntoView) {
-        activeThumb.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+      var thumbsViewport = activeThumb && activeThumb.parentElement;
+      if (activeThumb && thumbsViewport) {
+        var horizontal = window.matchMedia("(max-width: 899.98px)").matches;
+        if (horizontal) {
+          var targetLeft = activeThumb.offsetLeft - (thumbsViewport.clientWidth - activeThumb.offsetWidth) / 2;
+          thumbsViewport.scrollTo({ left: Math.max(0, targetLeft), behavior: "smooth" });
+        } else {
+          var targetTop = activeThumb.offsetTop - (thumbsViewport.clientHeight - activeThumb.offsetHeight) / 2;
+          thumbsViewport.scrollTo({ top: Math.max(0, targetTop), behavior: "smooth" });
+        }
       }
     }
 
