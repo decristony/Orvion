@@ -442,7 +442,11 @@
     ];
 
     function url(name) {
-      return folder.split("/").map(encodeURIComponent).join("/") + "/" + encodeURIComponent(name);
+      try {
+        return new URL(name, folder).href;
+      } catch (e) {
+        return folder.replace(/\/?$/, "/") + encodeURIComponent(name);
+      }
     }
 
     function build() {
@@ -631,13 +635,13 @@
     if (!mainImg || !thumbs.length) return;
 
     var PROJECTS = [
-      { img: "public/portfolio/IFORTEC.webp", num: "01", name: "IFORTEC", url: "" },
-      { img: "public/portfolio/Dr Diego.webp", num: "02", name: "Dr. Diego", url: "" },
-      { img: "public/portfolio/site 04.webp", num: "03", name: "Santos e Robert", url: "https://santosrobert.com.br/" },
-      { img: "public/portfolio/Site 01.webp", num: "04", name: "Odonto Vita", url: "https://decristony.github.io/OdontoVitta/" },
-      { img: "public/portfolio/Site 03.webp", num: "05", name: "La Maison", url: "https://decristony.github.io/Luxury-Cardapio/" },
-      { img: "public/portfolio/Site 02.webp", num: "06", name: "Liora Aura", url: "https://decristony.github.io/Aura-Premium/" },
-      { img: "public/portfolio/Camila Ribeiro.webp", num: "07", name: "Camila Ribeiro", url: "" }
+      { img: "/public/portfolio/IFORTEC.webp", num: "01", name: "IFORTEC", url: "" },
+      { img: "/public/portfolio/Dr Diego.webp", num: "02", name: "Dr. Diego", url: "" },
+      { img: "/public/portfolio/site 04.webp", num: "03", name: "Santos e Robert", url: "https://santosrobert.com.br/" },
+      { img: "/public/portfolio/Site 01.webp", num: "04", name: "Odonto Vita", url: "https://decristony.github.io/OdontoVitta/" },
+      { img: "/public/portfolio/Site 03.webp", num: "05", name: "La Maison", url: "https://decristony.github.io/Luxury-Cardapio/" },
+      { img: "/public/portfolio/Site 02.webp", num: "06", name: "Liora Aura", url: "https://decristony.github.io/Aura-Premium/" },
+      { img: "/public/portfolio/Camila Ribeiro.webp", num: "07", name: "Camila Ribeiro", url: "" }
     ];
 
     var SCROLL_DOWN_MS = 12000;
