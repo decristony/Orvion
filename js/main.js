@@ -339,9 +339,9 @@
 
     function applyState() {
       if (item.open) {
+        answer.style.paddingBottom = "20px";
         answer.style.maxHeight = answer.scrollHeight + "px";
         answer.style.opacity = "1";
-        answer.style.paddingBottom = "24px";
       } else {
         answer.style.maxHeight = "0px";
         answer.style.opacity = "0";
@@ -465,10 +465,6 @@
         card.innerHTML =
           '<div class="mockup-viewport">' +
             '<img src="' + url(name) + '" alt="Projeto ORVION ' + (i + 1) + '" loading="lazy">' +
-            '<div class="mockup-overlay-badge">' +
-              '<span class="badge-icon">' + meta.icon + '</span>' +
-              '<span>' + meta.badge + '</span>' +
-            '</div>' +
           '</div>';
 
         card.addEventListener("click", function () {
@@ -696,6 +692,7 @@
       // Swap screenshot and reset to top
       mainImg.style.transition = "none";
       mainImg.src = p.img;
+      mainImg.alt = "Projeto de site " + p.name + " desenvolvido pela ORVION";
       mainImg.style.transform = "translateY(0px)";
 
       // Start vertical scroll
@@ -974,4 +971,233 @@
     startAuto();
   })();
 
+})();
+
+/* Mobile client logos: continuous autoplay + native swipe/drag + seamless loop */
+(function () {
+  var strip = document.querySelector('.logos-strip');
+  if (!strip) return;
+
+  var mq = window.matchMedia('(max-width: 809.98px)');
+  var originals = Array.prototype.slice.call(strip.children).filter(function (el) {
+    return !el.classList.contains('logo-clone');
+  });
+  var raf = 0;
+  var position = 0;
+  var lastTime = 0;
+  var pausedUntil = 0;
+  var speed = 38; // px/s: perceptible but calm
+
+  function addClones() {
+    strip.querySelectorAll('.logo-clone').forEach(function (el) { el.remove(); });
+    originals.forEach(function (cell) {
+      var clone = cell.cloneNode(true);
+      clone.classList.add('logo-clone');
+      clone.setAttribute('aria-hidden', 'true');
+      strip.appendChild(clone);
+    });
+  }
+
+  function removeClones() {
+    strip.querySelectorAll('.logo-clone').forEach(function (el) { el.remove(); });
+  }
+
+  function loopWidth() {
+    var firstClone = strip.querySelector('.logo-clone');
+    return firstClone ? firstClone.offsetLeft : strip.scrollWidth / 2;
+  }
+
+  function normalize() {
+    var w = loopWidth();
+    if (!w) return;
+    while (position >= w) position -= w;
+    while (position < 0) position += w;
+    strip.scrollLeft = position;
+  }
+
+  function frame(ts) {
+    if (!mq.matches) {
+      raf = 0;
+      return;
+    }
+    if (!lastTime) lastTime = ts;
+    var dt = Math.min(50, ts - lastTime);
+    lastTime = ts;
+
+    if (ts >= pausedUntil) {
+      position += speed * dt / 1000;
+      normalize();
+    } else {
+      position = strip.scrollLeft;
+    }
+    raf = requestAnimationFrame(frame);
+  }
+
+  function start() {
+    if (!mq.matches) return;
+    if (!strip.querySelector('.logo-clone')) addClones();
+    position = strip.scrollLeft;
+    lastTime = 0;
+    if (!raf) raf = requestAnimationFrame(frame);
+  }
+
+  function stop() {
+    if (raf) cancelAnimationFrame(raf);
+    raf = 0;
+    lastTime = 0;
+  }
+
+  function pauseFor(ms) {
+    pausedUntil = performance.now() + (ms || 1400);
+    position = strip.scrollLeft;
+  }
+
+  strip.addEventListener('touchstart', function () { pauseFor(1800); }, { passive: true });
+  strip.addEventListener('touchmove', function () { position = strip.scrollLeft; pauseFor(1800); }, { passive: true });
+  strip.addEventListener('touchend', function () { position = strip.scrollLeft; pauseFor(900); }, { passive: true });
+  strip.addEventListener('pointerdown', function () {
+    strip.classList.add('is-dragging');
+    pauseFor(1800);
+  });
+  window.addEventListener('pointerup', function () {
+    strip.classList.remove('is-dragging');
+    position = strip.scrollLeft;
+    pauseFor(900);
+  });
+  strip.addEventListener('scroll', function () {
+    if (performance.now() < pausedUntil) position = strip.scrollLeft;
+  }, { passive: true });
+
+  function refresh() {
+    stop();
+    strip.scrollLeft = 0;
+    position = 0;
+    pausedUntil = 0;
+    if (mq.matches) {
+      addClones();
+      requestAnimationFrame(start);
+    } else {
+      removeClones();
+    }
+  }
+
+  if (mq.addEventListener) mq.addEventListener('change', refresh);
+  else if (mq.addListener) mq.addListener(refresh);
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) stop();
+    else start();
+  });
+  window.addEventListener('resize', function () {
+    if (mq.matches) {
+      position = strip.scrollLeft;
+      normalize();
+      start();
+    }
+  }, { passive: true });
+
+  refresh();
+})();
+
+
+/* Services carousel: autoplay + manual drag/swipe */
+(function () {
+  'use strict';
+
+  var row = document.querySelector('.services-row');
+  var track = row && row.querySelector('.services-track');
+  if (!row || !track) return;
+
+  // Disable the CSS animation here so autoplay and dragging share one transform source.
+  track.style.animation = 'none';
+
+  var offset = 0;
+  var dragging = false;
+  var hovering = false;
+  var pointerId = null;
+  var startX = 0;
+  var startOffset = 0;
+  var last = performance.now();
+  var speed = 0;
+
+  function halfWidth() {
+    return track.scrollWidth / 2;
+  }
+
+  function normalize(value) {
+    var half = halfWidth();
+    if (!half) return value;
+    while (value <= -half) value += half;
+    while (value > 0) value -= half;
+    return value;
+  }
+
+  function apply() {
+    offset = normalize(offset);
+    track.style.transform = 'translate3d(' + offset + 'px,0,0)';
+  }
+
+  function recalcSpeed() {
+    var half = halfWidth();
+    speed = half ? half / 55 : 20; // same approximate 55s loop as before
+  }
+
+  function tick(now) {
+    var dt = Math.min(50, now - last) / 1000;
+    last = now;
+    if (!dragging && !hovering && !document.hidden) {
+      offset -= speed * dt;
+      apply();
+    }
+    requestAnimationFrame(tick);
+  }
+
+  row.addEventListener('mouseenter', function () { hovering = true; });
+  row.addEventListener('mouseleave', function () {
+    hovering = false;
+    if (dragging) {
+      dragging = false;
+      row.classList.remove('is-dragging');
+    }
+  });
+
+  row.addEventListener('pointerdown', function (e) {
+    if (e.button !== undefined && e.button !== 0) return;
+    dragging = true;
+    pointerId = e.pointerId;
+    startX = e.clientX;
+    startOffset = offset;
+    row.classList.add('is-dragging');
+    if (row.setPointerCapture && pointerId !== undefined) {
+      try { row.setPointerCapture(pointerId); } catch (_) {}
+    }
+  });
+
+  row.addEventListener('pointermove', function (e) {
+    if (!dragging || (pointerId !== null && e.pointerId !== pointerId)) return;
+    offset = startOffset + (e.clientX - startX);
+    apply();
+  });
+
+  function endDrag(e) {
+    if (!dragging) return;
+    if (e && pointerId !== null && e.pointerId !== undefined && e.pointerId !== pointerId) return;
+    dragging = false;
+    pointerId = null;
+    row.classList.remove('is-dragging');
+  }
+
+  row.addEventListener('pointerup', endDrag);
+  row.addEventListener('pointercancel', endDrag);
+  window.addEventListener('resize', function () {
+    recalcSpeed();
+    apply();
+  }, { passive: true });
+
+  requestAnimationFrame(function () {
+    recalcSpeed();
+    apply();
+    last = performance.now();
+    requestAnimationFrame(tick);
+  });
 })();
