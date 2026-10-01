@@ -468,7 +468,7 @@
 
         card.innerHTML =
           '<div class="mockup-viewport">' +
-            '<img src="' + url(name) + '" alt="Projeto ORVION ' + (i + 1) + '" loading="lazy">' +
+            '<img src="' + url(name) + '" alt="Projeto ORVION ' + (i + 1) + '" width="1060" height="707" decoding="async" loading="' + (i === 0 ? 'eager' : 'lazy') + '" fetchpriority="' + (i === 0 ? 'high' : 'low') + '">' +
           '</div>';
 
         card.addEventListener("click", function () {
@@ -487,9 +487,9 @@
         stage.appendChild(card);
         cards.push(card);
 
-        var dot = document.createElement("span");
+        var dot = document.createElement("button");
+        dot.type = "button";
         dot.className = "sd";
-        dot.setAttribute("role", "tab");
         dot.setAttribute("aria-label", "Slide " + (i + 1));
         dot.addEventListener("click", function () {
           go(i);
@@ -531,7 +531,7 @@
       dots.forEach(function (dot, i) {
         var active = i === current;
         dot.classList.toggle("active", active);
-        dot.setAttribute("aria-selected", active ? "true" : "false");
+        if (active) dot.setAttribute("aria-current", "true"); else dot.removeAttribute("aria-current");
       });
     }
 
@@ -666,9 +666,6 @@
     var raf = null;
     var loadTimer = null;
 
-    // Preload all screenshots up front
-    PROJECTS.forEach(function (p) { var img = new Image(); img.src = p.img; });
-
     function ready() {
       return mainImg.complete && mainImg.naturalWidth > 0;
     }
@@ -688,7 +685,6 @@
         var dot = document.createElement("button");
         dot.type = "button";
         dot.className = "cases-dot";
-        dot.setAttribute("role", "tab");
         dot.setAttribute("aria-label", "Ver projeto " + p.num + " — " + p.name);
         dot.addEventListener("click", function () {
           pauseCycle();
@@ -707,7 +703,7 @@
       });
       caseDots.forEach(function (d, i) {
         d.classList.toggle("active", i === current);
-        d.setAttribute("aria-selected", i === current ? "true" : "false");
+        if (i === current) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current");
       });
       var activeThumb = thumbs[current];
       var thumbsViewport = activeThumb && activeThumb.parentElement;
@@ -969,9 +965,9 @@
     var timer = null;
 
     var dots = cards.map(function (card, i) {
-      var d = document.createElement("span");
+      var d = document.createElement("button");
+      d.type = "button";
       d.className = "fdot";
-      d.setAttribute("role", "tab");
       d.setAttribute("aria-label", "Membro " + (i + 1));
       d.addEventListener("click", function () { go(i); });
       dotsWrap.appendChild(d);
@@ -990,6 +986,7 @@
       });
       dots.forEach(function (dot, c) {
         dot.classList.toggle("active", c === current);
+        if (c === current) dot.setAttribute("aria-current", "true"); else dot.removeAttribute("aria-current");
       });
     }
 

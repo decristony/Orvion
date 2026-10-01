@@ -32,10 +32,11 @@
   </script>
   -->
 <!-- Dados estruturados -->
+<link rel="preload" as="image" href="public/mockups/slide%201.webp" type="image/webp" fetchpriority="high"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="css/style.css?v=47" rel="stylesheet"/>
+<link href="css/style.css?v=48" rel="stylesheet"/>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -149,7 +150,7 @@
 <button aria-label="Próximo slide" class="cf-arrow cf-arrow--next" title="Próximo">
 <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><polyline points="9 18 15 12 9 6"></polyline></svg>
 </button>
-<div aria-label="Navegação dos projetos" class="stage-dots" role="tablist"></div>
+<div aria-label="Navegação dos projetos" class="stage-dots"></div>
 </div>
 </div>
 </section>
@@ -262,7 +263,7 @@
 <div class="cases-main">
 <div class="cases-main-glass">
 <div class="cases-main-screen">
-<img alt="Projeto de site IFORTEC desenvolvido pela ORVION" class="cases-main-img" decoding="async" src="public/portfolio/IFORTEC.webp"/>
+<img alt="Projeto de site IFORTEC desenvolvido pela ORVION" class="cases-main-img" decoding="async" src="public/portfolio/IFORTEC.webp" loading="lazy"/>
 </div>
 <div class="cases-main-title">
 <span class="cases-main-num">01</span>
@@ -281,7 +282,7 @@
 <div class="cases-nav-wrap">
 <div class="cases-thumbs">
 <button aria-label="Projeto 01 — IFORTEC" class="cases-thumb active" data-index="0">
-<div class="cases-thumb-img"><img alt="" decoding="async" src="public/portfolio/IFORTEC.webp"/></div>
+<div class="cases-thumb-img"><img alt="" decoding="async" src="public/portfolio/IFORTEC.webp" loading="lazy"/></div>
 <span class="cases-thumb-label">01</span>
 </button>
 <button aria-label="Projeto 02 — Dr. Diego" class="cases-thumb" data-index="1">
@@ -289,19 +290,19 @@
 <span class="cases-thumb-label">02</span>
 </button>
 <button aria-label="Projeto 03 — Santos e Robert" class="cases-thumb" data-index="2">
-<div class="cases-thumb-img"><img alt="" decoding="async" src="public/portfolio/site 04.webp"/></div>
+<div class="cases-thumb-img"><img alt="" decoding="async" src="public/portfolio/site 04.webp" loading="lazy"/></div>
 <span class="cases-thumb-label">03</span>
 </button>
 <button aria-label="Projeto 04 — Odonto Vita" class="cases-thumb" data-index="3">
-<div class="cases-thumb-img"><img alt="" decoding="async" src="public/portfolio/Site 01.webp"/></div>
+<div class="cases-thumb-img"><img alt="" decoding="async" src="public/portfolio/Site 01.webp" loading="lazy"/></div>
 <span class="cases-thumb-label">04</span>
 </button>
 <button aria-label="Projeto 05 — La Maison" class="cases-thumb" data-index="4">
-<div class="cases-thumb-img"><img alt="" decoding="async" src="public/portfolio/Site 03.webp"/></div>
+<div class="cases-thumb-img"><img alt="" decoding="async" src="public/portfolio/Site 03.webp" loading="lazy"/></div>
 <span class="cases-thumb-label">05</span>
 </button>
 <button aria-label="Projeto 06 — Liora Aura" class="cases-thumb" data-index="5">
-<div class="cases-thumb-img"><img alt="" decoding="async" src="public/portfolio/Site 02.webp"/></div>
+<div class="cases-thumb-img"><img alt="" decoding="async" src="public/portfolio/Site 02.webp" loading="lazy"/></div>
 <span class="cases-thumb-label">06</span>
 </button>
 <button aria-label="Projeto 07 — Camila Ribeiro" class="cases-thumb" data-index="6">
@@ -309,7 +310,7 @@
 <span class="cases-thumb-label">07</span>
 </button>
 </div>
-<div aria-label="Navegação dos projetos" class="cases-dots" role="tablist"></div>
+<div aria-label="Navegação dos projetos" class="cases-dots"></div>
 </div>
 </div>
 <div class="cases-more reveal">
@@ -572,7 +573,7 @@
 </div>
 </article>
 </div>
-<div aria-hidden="true" class="founders-dots"></div>
+<div aria-label="Navegação da equipa" class="founders-dots"></div>
 </div>
 <div class="about-manifesto reveal" style="--delay: .26s">
 <a class="btn btn-primary btn-lg" href="https://wa.me/5561998512796?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20um%20or%C3%A7amento.">
@@ -726,9 +727,9 @@
 </div>
 </section>
 <!-- ============ MARQUEE CTA (FORA DO STACKING - SCROLL NORMAL) ============ -->
-<section aria-hidden="true" class="cta">
-<a class="cta-marquee" data-ticker="" href="https://wa.me/5561998512796?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20um%20or%C3%A7amento." tabindex="-1">
-<div class="cta-track">
+<section class="cta">
+<a aria-label="Falar com a ORVION pelo WhatsApp" class="cta-marquee" data-ticker="" href="https://wa.me/5561998512796?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20um%20or%C3%A7amento.">
+<div aria-hidden="true" class="cta-track">
 <span class="cta-text">Fale com a ORVION
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg>
 </span>
@@ -790,8 +791,8 @@
 <a aria-label="Solicitar orçamento pelo WhatsApp" class="whatsapp-float" href="https://wa.me/5561998512796?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20um%20or%C3%A7amento." rel="noopener noreferrer" target="_blank">
 <img alt="WhatsApp" decoding="async" src="assets/img/whatsapp-float.png"/>
 </a>
-<script src="js/mockups.js?v=3"></script>
-<script src="js/main.js?v=16"></script>
+<script src="js/mockups.js?v=4"></script>
+<script src="js/main.js?v=17"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

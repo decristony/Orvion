@@ -4866,3 +4866,17 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
     min-width: 74px;
   }
 }
+
+
+/* ==========================================================================
+   Performance + agentic readiness v37
+   Keep the LCP headline paintable immediately; JS can still enhance layout.
+   ========================================================================== */
+.hero-title .w {
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+}
+.hero-title.in .w {
+  transition: none !important;
+}
