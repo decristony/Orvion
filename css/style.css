@@ -4470,6 +4470,59 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
   }
 }
 
+
+
+.back-to-top-float {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 9998;
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.24));
+  opacity: 0;
+  transform: translateY(22px) scale(0.82);
+  animation: whatsapp-float-enter 0.72s cubic-bezier(.2,.8,.2,1) 1s forwards;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.28s var(--ease), filter 0.28s var(--ease);
+}
+
+.back-to-top-float img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.back-to-top-float:hover {
+  transform: translateY(-4px) scale(1.055);
+  filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.32)) drop-shadow(0 0 12px rgba(1, 179, 239, 0.22));
+}
+
+.back-to-top-float:active {
+  transform: translateY(0) scale(0.93);
+  transition-duration: 0.09s;
+}
+
+.back-to-top-float:focus-visible {
+  outline: 3px solid rgba(1, 179, 239, 0.9);
+  outline-offset: 5px;
+}
+
+@media (max-width: 809.98px) {
+  .back-to-top-float {
+    left: 18px;
+    bottom: 18px;
+    width: 52px;
+    height: 52px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .whatsapp-float {
     opacity: 1;
@@ -4879,4 +4932,92 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 }
 .hero-title.in .w {
   transition: none !important;
+}
+
+
+/* Footer social links with icons */
+.footer-social-link {
+  display: flex !important;
+  align-items: center;
+  gap: 9px;
+}
+.footer-social-link img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex: 0 0 18px;
+}
+@media (max-width: 809.98px) {
+  .footer-social-link img {
+    width: 17px;
+    height: 17px;
+    flex-basis: 17px;
+  }
+}
+
+
+/* ========================================================================== 
+   ORVION page loader / page transition
+   ========================================================================== */
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: grid;
+  place-items: center;
+  background: #0B0C0E;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity .42s cubic-bezier(.22,1,.36,1), visibility 0s linear 0s;
+}
+
+.page-loader.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .42s cubic-bezier(.22,1,.36,1), visibility 0s linear .42s;
+}
+
+.page-loader.is-entering {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity .24s ease-out, visibility 0s;
+}
+
+.page-loader-mark {
+  width: 90px;
+  min-width: 90px;
+  aspect-ratio: 1;
+}
+
+.page-loader-mark svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.page-loader-brand {
+  fill: none;
+  stroke: url(#pageLoaderGradient);
+  stroke-width: 130;
+}
+
+.page-loader-dot {
+  fill: #01B3EF;
+  filter: url(#pageLoaderGlow);
+}
+
+@media (max-width: 809.98px) {
+  .page-loader-mark {
+    width: 90px;
+    min-width: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-loader { transition-duration: .12s; }
+  .page-loader-dot { display: none; }
 }

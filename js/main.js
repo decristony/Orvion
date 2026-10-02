@@ -267,12 +267,20 @@
     document.documentElement.style.scrollBehavior = "auto";
 
     var startTime = null;
-    // Duração sedosa calibrada: mínimo 650ms, máximo 1150ms
-    var duration = Math.min(1150, Math.max(650, Math.abs(diff) * 0.48));
+    var isMobileScroll = window.matchMedia("(max-width: 809.98px)").matches;
 
-    // Curva easeInOutQuart: aceleração imperceptível e desaceleração longa e aveludada
+    // No mobile a rolagem nativa entre âncoras tende a parecer mais brusca.
+    // Usamos uma duração maior e proporcional à distância para manter o mesmo
+    // caráter suave do desktop em menu, CTAs, projetos e botão de voltar ao topo.
+    var duration = isMobileScroll
+      ? Math.min(3000, Math.max(1700, Math.abs(diff) * 0.95))
+      : Math.min(2200, Math.max(1200, Math.abs(diff) * 0.72));
+
+    // Curva contínua com aceleração e desaceleração progressivas.
     function smoothEase(t) {
-      return t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
+      return t < 0.5
+        ? 8 * Math.pow(t, 4)
+        : 1 - Math.pow(-2 * t + 2, 4) / 2;
     }
 
     function cleanup() {
