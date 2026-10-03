@@ -30,4 +30,95 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://orvionweb.com/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://orvionweb.com/"/>
   </url>
+
+  <url>
+    <loc>https://orvionweb.com/politica-de-privacidade/</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://orvionweb.com/politica-de-privacidade/"/>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://orvionweb.com/pt/politica-de-privacidade/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://orvionweb.com/en/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://orvionweb.com/politica-de-privacidade/"/>
+  </url>
+  <url>
+    <loc>https://orvionweb.com/pt/politica-de-privacidade/</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://orvionweb.com/politica-de-privacidade/"/>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://orvionweb.com/pt/politica-de-privacidade/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://orvionweb.com/en/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://orvionweb.com/politica-de-privacidade/"/>
+  </url>
+  <url>
+    <loc>https://orvionweb.com/en/privacy-policy/</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://orvionweb.com/politica-de-privacidade/"/>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://orvionweb.com/pt/politica-de-privacidade/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://orvionweb.com/en/privacy-policy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://orvionweb.com/politica-de-privacidade/"/>
+  </url>
+  <url>
+    <loc>https://orvionweb.com/termos-de-uso/</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://orvionweb.com/termos-de-uso/"/>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://orvionweb.com/pt/termos-de-uso/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://orvionweb.com/en/terms-of-use/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://orvionweb.com/termos-de-uso/"/>
+  </url>
+  <url>
+    <loc>https://orvionweb.com/pt/termos-de-uso/</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://orvionweb.com/termos-de-uso/"/>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://orvionweb.com/pt/termos-de-uso/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://orvionweb.com/en/terms-of-use/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://orvionweb.com/termos-de-uso/"/>
+  </url>
+  <url>
+    <loc>https://orvionweb.com/en/terms-of-use/</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://orvionweb.com/termos-de-uso/"/>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://orvionweb.com/pt/termos-de-uso/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://orvionweb.com/en/terms-of-use/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://orvionweb.com/termos-de-uso/"/>
+  </url>
+  <url>
+    <loc>https://orvionweb.com/termos-de-servico/</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://orvionweb.com/termos-de-servico/"/>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://orvionweb.com/pt/termos-de-servico/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://orvionweb.com/en/terms-of-service/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://orvionweb.com/termos-de-servico/"/>
+  </url>
+  <url>
+    <loc>https://orvionweb.com/pt/termos-de-servico/</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://orvionweb.com/termos-de-servico/"/>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://orvionweb.com/pt/termos-de-servico/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://orvionweb.com/en/terms-of-service/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://orvionweb.com/termos-de-servico/"/>
+  </url>
+  <url>
+    <loc>https://orvionweb.com/en/terms-of-service/</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://orvionweb.com/termos-de-servico/"/>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://orvionweb.com/pt/termos-de-servico/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://orvionweb.com/en/terms-of-service/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://orvionweb.com/termos-de-servico/"/>
+  </url>
 </urlset>
