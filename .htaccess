@@ -1,0 +1,14 @@
+# easyIndex: serve the original HTML and record crawler reads after the response.
+# Normal visitors, assets and unrelated routes retain their existing static handling.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# Crawler page requests must reach the recorder rather than the LiteSpeed cache.
+RewriteCond %{REQUEST_METHOD} ^(GET|HEAD)$
+RewriteCond %{HTTP_USER_AGENT} (bot|crawl|spider|gpt|claude|anthropic|perplexity|google-extended|cohere|mistral|meta-external|ccbot|easyindex) [NC]
+RewriteRule ^(?:(?:en|en/privacy-policy|en/terms-of-service|en/terms-of-use|politica-de-privacidade|pt|pt/politica-de-privacidade|pt/termos-de-servico|pt/termos-de-uso|termos-de-servico|termos-de-uso)/)?(?:index\.html)?$ - [E=Cache-Control:no-cache]
+
+RewriteCond %{REQUEST_METHOD} ^(GET|HEAD)$
+RewriteCond %{HTTP_USER_AGENT} (bot|crawl|spider|gpt|claude|anthropic|perplexity|google-extended|cohere|mistral|meta-external|ccbot|easyindex) [NC]
+RewriteRule ^(?:(?:en|en/privacy-policy|en/terms-of-service|en/terms-of-use|politica-de-privacidade|pt|pt/politica-de-privacidade|pt/termos-de-servico|pt/termos-de-uso|termos-de-servico|termos-de-uso)/)?(?:index\.html)?$ easyindex-crawl.php [L]
+</IfModule>
