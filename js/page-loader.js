@@ -19,15 +19,18 @@
     if (dismissed || leaving) return;
     dismissed = true;
     const elapsed = performance.now() - startedAt;
-    const wait = Math.max(0, 340 - elapsed);
+    const wait = Math.max(0, 120 - elapsed);
     window.setTimeout(() => loader.classList.add("is-hidden"), wait);
   }
 
-  // Do not hold the page for every image below the fold. Release on load,
-  // but cap the wait so the loader never becomes a performance bottleneck.
-  if (document.readyState === "complete") hideLoader();
-  else window.addEventListener("load", hideLoader, { once: true });
-  window.setTimeout(hideLoader, 900);
+  // Release once the document is parsed: do not wait for offscreen images,
+  // analytics or third-party scripts before showing above-the-fold content.
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", hideLoader, { once: true });
+  } else {
+    hideLoader();
+  }
+  window.setTimeout(hideLoader, 450);
 
   function transitionTo(url) {
     if (leaving) return;
