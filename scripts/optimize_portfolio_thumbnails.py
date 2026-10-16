@@ -36,7 +36,7 @@ for relative in ("index.html", "pt/index.html", "en/index.html"):
         opening, closing = match.group(1), match.group(3)
         if 'fetchpriority=' not in closing:
             closing = closing.replace("/>", ' fetchpriority="low"/>')
-        if 'loading=' not in closing:
+        if 'loading=' not in opening + closing:
             closing = closing.replace("/>", ' loading="lazy"/>')
         return opening + src.split("/portfolio/", 1)[0] + "/portfolio/thumbs/" + name + closing
     html = pattern.sub(update, html)
