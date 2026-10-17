@@ -5143,3 +5143,11 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 @media (max-width: 809.98px) {
   .hero-stage .stage-dots { bottom: -14px; }
 }
+
+
+/* Slim horizontal hero progress rail (visual only; touch targets stay 30px). */
+.hero-stage .stage-dots{bottom:4px;height:22px;padding:0 9px;gap:5px;min-width:160px;border-radius:999px;background:rgba(18,21,30,.68);border:1px solid rgba(255,255,255,.12);box-shadow:0 2px 12px rgba(0,0,0,.22);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.hero-stage .stage-dots .sd{width:20px;min-width:20px;height:30px;min-height:30px;flex:0 0 20px}
+.hero-stage .stage-dots .sd::before{width:5px;height:5px}
+.hero-stage .stage-dots .sd.active::before{width:15px;height:5px}
+@media(max-width:809.98px){.hero-stage .stage-dots{bottom:0;min-width:150px;height:20px;gap:4px}}
