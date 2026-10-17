@@ -12,3 +12,25 @@ RewriteCond %{REQUEST_METHOD} ^(GET|HEAD)$
 RewriteCond %{HTTP_USER_AGENT} (bot|crawl|spider|gpt|claude|anthropic|perplexity|google-extended|cohere|mistral|meta-external|ccbot|easyindex) [NC]
 RewriteRule ^(?:(?:en|en/privacy-policy|en/terms-of-service|en/terms-of-use|politica-de-privacidade|pt|pt/politica-de-privacidade|pt/termos-de-servico|pt/termos-de-uso|termos-de-servico|termos-de-uso)/)?(?:index\.html)?$ easyindex-crawl.php [L]
 </IfModule>
+
+
+# Browser cache for versioned/static assets; HTML and crawler recorder are not cached.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/avif "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+</IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch "\\.(?:webp|avif|png|jpe?g|svg|woff2)$">
+    Header set Cache-Control "public, max-age=31536000"
+  </FilesMatch>
+  <FilesMatch "\\.(?:css|js)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+</IfModule>
