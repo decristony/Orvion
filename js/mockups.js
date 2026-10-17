@@ -10,11 +10,11 @@
     folder: new URL("../public/mockups/", scriptUrl).href,
     images: [
       "slide 1-optimized.webp",
-      "slide 2-optimized.webp",
-      "slide 3-optimized.webp",
-      "slide 4-optimized.webp",
-      "slide 5-optimized.webp",
-      "slide 6-optimized.webp"
+      "slide 2-compact.webp",
+      "slide 3-compact.webp",
+      "slide 4-compact.webp",
+      "slide 5-compact.webp",
+      "slide 6-compact.webp"
     ]
   };
 })();
