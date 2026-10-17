@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m pip install rcssmin rjsmin
+      - run: python -m pip install rcssmin rjsmin tinycss2
       - run: python scripts/minify_site.py
       - name: Save built CSS and JS
         run: |
