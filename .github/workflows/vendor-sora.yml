@@ -1,0 +1,38 @@
+name: Vendor Sora font
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/vendor-sora.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  vendor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Download official open-licensed variable font
+        run: |
+          npm install --no-save --ignore-scripts --no-audit --no-fund --prefix /tmp/orvion-font @fontsource-variable/sora@5.3.0
+          mkdir -p assets/fonts
+          cp /tmp/orvion-font/node_modules/@fontsource-variable/sora/files/sora-latin-wght-normal.woff2 assets/fonts/sora-latin-wght-normal.woff2
+          cp /tmp/orvion-font/node_modules/@fontsource-variable/sora/OFL.txt assets/fonts/Sora-OFL.txt
+      - name: Commit local font
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/fonts/
+          if ! git diff --cached --quiet; then
+            git commit -m "perf: host Sora variable WOFF2 locally"
+            for attempt in 1 2 3 4 5; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then exit 0; fi
+              sleep 3
+            done
+            exit 1
+          fi
