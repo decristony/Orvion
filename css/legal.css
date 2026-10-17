@@ -62,12 +62,6 @@ img{display:block;max-width:100%}
 .legal-footer a{transition:color .2s ease}
 .legal-footer a:hover{color:#fff}
 
-/* shared ORVION transition loader */
-.page-loader{position:fixed;inset:0;z-index:100000;display:grid;place-items:center;background:#0B0C0E;opacity:1;visibility:visible;pointer-events:auto;transition:opacity .42s cubic-bezier(.22,1,.36,1),visibility 0s linear 0s}
-.page-loader.is-hidden{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .42s cubic-bezier(.22,1,.36,1),visibility 0s linear .42s}
-.page-loader.is-entering{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .24s ease-out,visibility 0s}
-.page-loader-mark{width:90px;min-width:90px;aspect-ratio:1}.page-loader-mark svg{display:block;width:100%;height:100%;overflow:visible}.page-loader-brand{fill:none;stroke:url(#pageLoaderGradient);stroke-width:130}.page-loader-dot{fill:#01B3EF;filter:url(#pageLoaderGlow)}
-
 @media(max-width:800px){
   .legal-shell{width:calc(100% - 40px)}
   .legal-hero{min-height:300px}
@@ -81,7 +75,7 @@ img{display:block;max-width:100%}
   .legal-footer-inner{width:calc(100% - 40px);padding:24px 0;min-height:0;flex-direction:column;align-items:flex-start;gap:14px}
   .legal-footer-copy{white-space:normal}.legal-footer-links{justify-content:flex-start;gap:12px 20px}
 }
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.page-loader{transition-duration:.12s}.page-loader-dot{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
 
 /* Home navbar/footer integration on legal pages */
