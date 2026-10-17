@@ -9,12 +9,12 @@
   window.ORVION_MOCKUPS = {
     folder: new URL("../public/mockups/", scriptUrl).href,
     images: [
-      "slide 1.webp",
-      "slide 2.webp",
-      "slide 3.webp",
-      "slide 4.webp",
-      "slide 5.webp",
-      "slide 6.webp"
+      "slide 1-optimized.webp",
+      "slide 2-optimized.webp",
+      "slide 3-optimized.webp",
+      "slide 4-optimized.webp",
+      "slide 5-optimized.webp",
+      "slide 6-optimized.webp"
     ]
   };
 })();
