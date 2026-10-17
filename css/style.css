@@ -5091,3 +5091,55 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 .hero-title .w.hl { filter:drop-shadow(0 2px 14px rgba(1,179,239,.4)); }
 /* HTML-first hero slide appears immediately, prior to coverflow initialization. */
 .mockup-scene > .cf-card[data-initial-slide] { z-index:4; }
+
+
+/* Hero slide navigation: restore compact, thin indicator rail below the mockups.
+   Touch hit targets remain generous without increasing the visual bar's height. */
+.hero-stage .stage-dots {
+  bottom: -18px;
+  height: 12px;
+  padding: 0 5px;
+  gap: 2px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  overflow: visible;
+}
+.hero-stage .stage-dots .sd {
+  box-sizing: border-box;
+  width: 24px;
+  min-width: 24px;
+  height: 30px;
+  min-height: 30px;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  display: grid;
+  place-items: center;
+}
+.hero-stage .stage-dots .sd::before {
+  content: "";
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.45);
+  transition: width .2s ease, background .2s ease;
+}
+.hero-stage .stage-dots .sd.active::before {
+  width: 16px;
+  height: 6px;
+  background: var(--accent-turquoise);
+}
+.hero-stage .stage-dots .sd:hover::before { background: rgba(255,255,255,.85); }
+.hero-stage .stage-dots .sd.active:hover::before { background: var(--accent-turquoise); }
+.hero-stage .stage-dots .sd:focus-visible { outline: 2px solid var(--accent-turquoise); outline-offset: 0; border-radius: 5px; }
+@media (max-width: 809.98px) {
+  .hero-stage .stage-dots { bottom: -14px; }
+}
