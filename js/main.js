@@ -991,6 +991,8 @@
       if (!isMobile()) return;
       cards.forEach(function (card, c) {
         card.setAttribute("aria-hidden", c === current ? "false" : "true");
+        // Remove hidden carousel cards and their links from keyboard navigation.
+        card.inert = c !== current;
       });
       dots.forEach(function (dot, c) {
         dot.classList.toggle("active", c === current);
@@ -1049,7 +1051,7 @@
       } else {
         stop();
         track.style.transform = "translateX(0px)";
-        cards.forEach(function (card) { card.removeAttribute("aria-hidden"); });
+        cards.forEach(function (card) { card.removeAttribute("aria-hidden"); card.inert = false; });
       }
     }
     if (mobileQuery.addEventListener) mobileQuery.addEventListener("change", onMq);
