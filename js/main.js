@@ -3,19 +3,8 @@
 (function () {
   "use strict";
 
-  /* ---------- Hero: word-by-word animation ---------- */
-  var heroTitle = document.getElementById("hero-title");
-  if (heroTitle) {
-    var words = heroTitle.querySelectorAll(".w");
-    words.forEach(function (w, i) {
-      w.style.setProperty("--d", (0.15 + i * 0.07).toFixed(2) + "s");
-    });
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        heroTitle.classList.add("in");
-      });
-    });
-  }
+  /* LCP: keep hero heading visible in the initial HTML paint. 
+     Delayed opacity/blur previously concealed the primary heading. */
 
   /* ---------- Reveal on scroll ---------- */
   var revealEls = document.querySelectorAll(".reveal");
@@ -459,7 +448,10 @@
 
     function build() {
       stage.classList.remove("is-empty");
-      stage.innerHTML = "";
+      // Keep the first, HTML-rendered slide. Recreating it delays paint and LCP.
+      var initialCard = stage.querySelector("[data-initial-slide]");
+      if (initialCard) stage.replaceChildren(initialCard);
+      else stage.innerHTML = "";
       indicatorsWrap.innerHTML = "";
       cards = [];
       dots = [];
@@ -468,16 +460,18 @@
       images.forEach(function (name, i) {
         var meta = caseMeta[i % caseMeta.length];
 
-        var card = document.createElement("div");
+        var card = (i === 0 && initialCard) ? initialCard : document.createElement("div");
         card.className = "cf-card";
         card.setAttribute("role", "button");
         card.setAttribute("tabindex", "0");
         card.setAttribute("aria-label", "Ver projeto " + (i + 1));
 
-        card.innerHTML =
-          '<div class="mockup-viewport">' +
-            '<img src="' + url(name) + '" alt="Projeto ORVION ' + (i + 1) + '" width="1060" height="707" decoding="async" loading="' + (i === 0 ? 'eager' : 'lazy') + '" fetchpriority="' + (i === 0 ? 'high' : 'low') + '">' +
-          '</div>';
+        if (!(i === 0 && initialCard)) {
+          card.innerHTML =
+            '<div class="mockup-viewport">' +
+              '<img src="' + url(name) + '" alt="Projeto ORVION ' + (i + 1) + '" width="1060" height="707" decoding="async" loading="' + (i === 0 ? 'eager' : 'lazy') + '" fetchpriority="' + (i === 0 ? 'high' : 'low') + '">' +
+            '</div>';
+        }
 
         card.addEventListener("click", function () {
           if (i !== current) {
