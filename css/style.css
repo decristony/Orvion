@@ -1,3 +1,5 @@
+/* Locally hosted Sora variable font: one WOFF2 supports weights 400–700. */
+@font-face{font-family:"Sora";font-style:normal;font-weight:400 700;font-display:swap;src:url("../assets/fonts/sora-latin-wght-normal.woff2") format("woff2")}
 /* ==========================================================================
    ORVION — Stacking Card Panels Architecture & Dark/Light System
    ========================================================================== */
