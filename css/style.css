@@ -5153,3 +5153,22 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 .hero-stage .stage-dots .sd::before{width:5px;height:5px}
 .hero-stage .stage-dots .sd.active::before{width:15px;height:5px}
 @media(max-width:809.98px){.hero-stage .stage-dots{bottom:0;min-width:150px;height:20px;gap:4px}}
+
+
+/* LCP: paint the server-rendered hero image without effects or transitions.
+   Coverflow motion remains enabled as soon as a slide actually changes. */
+.hero-stage:not(.is-interactive) .cf-card,
+.hero-stage:not(.is-interactive) .mockup-viewport img {
+  transition: none !important;
+  will-change: auto;
+}
+.hero-stage .cf-card.is-center {
+  filter: none;
+}
+/* The large decorative blur need not be rasterized during the first mobile paint.
+   Its radial gradient is retained, so the effect stays visually close. */
+@media (max-width: 809.98px) {
+  .hero-stage::before { filter: none; }
+  .hero-stage:not(.is-interactive) .cf-card.is-left,
+  .hero-stage:not(.is-interactive) .cf-card.is-right { filter: none; }
+}
