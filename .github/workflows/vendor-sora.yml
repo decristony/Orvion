@@ -20,7 +20,7 @@ jobs:
           npm install --no-save --ignore-scripts --no-audit --no-fund --prefix /tmp/orvion-font @fontsource-variable/sora@5.3.0
           mkdir -p assets/fonts
           cp /tmp/orvion-font/node_modules/@fontsource-variable/sora/files/sora-latin-wght-normal.woff2 assets/fonts/sora-latin-wght-normal.woff2
-          cp /tmp/orvion-font/node_modules/@fontsource-variable/sora/OFL.txt assets/fonts/Sora-OFL.txt
+          curl --fail --location --silent --show-error https://raw.githubusercontent.com/google/fonts/main/ofl/sora/OFL.txt --output assets/fonts/Sora-OFL.txt
       - name: Commit local font
         run: |
           git config user.name "github-actions[bot]"
