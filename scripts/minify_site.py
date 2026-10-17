@@ -12,8 +12,8 @@ js=js.replace('script[src*="js/main.js"]','script[src*="js/main"]')
 for relative in ("index.html","pt/index.html","en/index.html"):
     page=ROOT/relative
     s=page.read_text(encoding="utf-8")
-    s=s.replace("css/style.css?v=49","css/style.min.css?v=53")
-    s=s.replace("css/style.min.css?v=51","css/style.min.css?v=53")
+    s=s.replace("css/style.css?v=49","css/style.min.css?v=54")
+    s=s.replace("css/style.min.css?v=51","css/style.min.css?v=54")
     s=s.replace("js/main.js?v=20","js/main.min.js?v=23")
     s=s.replace("js/main.min.js?v=21","js/main.min.js?v=23")
     page.write_text(s,encoding="utf-8")
