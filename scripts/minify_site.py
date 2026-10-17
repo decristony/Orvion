@@ -15,14 +15,14 @@ js = js.replace('script[src*="js/main.js"]', 'script[src*="js/main"]')
 # Keep all paint-critical CSS for the header, hero, mobile layout and carousel.
 # The complete stylesheet still loads; only non-critical rules may be deferred.
 KEYS = (
-    ":root", "html", "body", "*", "a", "img", "svg", "button", ".container",
+    ":root", ".container",
     ".nav", ".menu", ".logo", ".language", ".mobile", ".hamburger",
     ".hero", ".cf-", ".mockup-", ".stage-dots", ".sd", ".btn",
     ".cursor", ".page", ".header", ".section", ".reveal",
 )
 def chosen(selector):
     s = selector.lower().strip()
-    return any(k in s for k in KEYS)
+    return s in ("*", "html", "body", "a", "img", "svg", "button") or any(k in s for k in KEYS)
 
 def filter_css(tokens):
     output = []
@@ -42,6 +42,8 @@ def filter_css(tokens):
     return "".join(output)
 
 critical = cssmin(filter_css(tinycss2.parse_stylesheet(css, skip_whitespace=True, skip_comments=True)))
+# Inline styles resolve font URLs relative to each page, unlike external CSS.
+critical = critical.replace('../assets/fonts/', '/assets/fonts/')
 if not (".hero" in critical and ".nav" in critical and "@font-face" in critical):
     raise RuntimeError("Critical CSS extraction failed")
 if len(critical) > 80000:
