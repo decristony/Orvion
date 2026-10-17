@@ -512,7 +512,9 @@
     function layout() {
       var n = images.length;
       cards.forEach(function (card, i) {
-        card.classList.remove("is-center", "is-left", "is-right", "is-hidden");
+        if (!(current === 0 && i === 0 && card.classList.contains("is-center"))) {
+          card.classList.remove("is-center", "is-left", "is-right", "is-hidden");
+        }
         if (i === current) {
           card.classList.add("is-center");
           card.setAttribute("aria-current", "true");
@@ -537,12 +539,19 @@
       });
     }
 
+    function enableMotion() {
+      var hero = document.querySelector(".hero-stage");
+      if (hero) hero.classList.add("is-interactive");
+    }
+
     function step() {
+      enableMotion();
       current = (current + 1) % images.length;
       layout();
     }
 
     function prev() {
+      enableMotion();
       stop();
       current = (current - 1 + images.length) % images.length;
       layout();
@@ -550,6 +559,7 @@
     }
 
     function next() {
+      enableMotion();
       stop();
       current = (current + 1) % images.length;
       layout();
@@ -557,6 +567,7 @@
     }
 
     function go(i) {
+      enableMotion();
       stop();
       current = ((i % images.length) + images.length) % images.length;
       layout();
