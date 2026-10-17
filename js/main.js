@@ -450,8 +450,9 @@
       stage.classList.remove("is-empty");
       // Keep the first, HTML-rendered slide. Recreating it delays paint and LCP.
       var initialCard = stage.querySelector("[data-initial-slide]");
-      if (initialCard) stage.replaceChildren(initialCard);
-      else stage.innerHTML = "";
+      // The HTML already contains the LCP image. Never detach and reinsert it:
+      // moving the existing node can invalidate its first paint.
+      if (!initialCard) stage.innerHTML = "";
       indicatorsWrap.innerHTML = "";
       cards = [];
       dots = [];
@@ -461,7 +462,8 @@
         var meta = caseMeta[i % caseMeta.length];
 
         var card = (i === 0 && initialCard) ? initialCard : document.createElement("div");
-        card.className = "cf-card";
+        // Preserve 'is-center' on the original card throughout initialization.
+        if (card !== initialCard) card.className = "cf-card";
         card.setAttribute("role", "button");
         card.setAttribute("tabindex", "0");
         card.setAttribute("aria-label", "Ver projeto " + (i + 1));
@@ -486,7 +488,7 @@
           }
         });
 
-        stage.appendChild(card);
+        if (card !== initialCard) stage.appendChild(card);
         cards.push(card);
 
         var dot = document.createElement("button");
