@@ -60,12 +60,11 @@ for rel in ("index.html", "pt/index.html", "en/index.html"):
     html = re.sub(r'<noscript><link href="(?:\.\./)?css/style\.min\.css\?v=\d+" rel="stylesheet"/></noscript>\s*', "", html)
     head_insert = (
         '<style id="orvion-critical-css">' + critical + '</style>\n'
-        + '<link rel="preload" as="style" href="' + prefix + 'css/style.min.css?v=55" '
+        + '<link rel="preload" as="style" href="' + prefix + 'css/style.min.css?v=56" '
         + 'onload="this.onload=null;this.rel=\'stylesheet\'"/>\n'
-        + '<noscript><link href="' + prefix + 'css/style.min.css?v=55" rel="stylesheet"/></noscript>\n'
+        + '<noscript><link href="' + prefix + 'css/style.min.css?v=56" rel="stylesheet"/></noscript>\n'
     )
     html = html.replace("</head>", head_insert + "</head>", 1)
-    html = html.replace("js/main.min.js?v=21", "js/main.min.js?v=23")
-    html = html.replace("js/main.js?v=20", "js/main.min.js?v=23")
+    html = re.sub(r"js/main(?:\.min)?\.js\?v=\d+", "js/main.min.js?v=24", html)
     page.write_text(html, encoding="utf-8")
 print("built CSS",len(css),"critical",len(critical),"JS",len(js))
