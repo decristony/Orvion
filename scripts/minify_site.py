@@ -12,7 +12,9 @@ js=js.replace('script[src*="js/main.js"]','script[src*="js/main"]')
 for relative in ("index.html","pt/index.html","en/index.html"):
     page=ROOT/relative
     s=page.read_text(encoding="utf-8")
-    s=s.replace("css/style.css?v=49","css/style.min.css?v=51")
-    s=s.replace("js/main.js?v=20","js/main.min.js?v=21")
+    s=s.replace("css/style.css?v=49","css/style.min.css?v=52")
+    s=s.replace("css/style.min.css?v=51","css/style.min.css?v=52")
+    s=s.replace("js/main.js?v=20","js/main.min.js?v=22")
+    s=s.replace("js/main.min.js?v=21","js/main.min.js?v=22")
     page.write_text(s,encoding="utf-8")
 print("minified CSS and JS",len(css),len(js))
