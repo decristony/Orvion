@@ -5149,3 +5149,12 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
 @media (prefers-reduced-motion:reduce) {
   .hero-stage .cf-card,.mockup-viewport img,.founders-track,.services-track,.logos-strip,.footer-social-link {animation-duration:.01ms!important;transition-duration:.01ms!important;}
 }
+
+
+/* LCP: hero heading must paint without JS; keep typography and highlighted word. */
+.hero-title .w { opacity:1; transform:none; filter:none; }
+.hero-title.in .w { opacity:1; transform:none; filter:none; transition:none; }
+/* Preserve highlighted gradient/shadow while removing initial blur from ordinary words. */
+.hero-title .w.hl { filter:drop-shadow(0 2px 14px rgba(1,179,239,.4)); }
+/* HTML-first hero slide appears immediately, prior to coverflow initialization. */
+.mockup-scene > .cf-card[data-initial-slide] { z-index:4; }
