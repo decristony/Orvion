@@ -469,9 +469,11 @@
         card.setAttribute("aria-label", "Ver projeto " + (i + 1));
 
         if (!(i === 0 && initialCard)) {
+          var file = typeof name === "string" ? name : name.src;
+          var srcset = (name && name.srcset) ? name.srcset.map(function (s) { return url(s[0]) + " " + s[1] + "w"; }).join(", ") : "";
           card.innerHTML =
             '<div class="mockup-viewport">' +
-              '<img src="' + url(name) + '" alt="Projeto ORVION ' + (i + 1) + '" width="1060" height="707" decoding="async" loading="' + (i === 0 ? 'eager' : 'lazy') + '" fetchpriority="' + (i === 0 ? 'high' : 'low') + '">' +
+              '<img src="' + url(file) + '"' + (srcset ? ' srcset="' + srcset + '" sizes="' + (manifest.sizes || "530px") + '"' : '') + ' alt="Projeto ORVION ' + (i + 1) + '" width="1060" height="707" decoding="async" loading="' + (i === 0 ? 'eager' : 'lazy') + '" fetchpriority="' + (i === 0 ? 'high' : 'low') + '">' +
             '</div>';
         }
 
@@ -633,6 +635,39 @@
     }
   })();
 
+  /* ---------- Lazy load próprio (mural, miniaturas e tela dos projetos) ----------
+     As imagens com data-src só carregam quando a seção chega perto da tela.
+     O lazy nativo do navegador carrega cedo demais (até ~2500 px antes). */
+  (function () {
+    var imgs = Array.prototype.slice.call(document.querySelectorAll("img[data-src]"));
+    if (!imgs.length) return;
+    function show(img) {
+      if (img.getAttribute("src")) { img.removeAttribute("data-src"); img.removeAttribute("data-srcset"); return; }
+      if (img.dataset.srcset) { img.srcset = img.dataset.srcset; img.removeAttribute("data-srcset"); }
+      img.src = img.dataset.src; img.removeAttribute("data-src");
+    }
+    if (!("IntersectionObserver" in window)) { imgs.forEach(show); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var group = e.target.closest(".sites-wall, .cases-thumbs") || e.target;
+        Array.prototype.slice.call(group.querySelectorAll ? group.querySelectorAll("img[data-src]") : []).concat(group.matches && group.matches("img[data-src]") ? [group] : []).forEach(function (img) { io.unobserve(img); show(img); });
+        if (e.target.dataset && e.target.dataset.src) { io.unobserve(e.target); show(e.target); }
+      });
+    }, { rootMargin: "400px 0px" });
+    imgs.forEach(function (img) { io.observe(img); });
+  })();
+
+  /* ---------- Mural de sites (2ª dobra): pausa fora da tela ---------- */
+  (function () {
+    var wall = document.querySelector(".sites-wall");
+    if (!wall || !("IntersectionObserver" in window)) return;
+    wall.classList.add("is-paused");
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { wall.classList.toggle("is-paused", !e.isIntersecting); });
+    }, { rootMargin: "120px 0px" }).observe(wall);
+  })();
+
   /* ---------- Cases: Screenshot Showcase ---------- */
   (function () {
     var root = document.querySelector("[data-cases-showcase]");
@@ -654,17 +689,21 @@
     var mainScript = document.querySelector('script[src*="js/main.js"]');
     var siteRoot = mainScript ? new URL("../", mainScript.src) : new URL("./", window.location.href);
     function portfolioAsset(file) {
-      return new URL("public/portfolio/" + file, siteRoot).href;
+      return new URL("public/portfolio/" + file, siteRoot).href + "?v=2";
     }
 
     var PROJECTS = [
-      { img: portfolioAsset("IFORTEC.webp"), num: "01", name: "IFORTEC", url: "" },
-      { img: portfolioAsset("Dr Diego.webp"), num: "02", name: "Dr. Diego", url: "" },
-      { img: portfolioAsset("site 04.webp"), num: "03", name: "Santos e Robert", url: "https://santosrobert.com.br/" },
-      { img: portfolioAsset("Site 01.webp"), num: "04", name: "Odonto Vita", url: "https://decristony.github.io/OdontoVitta/" },
-      { img: portfolioAsset("Site 03.webp"), num: "05", name: "La Maison", url: "https://decristony.github.io/Luxury-Cardapio/" },
-      { img: portfolioAsset("Site 02.webp"), num: "06", name: "Liora Aura", url: "https://decristony.github.io/Aura-Premium/" },
-      { img: portfolioAsset("Camila Ribeiro.webp"), num: "07", name: "Camila Ribeiro", url: "" }
+      { img: portfolioAsset("marfim-odontologia-1240.webp"), imgM: portfolioAsset("marfim-odontologia-760.webp"), w: 1240, num: "01", name: "Marfim Odontologia", url: "https://decristony.github.io/marfim-odontologia/" },
+      { img: portfolioAsset("sereno-clinica-do-sono-1240.webp"), imgM: portfolioAsset("sereno-clinica-do-sono-760.webp"), w: 1240, num: "02", name: "Sereno Clínica do Sono", url: "https://decristony.github.io/sereno-clinica-do-sono/" },
+      { img: portfolioAsset("tez-dermatologia-estetica-1240.webp"), imgM: portfolioAsset("tez-dermatologia-estetica-760.webp"), w: 1240, num: "03", name: "Tez Dermatologia", url: "https://decristony.github.io/tez-dermatologia-estetica/" },
+      { img: portfolioAsset("faro-clinica-veterinaria-1240.webp"), imgM: portfolioAsset("faro-clinica-veterinaria-760.webp"), w: 1240, num: "04", name: "Faro Clínica Veterinária", url: "https://decristony.github.io/faro-clinica-veterinaria/" },
+      { img: portfolioAsset("iris-oftalmologia-1240.webp"), imgM: portfolioAsset("iris-oftalmologia-760.webp"), w: 1240, num: "05", name: "Íris Oftalmologia", url: "https://decristony.github.io/iris-oftalmologia/" },
+      { img: portfolioAsset("raiz-fisioterapia-1240.webp"), imgM: portfolioAsset("raiz-fisioterapia-760.webp"), w: 1240, num: "06", name: "Raiz Fisioterapia", url: "https://decristony.github.io/raiz-fisioterapia/" },
+      { img: portfolioAsset("ifortec-1100.webp"), imgM: portfolioAsset("ifortec-760.webp"), w: 1100, num: "07", name: "IFORTEC", url: "https://ifortec.com.br/" },
+      { img: portfolioAsset("Dr Diego.webp"), imgM: portfolioAsset("Dr Diego-760.webp"), w: 653, num: "08", name: "Dr. Diego", url: "" },
+      { img: portfolioAsset("santos-robert-1240.webp"), imgM: portfolioAsset("santos-robert-760.webp"), w: 1240, num: "09", name: "Santos e Robert", url: "https://santosrobert.com.br/" },
+      { img: portfolioAsset("odonto-vita-1240.webp"), imgM: portfolioAsset("odonto-vita-760.webp"), w: 1240, num: "10", name: "Odonto Vita", url: "https://decristony.github.io/OdontoVitta/" },
+      { img: portfolioAsset("la-maison-1240.webp"), imgM: portfolioAsset("la-maison-760.webp"), w: 1240, num: "11", name: "La Maison", url: "https://decristony.github.io/Luxury-Cardapio/" }
     ];
 
     var SCROLL_DOWN_MS = 12000;
@@ -755,6 +794,8 @@
 
       // Swap screenshot and reset to top
       mainImg.style.transition = "none";
+      mainImg.srcset = p.imgM + " 760w, " + p.img + " " + p.w + "w";
+      mainImg.sizes = "(max-width: 899.98px) 92vw, 640px";
       mainImg.src = p.img;
       mainImg.alt = "Projeto de site " + p.name + " desenvolvido pela ORVION";
       mainImg.style.transform = "translateY(0px)";

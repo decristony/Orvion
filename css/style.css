@@ -5172,3 +5172,105 @@ section { scroll-margin-top: calc(var(--nav-h) + 24px); }
   .hero-stage:not(.is-interactive) .cf-card.is-left,
   .hero-stage:not(.is-interactive) .cf-card.is-right { filter: none; }
 }
+
+/* Portfólio (desktop): a miniatura ativa avança para a esquerda e cresce.
+   Com o overflow da coluna rolável ela era cortada na borda esquerda;
+   o respiro interno dá espaço para ela aparecer inteira, à frente. */
+@media (min-width: 900px) {
+  .cases-thumbs {
+    width: calc(clamp(92px, 12vw, 150px) + 26px);
+    padding: 12px 8px 12px 18px;
+    margin-left: -18px;
+  }
+  .cases-thumb.active { z-index: 3; }
+}
+
+
+/* ============ MURAL DE SITES (2ª dobra) ============ */
+.about-split-media.sites-wall {
+  position: relative;
+  isolation: isolate;
+  background: radial-gradient(120% 90% at 30% 20%, #1a1d24 0%, #0b0c0e 62%);
+  perspective: 1800px;
+}
+.sites-wall::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, #0b0c0e 0%, rgba(11, 12, 14, 0) 16%, rgba(11, 12, 14, 0) 84%, #0b0c0e 100%),
+    radial-gradient(60% 50% at 70% 60%, rgba(1, 179, 239, 0.16), transparent 70%);
+}
+.sites-wall::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.55);
+}
+.sw-plane {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: flex;
+  gap: clamp(14px, 1.6vw, 24px);
+  transform: translate(-50%, -50%) rotateX(24deg) rotateZ(-14deg) scale(1.02);
+  transform-style: preserve-3d;
+}
+.sw-col {
+  width: clamp(120px, 11.5vw, 190px);
+  flex: 0 0 auto;
+  height: 160vh;
+  min-height: 1100px;
+  overflow: hidden;
+}
+.sw-col:nth-child(even) { margin-top: -140px; }
+.sw-track {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 1.6vw, 24px);
+  animation: swUp 70s linear infinite;
+  will-change: transform;
+}
+.sw-col:nth-child(2) .sw-track { animation-duration: 86s; animation-direction: reverse; }
+.sw-col:nth-child(3) .sw-track { animation-duration: 62s; }
+.sw-col:nth-child(4) .sw-track { animation-duration: 94s; animation-direction: reverse; }
+.sw-col:nth-child(5) .sw-track { animation-duration: 76s; }
+.sites-wall.is-paused .sw-track { animation-play-state: paused; }
+@keyframes swUp { to { transform: translateY(calc(-50% - clamp(7px, 0.8vw, 12px))); } }
+.sw-card {
+  position: relative;
+  margin: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #16181d;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.07);
+}
+.sw-card img { display: block; width: 100%; height: auto; }
+.sw-card figcaption {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font: 600 11px/1 "Sora", system-ui, sans-serif;
+  letter-spacing: 0.01em;
+  color: #fff;
+  background: rgba(11, 12, 14, 0.72);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+@media (max-width: 809.98px) {
+  .about-split-media.sites-wall { height: clamp(300px, 82vw, 420px); }
+  .sw-plane { transform: translate(-50%, -50%) rotateX(22deg) rotateZ(-14deg) scale(1); }
+  .sw-col { width: clamp(96px, 27vw, 150px); height: 900px; min-height: 0; }
+  .sw-col:nth-child(even) { margin-top: -90px; }
+  .sw-card figcaption { font-size: 9.5px; padding: 5px 8px; left: 7px; bottom: 7px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sw-track { animation: none; }
+}
