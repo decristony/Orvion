@@ -121,4 +121,10 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://orvionweb.com/en/terms-of-service/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://orvionweb.com/termos-de-servico/"/>
   </url>
+  <url>
+    <loc>https://orvionweb.com/links/</loc>
+    <lastmod>2026-11-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
 </urlset>
