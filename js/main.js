@@ -636,57 +636,26 @@
   })();
 
   /* ---------- Lazy load próprio (mural, miniaturas e tela dos projetos) ----------
-     Observa as seções que têm altura real e carrega as imagens quando elas chegam perto da viewport.
-     Isso evita observar diretamente <img> sem src, que pode ter área efetiva zero em alguns layouts. */
+     As imagens com data-src só carregam quando a seção chega perto da tela.
+     O lazy nativo do navegador carrega cedo demais (até ~2500 px antes). */
   (function () {
     var imgs = Array.prototype.slice.call(document.querySelectorAll("img[data-src]"));
     if (!imgs.length) return;
-
     function show(img) {
-      if (img.getAttribute("src")) {
-        img.removeAttribute("data-src");
-        img.removeAttribute("data-srcset");
-        return;
-      }
-      if (img.dataset.srcset) {
-        img.srcset = img.dataset.srcset;
-        img.removeAttribute("data-srcset");
-      }
-      img.src = img.dataset.src;
-      img.removeAttribute("data-src");
+      if (img.getAttribute("src")) { img.removeAttribute("data-src"); img.removeAttribute("data-srcset"); return; }
+      if (img.dataset.srcset) { img.srcset = img.dataset.srcset; img.removeAttribute("data-srcset"); }
+      img.src = img.dataset.src; img.removeAttribute("data-src");
     }
-
-    function showGroup(root) {
-      Array.prototype.slice.call(root.querySelectorAll("img[data-src]")).forEach(show);
-    }
-
-    if (!("IntersectionObserver" in window)) {
-      imgs.forEach(show);
-      return;
-    }
-
-    var selector = ".sites-wall, [data-cases-showcase]";
-    var groups = Array.prototype.slice.call(document.querySelectorAll(selector));
-
+    if (!("IntersectionObserver" in window)) { imgs.forEach(show); return; }
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-
-        if (entry.target.matches && entry.target.matches(selector)) {
-          showGroup(entry.target);
-        } else if (entry.target.matches && entry.target.matches("img[data-src]")) {
-          show(entry.target);
-        }
-
-        io.unobserve(entry.target);
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var group = e.target.closest(".sites-wall, .cases-thumbs") || e.target;
+        Array.prototype.slice.call(group.querySelectorAll ? group.querySelectorAll("img[data-src]") : []).concat(group.matches && group.matches("img[data-src]") ? [group] : []).forEach(function (img) { io.unobserve(img); show(img); });
+        if (e.target.dataset && e.target.dataset.src) { io.unobserve(e.target); show(e.target); }
       });
-    }, { rootMargin: "600px 0px" });
-
-    groups.forEach(function (group) { io.observe(group); });
-
-    imgs.forEach(function (img) {
-      if (!img.closest(selector)) io.observe(img);
-    });
+    }, { rootMargin: "400px 0px" });
+    imgs.forEach(function (img) { io.observe(img); });
   })();
 
   /* ---------- Mural de sites (2ª dobra): pausa fora da tela ---------- */
